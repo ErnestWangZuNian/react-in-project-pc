@@ -1,154 +1,132 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer')({
-  browsers: [
-    '>1%',
-    'last 4 versions',
-    'Firefox ESR',
-    'not ie < 9', // React doesn't support IE8 anyway
-  ]
-});
+const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require("webpack");
+const context = path.resolve(__dirname, "src");
 
-function resolve(dir) {
-  return path.join(process.cwd(), dir)
-}
-
-const src = resolve('src');
-const node_modules = resolve('node_modules');
-
-const HappyPack = require('happypack');
-const happyThreadPool = HappyPack.ThreadPool({
-  size: require('os').cpus().length
-});
-
-const vender = [
-  'react-document-title',
-  '@zd/zds-request-api',
-  '@zd/zds-component-bundle',
-  '@zd/zds-component-store',
-  '@zd/zds-component-util',
-  '@zd/factoring-component-lib',
-  '@zd/zds-web-lib',
-  '@zd/loadfactory',
-  '@zd/resumefactory',
-  '@zd/pagingtable',
-  '@zd/formcreator',
-  '@zd/validate'
-];
-const js = [
-  '@/js/api',
-  '@/js/jqueryplugin',
-  '@/js/util'
-];
 module.exports = {
-  entry: {
-    main: resolve('src/main.js'),
-    js,
-    vender
-  },
+  context,
+  entry: [path.resolve(__dirname, "src/main.js")],
   output: {
-    filename: '[name].[hash:6].js',
-    path: path.join(__dirname, 'build'),
-    chunkFilename: "chunk/[chunkhash:6].js",
-    publicPath: "/"
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
   resolve: {
-    modules: ['node_modules', src],
-    extensions: ['.js', '.jsx', '.scss', '.css'],
+    modules: ["node_modules"],
+    extensions: [".js", ".jsx", ".scss", ".less", ".css"],
     alias: {
-      '@': src,
-      '~': node_modules
+      "@": context
     }
   },
-  plugins: [
-    new ExtractTextWebpackPlugin(path.posix.join('static', 'css/[name].[contenthash:6].css')),
-    new webpack.optimize.CommonsChunkPlugin('vender'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'modules',
-      minChunks: function(module, count) {
-        return (module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            node_modules
-          ) === 0 && vender.filter(item => module.resource.indexOf(item) > -1).length == 0)
-      }
-    }),
-    new HappyPack({
-      id: 'js',
-      threadPool: happyThreadPool,
-      loaders: ['babel-loader']
-    })
-  ],
   module: {
-    loaders: [{
-      test: /\.js[x]?$/,
-      exclude: /node_modules/,
-      use: [{
-        loader: '@zd/zds-component-bundle/loader?lazy',
-        options: {
-          filter: /\?bundle/i
-        }
-      }, {
-        loader: 'happypack/loader?id=js'
-      }]
-    }, {
-      test: /\.s[c|a]ss$/,
-      include: resolve('src/pages'),
-      use: [{
-        loader: "style-loader/useable"
-      }, {
-        loader: 'css-loader'
-      }, {
-        loader: 'postcss-loader',
-        options: {
-          plugins: () => [autoprefixer]
-        }
-      }, {
-        loader: 'sass-loader'
-      }]
-    }, {
-      test: /\.s[c|a]ss$/,
-      exclude: resolve('src/pages'),
-      use: ExtractTextWebpackPlugin.extract({
-        fallback: "style-loader",
-        use: [{
-          loader: 'css-loader'
-        }, {
-          loader: 'postcss-loader',
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        include: context,
+        use: {
+          loader: "babel-loader",
           options: {
-            plugins: () => [autoprefixer]
+            plugins: [
+              [
+                "react-css-modules",
+                {
+                  context: context,
+                  exclude: "node_modules",
+                  filetypes: {
+                    ".scss": {
+                      syntax: "postcss-scss"
+                    }
+                  },
+                  webpackHotModuleReloading: true,
+                  handleMissingStyleName: "ignore",
+                  generateScopedName: "[local]--[hash:base64:5]"
+                }
+              ]
+            ]
           }
-        }, {
-          loader: 'sass-loader'
-        }]
-      })
-    }, {
-      test: /\.css$/,
-      use: ExtractTextWebpackPlugin.extract({
-        fallback: "style-loader",
-        use: [{
-          loader: 'css-loader'
-        }, {
-          loader: 'postcss-loader',
+        }
+      },
+      {
+        test: /\.bundle\.jsx$/,
+        use: {
+          loader: "bundle-loader",
           options: {
-            plugins: () => [autoprefixer]
+            lazy: true
           }
-        }]
-      })
-    }, {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        limit: 1024,
-        name: path.posix.join('static', 'images/[hash:6].[ext]')
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader"]
+        })
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "less-loader"
+          }
+        ]
+      },
+      {
+        test: /\.(scss|sass)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: "style-loader"
+            },
+            {
+              loader: "css-loader",
+              options: {
+                module: true,
+                localIdentName: "[local]--[hash:base64:5]"
+              }
+            },
+            {
+              loader: "sass-loader"
+            }
+          ]
+        })
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: "file-loader"
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: "file-loader"
+          }
+        ]
       }
-    }, {
-      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      loader: 'url-loader',
-      query: {
-        name: path.posix.join('static', 'fonts/[hash:6].[ext]')
-      }
-    }]
-  }
-}
+    ]
+  },
+  plugins: [
+    new CleanWebpackPlugin(["dist"]),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common"
+    }),
+    new HtmlWebpackPlugin({
+      title: "Production",
+      template: path.resolve(__dirname, "index.html")
+    }),
+    new ExtractTextPlugin("[name].styles.[id].[contenthash].css", {
+      allChunks: false
+    })
+  ]
+};
