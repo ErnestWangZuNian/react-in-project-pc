@@ -20,30 +20,29 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.(js|jsx)$/,
         include: context,
         use: {
           loader: "babel-loader",
           options: {
-            plugins: [
-              [
-                "react-css-modules",
-                {
-                  context: context,
-                  exclude: "node_modules",
-                  filetypes: {
-                    ".scss": {
-                      syntax: "postcss-scss"
-                    }
-                  },
-                  webpackHotModuleReloading: true,
-                  handleMissingStyleName: "ignore",
-                  generateScopedName: "[local]--[hash:base64:5]"
-                }
-              ]
-            ]
+            // plugins: [
+            //   [
+            //     "react-css-modules",
+            //     {
+            //       context: context,
+            //       exclude: "node_modules",
+            //       filetypes: {
+            //         ".scss": {
+            //           syntax: "postcss-scss"
+            //         }
+            //       },
+            //       webpackHotModuleReloading: true,
+            //       handleMissingStyleName: "ignore",
+            //       generateScopedName: "[local]--[hash:base64:5]"
+            //     }
+            //   ]
+            // ]
           }
         }
       },
@@ -65,8 +64,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [
-          {
+        use: [{
             loader: "style-loader"
           },
           {
@@ -81,17 +79,19 @@ module.exports = {
         test: /\.(scss|sass)$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
+          use: [{
               loader: "style-loader"
             },
             {
-              loader: "css-loader",
-              options: {
-                module: true,
-                localIdentName: "[local]--[hash:base64:5]"
-              }
+              loader: "css-loader"
             },
+            // {
+            //   loader: "css-loader",
+            //   options: {
+            //     module: true,
+            //     localIdentName: "[local]--[hash:base64:5]"
+            //   }
+            // },
             {
               loader: "sass-loader"
             }
@@ -100,19 +100,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       }
     ]
   },
