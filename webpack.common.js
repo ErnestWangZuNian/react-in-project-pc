@@ -3,14 +3,25 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
-const context = path.resolve(__dirname, "src");
+const autoprefixer = require("autoprefixer")({
+  browsers: [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 9" // React doesn't support IE8 anyway
+  ]
+});
+const resolve = (dir) =>  {
+  return path.resolve(__dirname, dir);
+}
+const context = resolve('src');
 
 module.exports = {
   context,
-  entry: [path.resolve(__dirname, "src/main.js")],
+  entry: [resolve("src/main.js")],
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: resolve("dist")
   },
   resolve: {
     modules: ["node_modules"],
@@ -25,25 +36,6 @@ module.exports = {
         include: context,
         use: {
           loader: "babel-loader",
-          options: {
-            // plugins: [
-            //   [
-            //     "react-css-modules",
-            //     {
-            //       context: context,
-            //       exclude: "node_modules",
-            //       filetypes: {
-            //         ".scss": {
-            //           syntax: "postcss-scss"
-            //         }
-            //       },
-            //       webpackHotModuleReloading: true,
-            //       handleMissingStyleName: "ignore",
-            //       generateScopedName: "[local]--[hash:base64:5]"
-            //     }
-            //   ]
-            // ]
-          }
         }
       },
       {
@@ -64,11 +56,18 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        include: resolve("src/pages"),
         use: [{
-            loader: "style-loader"
+            loader: "style-loader/useable"
           },
           {
             loader: "css-loader"
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer]
+            }
           },
           {
             loader: "less-loader"
@@ -76,22 +75,62 @@ module.exports = {
         ]
       },
       {
-        test: /\.(scss|sass)$/,
+        test: /\.less$/,
+        exclude: resolve("src/pages"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [{
+          use: [
+            {
               loader: "style-loader"
             },
             {
               loader: "css-loader"
             },
-            // {
-            //   loader: "css-loader",
-            //   options: {
-            //     module: true,
-            //     localIdentName: "[local]--[hash:base64:5]"
-            //   }
-            // },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [autoprefixer]
+              }
+            },
+            {
+              loader: "less-loader"
+            }
+          ]
+        })
+      },
+      {
+        test: /\.s[c|a]ss$/,
+        include: resolve("src/pages"),
+        use: [
+          {
+            loader: "style-loader/useable"
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer]
+            }
+          },
+          {
+            loader: "sass-loader"
+          }
+        ]
+      },
+      {
+        test: /\.s[c|a]ss$/,
+        exclude: resolve("src/pages"),
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: "style-loader"
+            },
+            {
+              loader: "css-loader"
+            },
             {
               loader: "sass-loader"
             }

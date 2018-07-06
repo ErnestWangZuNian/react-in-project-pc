@@ -1,7 +1,6 @@
 import url from "./api.action";
 import { Button } from "antd";
 import createReactClass from "create-react-class";
-
 let style = target => {
   return Component =>
     createReactClass({
@@ -30,8 +29,9 @@ let page = options => {
   };
 };
 @page({
-  style: require("./style")
+  style: require("./test.less")
 })
+
 class App extends React.Component {
   constructor(props) {
     super(props);
