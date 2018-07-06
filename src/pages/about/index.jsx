@@ -1,5 +1,8 @@
-import "./style.scss";
 import urlList from "./api.actions";
+import page from "../../component/page";
+@page({
+  style: require("./style")
+})
 class About extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +26,7 @@ class About extends React.Component {
     const { data } = this.state;
     return (
       <div>
-        <div styleName="test">111</div>
-        <div >111</div>
+        <div className="test">111</div>
       </div>
     );
   }

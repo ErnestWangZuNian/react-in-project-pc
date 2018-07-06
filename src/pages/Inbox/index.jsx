@@ -1,4 +1,7 @@
-import "./style.scss";
+import page from "../../component/page";
+@page({
+  style: require("./style")
+})
 class Inbox extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +14,7 @@ class Inbox extends React.Component {
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
-    return <div styleName="about-container">Hello,I am inbox;</div>;
+    return <div className="test">111</div>
   }
 }
 export default Inbox;
