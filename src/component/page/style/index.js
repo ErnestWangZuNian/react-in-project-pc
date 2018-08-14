@@ -4,7 +4,6 @@ let style = target => {
       createReactClass({
         componentWillMount() {
           if (target && target.use) {
-            console.log(target, "1111");
             target.use();
           }
         },

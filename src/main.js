@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Api from "./api/index";
 import Router from "./router/route/index.jsx";
+import store from "@/store/store";
+import { Provider } from "react-redux";
 global.Api = Api;
 global.React = React;
 global.ReactDOM = ReactDOM;
-ReactDOM.render(Router, document.getElementById("app"));
+ReactDOM.render(
+  <Provider store={store}>{Router}</Provider>,
+  document.getElementById("app")
+);

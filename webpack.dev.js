@@ -6,11 +6,11 @@ module.exports = merge(common, {
   devtool: "inline-source-map",
   devServer: {
     hot: true,
-    port: 1024,
+    port: 1023,
     contentBase: "./dist",
     proxy: {
       "/": {
-        target: "http://book.zhongxiaoyu.cn/",
+        target: "http://47.92.112.65",
         pathRewrite: { "^/": "" }
       }
     }
