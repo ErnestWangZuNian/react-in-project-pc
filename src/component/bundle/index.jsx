@@ -3,7 +3,6 @@ class Bundle extends Component {
   constructor() {
     super();
     this.state = {
-      // short for "module" but that's a keyword in js, so "mod"
       mod: null
     };
   }

@@ -1,8 +1,11 @@
-import * as about from "./action-type";
+const ActionType ={
+  CLICKBUTTON: "CLICKBUTTON",
+  GETINFO: "GETINFO"
+};
 // 点击按钮
 export const clickButton = () => {
   return {
-    type: about.CLICKBUTTON
+    type: ActionType.CLICKBUTTON
   };
 };
 //  获取信息
@@ -11,7 +14,7 @@ export const getInfo = () => {
     try {
       let result = await Api.get("/v1/top");
       dispatch({
-        type: about.GETINFO,
+        type: ActionType.GETINFO,
         dataList: result.body
       });
     } catch (err) {

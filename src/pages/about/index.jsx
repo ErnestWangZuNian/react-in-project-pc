@@ -1,13 +1,22 @@
 import urlList from "./api.actions";
-import page from "../../component/page";
+import page from "@/component/page";
+import ZSearchTable from "@/component/bussiness/zsearchtable";
 import PropTypes from "prop-types";
 import { clickButton, getInfo } from "@/store/about/action";
-import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 const FormItem = Form.Item;
 @page({
   style: require("./style"),
-  form: true
+  form: true,
+  connect: {
+    mapStateToProps: state => ({
+       aboutData: state.aboutData
+    }),
+    mapDispatchToProps:  {
+       clickButton,
+       getInfo
+    }
+  }
 })
 class About extends React.Component {
   static propTypes = {
@@ -21,11 +30,12 @@ class About extends React.Component {
       data: null
     };
   }
-  componentWillMount() {}
-  componentDidMount() {
+  componentWillMount() {
     let { getInfo } = this.props;
+    console.log(Utils.isArray([1,2,4]))
     getInfo();
   }
+  componentDidMount() {}
   componentWillReceiveProps() {}
   componentWillUpdate() {}
   componentDidUpdate() {}
@@ -44,6 +54,7 @@ class About extends React.Component {
     const { aboutData, clickButton, getInfo, form } = this.props;
     return (
       <div>
+        <ZSearchTable></ZSearchTable>
         <Button
           type="primary"
           onClick={() => {
@@ -84,12 +95,4 @@ class About extends React.Component {
     );
   }
 }
-export default connect(
-  state => ({
-    aboutData: state.aboutData
-  }),
-  {
-    clickButton,
-    getInfo
-  }
-)(About);
+export default About;
