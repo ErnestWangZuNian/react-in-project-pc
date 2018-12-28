@@ -24,10 +24,15 @@ class ZSearchTable extends React.Component {
     };
   }
   componentWillMount() {}
-  componentDidMount() {
+  componentDidMount(props) {
     this.getDataFromApi();
   }
-  componentWillReceiveProps() {}
+  componentWillReceiveProps(props) {
+    console.log(props)
+    if (props.reload) {
+      this.reload();
+    }
+  }
   componentWillUpdate() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
@@ -76,6 +81,10 @@ class ZSearchTable extends React.Component {
       pageSize
     });
     onPage && (await onPage());
+  }
+  //  刷新页面
+  async reload() {
+    this.getDataFromApi();
   }
   render() {
     const { dataSource, loading } = this.state;

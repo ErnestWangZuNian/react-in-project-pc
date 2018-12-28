@@ -2,8 +2,9 @@ import urlList from "./api.actions";
 import page from "@/component/page";
 import ZSearchTable from "@/component/bussiness/zsearchtable";
 import PropTypes from "prop-types";
-import { clickButton, getInfo } from "@/store/about/action";
+import { clickButton, getInfo, openModal, reload } from "@/store/about/action";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
+import AddModal from "./modal/add";
 const FormItem = Form.Item;
 @page({
   style: require("./style"),
@@ -14,7 +15,8 @@ const FormItem = Form.Item;
     }),
     mapDispatchToProps: {
       clickButton,
-      getInfo
+      getInfo,
+      openModal
     }
   }
 })
@@ -22,7 +24,8 @@ class About extends React.Component {
   static propTypes = {
     aboutData: PropTypes.object.isRequired,
     clickButton: PropTypes.func.isRequired,
-    getInfo: PropTypes.func.isRequired
+    getInfo: PropTypes.func.isRequired,
+    openModal: PropTypes.func
   };
   constructor(props) {
     super(props);
@@ -48,15 +51,29 @@ class About extends React.Component {
       }
     });
   };
+  //  刷新页面
+  reload = () => {
+    alert("reload");
+  };
   render() {
     const { data } = this.state;
-    const { aboutData, clickButton, getInfo, form } = this.props;
+    const { aboutData, clickButton, getInfo, form, openModal } = this.props;
     return (
       <div className="about-container">
         <ZSearchTable
           url="/v1/consumable"
           data={{}}
-          toolbar={<Button type="primary">新增</Button>}
+          reload={aboutData.tableReload}
+          toolbar={
+            <Button
+              type="primary"
+              onClick={() => {
+                openModal();
+              }}
+            >
+              新增
+            </Button>
+          }
           search={form => {
             return [
               <FormItem
@@ -157,6 +174,7 @@ class About extends React.Component {
         >
           表单验证
         </Button>
+        <AddModal />
       </div>
     );
   }
