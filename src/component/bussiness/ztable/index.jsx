@@ -1,6 +1,6 @@
 import { Table } from "antd";
 import page from "@/component/page";
-import { Nodata,TableColumns } from "@/component/bussiness";
+import { Nodata, TableColumns } from "@/component/bussiness";
 @page({
   style: require("./style.scss")
 })
@@ -15,8 +15,7 @@ class ZTable extends React.Component {
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
-    const {columns} = this.props;
-    console.log(columns,'123344')
+    const { columns } = this.props;
     return (
       <Table
         locale={{
@@ -24,6 +23,7 @@ class ZTable extends React.Component {
         }}
         columns={TableColumns.dealColumns(columns)}
         className="component-table"
+        rowKey={record => Utils.getRanderSrting()}
         {...this.props}
       />
     );

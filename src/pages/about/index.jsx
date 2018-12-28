@@ -10,11 +10,11 @@ const FormItem = Form.Item;
   form: true,
   connect: {
     mapStateToProps: state => ({
-       aboutData: state.aboutData
+      aboutData: state.aboutData
     }),
-    mapDispatchToProps:  {
-       clickButton,
-       getInfo
+    mapDispatchToProps: {
+      clickButton,
+      getInfo
     }
   }
 })
@@ -32,7 +32,6 @@ class About extends React.Component {
   }
   componentWillMount() {
     let { getInfo } = this.props;
-    console.log(Utils.isArray([1,2,4]))
     getInfo();
   }
   componentDidMount() {}
@@ -53,8 +52,70 @@ class About extends React.Component {
     const { data } = this.state;
     const { aboutData, clickButton, getInfo, form } = this.props;
     return (
-      <div>
-        <ZSearchTable></ZSearchTable>
+      <div className="about-container">
+        <ZSearchTable
+          url="/v1/consumable"
+          data={{}}
+          toolbar={<Button type="primary">新增</Button>}
+          search={form => {
+            return [
+              <FormItem
+                label="名称"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 16 }}
+              >
+                <Input {...form.getFieldProps("name")} />
+              </FormItem>,
+              <FormItem
+                label="分类名称"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 16 }}
+              >
+                <Input {...form.getFieldProps("categoryName")} />
+              </FormItem>,
+              <FormItem
+                label="店铺名称"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 16 }}
+              >
+                <Input {...form.getFieldProps("storeName")} />
+              </FormItem>,
+              <FormItem
+                label="店铺名称"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 16 }}
+              >
+                <Input {...form.getFieldProps("storeName")} />
+              </FormItem>
+            ];
+          }}
+          onResponse={data => {
+            return data;
+          }}
+          onPage={data => {
+            console.log(`翻页了`);
+          }}
+          onQuery={data => {
+            console.log(`我被点击查询了参数是${data}`);
+          }}
+          onReset={() => {
+            console.log(`我被重置了`);
+          }}
+          columns={[
+            {
+              title: "名称",
+              dataIndex: "name"
+            },
+            {
+              title: "分类名称",
+              dataIndex: "category_name"
+            },
+            {
+              title: "店铺名称",
+              dataIndex: "store_name"
+            }
+          ]}
+        />
         <Button
           type="primary"
           onClick={() => {
@@ -63,6 +124,11 @@ class About extends React.Component {
         >
           {aboutData.count}
         </Button>
+        <div>1234566</div>
+        {aboutData.testList.map((item, index) => {
+          console.log(item, "wewwe");
+          return <div key={index}>{item.name}</div>;
+        })}
         <FormItem>
           <Input
             prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
