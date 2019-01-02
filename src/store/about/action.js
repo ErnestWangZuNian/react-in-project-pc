@@ -34,18 +34,47 @@ export const closeModal = () => {
   };
 };
 //  确认弹窗
-export const confirmModal = (values) => {
-  return {
-    type: ActionType.CONFIRMMODAL,
-    modalType: "ADD",
-    values
+export const confirmModal = values => {
+  return async dispatch => {
+    try {
+      let result = await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          alert("我异步了两秒哟");
+          resolve();
+        }, 2000);
+      });
+      dispatch({
+        type: ActionType.CONFIRMMODAL,
+        modalType: "ADD",
+        values
+      });
+      dispatch({
+        type: ActionType.RELOADTABLE
+      });
+      dispatch({
+        type: ActionType.CANCELRELOADTABLE
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
-//   取消弹窗
+//  取消弹窗
 export const cancelModal = () => {
   return {
     type: ActionType.CANCELMODAL,
-    modalType: "ADD",
-    
+    modalType: "ADD"
+  };
+};
+//  刷新列表
+export const reloadTable = () => {
+  return {
+    type: ActionType.RELOADTABLE
+  };
+};
+//  取消刷新列表
+export const cancelReloadTable = () => {
+  return {
+    type: ActionType.CANCELRELOADTABLE
   };
 };

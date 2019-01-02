@@ -13,3 +13,7 @@ export const  CLOSEMODAL = "CLOSEMODAL";
 export const  CONFIRMMODAL = "CONFIRMMODAL";
 //   取消弹窗
 export const  CANCELMODAL = "CANCELMODAL";
+//  刷新table
+export const  RELOADTABLE = "RELOADTABLE";
+//   取消刷新table
+export const  CANCELRELOADTABLE = "CANCELRELOADTABLE";

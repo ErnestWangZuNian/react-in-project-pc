@@ -38,7 +38,9 @@ class About extends React.Component {
     getInfo();
   }
   componentDidMount() {}
-  componentWillReceiveProps() {}
+  componentWillReceiveProps(props) {
+    console.log(props, "wwww");
+  }
   componentWillUpdate() {}
   componentDidUpdate() {}
   componentWillUnmount() {}

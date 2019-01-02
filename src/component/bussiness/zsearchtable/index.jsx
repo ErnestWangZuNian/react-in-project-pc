@@ -28,7 +28,7 @@ class ZSearchTable extends React.Component {
     this.getDataFromApi();
   }
   componentWillReceiveProps(props) {
-    console.log(props)
+    console.log(props.reload,'wwww')
     if (props.reload) {
       this.reload();
     }

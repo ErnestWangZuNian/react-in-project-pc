@@ -18,6 +18,18 @@ export const aboutData = (state = defaultState, action = {}) => {
         ...{ testList: state.testList.concat([{ name: "12233" }]) }
       };
       break;
+    case about.RELOADTABLE:
+      return {
+        ...state,
+        ...{ tableReload: true }
+      };
+      break;
+    case about.CANCELRELOADTABLE:
+      return {
+        ...state,
+        ...{ tableReload: false }
+      };
+      break;
     case about.GETINFO:
       return { ...state, ...{ dataList: action.dataList } };
     case about.OPENMODAL:
@@ -35,12 +47,23 @@ export const aboutData = (state = defaultState, action = {}) => {
         case "ADD":
           confirmResult = {
             ...state,
-            ...{ tableReload: {loding:true} },
-            ...{ modal: { add: { visible: false } }}
+            ...{ modal: { add: { visible: false } } }
           };
           break;
       }
       return confirmResult;
+      break;
+    case about.CANCELMODAL:
+      let cancelResult = null;
+      switch (action.modalType) {
+        case "ADD":
+          cancelResult = {
+            ...state,
+            ...{ modal: { add: { visible: false } } }
+          };
+          break;
+      }
+      return cancelResult;
       break;
     default:
       return state;
