@@ -4,7 +4,7 @@ let defaultState = {
   tableReload: false,
   dataList: [],
   testList: [],
-  modal: { add: { visible: false } },
+  modal: { add: { visible: false }, test: { visible: false } },
   form: {}
 };
 // 关于组件
@@ -36,7 +36,13 @@ export const aboutData = (state = defaultState, action = {}) => {
       let result = null;
       switch (action.modalType) {
         case "ADD":
-          result = { ...state, ...{ modal: { add: { visible: true } } } };
+          result = { ...state };
+          result.modal.add.visible = true;
+          break;
+          break;
+        case "TEST":
+          result = { ...state };
+          result.modal.test.visible = true;
           break;
       }
       return result;
@@ -46,9 +52,15 @@ export const aboutData = (state = defaultState, action = {}) => {
       switch (action.modalType) {
         case "ADD":
           confirmResult = {
-            ...state,
-            ...{ modal: { add: { visible: false } } }
+            ...state
           };
+          confirmResult.modal.add.visible = false;
+          break;
+        case "TEST":
+          confirmResult = {
+            ...state
+          };
+          confirmResult.modal.test.visible = false;
           break;
       }
       return confirmResult;
@@ -58,12 +70,21 @@ export const aboutData = (state = defaultState, action = {}) => {
       switch (action.modalType) {
         case "ADD":
           cancelResult = {
-            ...state,
-            ...{ modal: { add: { visible: false } } }
+            ...state
           };
+          cancelResult.modal.add.visible = false;
+          break;
+        case "TEST":
+          cancelResult = {
+            ...state
+          };
+          cancelResult.modal.test.visible = false;
           break;
       }
       return cancelResult;
+      break;
+    case about.INITSTATE:
+      return defaultState;
       break;
     default:
       return state;

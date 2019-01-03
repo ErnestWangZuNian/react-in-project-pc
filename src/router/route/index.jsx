@@ -7,12 +7,28 @@ const About = () => (
 const App = () => (
   <Bundle load={require("bundle-loader?lazy!@/pages/app/index.jsx")} />
 );
-let router = (
-  <HashRouter>
-    <div>
-      <Route exact path="/" component={App} />
-      <Route exact path="/about" component={About} />
-    </div>
-  </HashRouter>
-);
+class router extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <HashRouter >
+        <div>
+          <Route exact path="/" component={App} />
+          <Route exact path="/about" component={About} />
+        </div>
+      </HashRouter>
+    );
+  }
+}
+// let router = (
+//   <HashRouter>
+//     <div>
+//       <Route exact path="/" component={App} />
+//       <Route exact path="/about" component={About} />
+//     </div>
+//   </HashRouter>
+// );
 export default router;

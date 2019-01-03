@@ -1,6 +1,6 @@
 import url from "./api.action";
 import { Button } from "antd";
-import page from "../../component/page"
+import page from "../../component/page";
 @page({
   style: require("./test.less")
 })
@@ -13,8 +13,7 @@ class App extends React.Component {
       totalPage: 1
     };
   }
-  componentWillMount() {
-  }
+  componentWillMount() {}
   componentDidMount() {}
   componentWillReceiveProps() {}
   componentWillUpdate() {}
@@ -23,8 +22,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Button type="primary">111</Button>;
-        <div className="test">2222</div>
+        <Button
+          type="primary"
+          onClick={() => {
+            this.props.history.push("/about");
+          }}
+        >
+          跳转路由
+        </Button>
+        ;<div className="test">2222</div>
       </div>
     );
   }

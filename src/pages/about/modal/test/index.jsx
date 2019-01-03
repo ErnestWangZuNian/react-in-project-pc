@@ -31,19 +31,19 @@ class App extends React.Component {
     return (
       <div>
         <Modal
-          title="redux弹窗"
-          visible={aboutData.modal.add.visible}
+          title="reduxtest弹窗"
+          visible={aboutData.modal.test.visible}
           onOk={() => {
             form.validateFields((err, values) => {
               if (err) {
                 console.log("Received values of form: ", values);
               } else {
-                confirmModal("ADD",values);
+                confirmModal("TEST",values);
               }
             });
           }}
           onCancel={() => {
-            cancelModal("ADD");
+            cancelModal("TEST");
           }}
         >
           <FormItem

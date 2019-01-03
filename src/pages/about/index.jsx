@@ -2,9 +2,16 @@ import urlList from "./api.actions";
 import page from "@/component/page";
 import ZSearchTable from "@/component/bussiness/zsearchtable";
 import PropTypes from "prop-types";
-import { clickButton, getInfo, openModal, reload } from "@/store/about/action";
+import {
+  clickButton,
+  getInfo,
+  openModal,
+  reload,
+  initState
+} from "@/store/about/action";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import AddModal from "./modal/add";
+import TestModal from "./modal/test";
 const FormItem = Form.Item;
 @page({
   style: require("./style"),
@@ -16,7 +23,8 @@ const FormItem = Form.Item;
     mapDispatchToProps: {
       clickButton,
       getInfo,
-      openModal
+      openModal,
+      initState
     }
   }
 })
@@ -33,17 +41,18 @@ class About extends React.Component {
       data: null
     };
   }
-  componentWillMount() {
+  componentWillMount() {}
+  componentDidMount() {
     let { getInfo } = this.props;
     getInfo();
   }
-  componentDidMount() {}
-  componentWillReceiveProps(props) {
-    console.log(props, "wwww");
-  }
+  componentWillReceiveProps(props) {}
   componentWillUpdate() {}
   componentDidUpdate() {}
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    let { initState } = this.props;
+    initState();
+  }
   //  验证表单信息
   validateForm = () => {
     const { form } = this.props;
@@ -62,6 +71,14 @@ class About extends React.Component {
     const { aboutData, clickButton, getInfo, form, openModal } = this.props;
     return (
       <div className="about-container">
+        <Button
+          type="primary"
+          onClick={() => {
+            openModal("TEST");
+          }}
+        >
+          测试
+        </Button>
         <ZSearchTable
           url="/v1/consumable"
           data={{}}
@@ -70,7 +87,7 @@ class About extends React.Component {
             <Button
               type="primary"
               onClick={() => {
-                openModal();
+                openModal("ADD");
               }}
             >
               新增
@@ -145,7 +162,6 @@ class About extends React.Component {
         </Button>
         <div>1234566</div>
         {aboutData.testList.map((item, index) => {
-          console.log(item, "wewwe");
           return <div key={index}>{item.name}</div>;
         })}
         <FormItem>
@@ -176,7 +192,16 @@ class About extends React.Component {
         >
           表单验证
         </Button>
-        <AddModal />
+        <Button
+          type="primary"
+          onClick={() => {
+            this.props.history.push("/");
+          }}
+        >
+          跳转路由
+        </Button>
+        <AddModal key={Utils.getRanderSrting()} />
+        <TestModal key={Utils.getRanderSrting()} />
       </div>
     );
   }

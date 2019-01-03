@@ -10,6 +10,8 @@ global.Utils = Utils;
 global.React = React;
 global.ReactDOM = ReactDOM;
 ReactDOM.render(
-  <Provider store={store}>{Router}</Provider>,
+  <Provider store={store}>
+    <Router />
+  </Provider>,
   document.getElementById("app")
 );

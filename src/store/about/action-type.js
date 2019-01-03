@@ -11,9 +11,11 @@ export const  OPENMODAL = "OPENMODAL";
 export const  CLOSEMODAL = "CLOSEMODAL";
 //  确认弹窗
 export const  CONFIRMMODAL = "CONFIRMMODAL";
-//   取消弹窗
+//  取消弹窗
 export const  CANCELMODAL = "CANCELMODAL";
 //  刷新table
 export const  RELOADTABLE = "RELOADTABLE";
-//   取消刷新table
+//  取消刷新table
 export const  CANCELRELOADTABLE = "CANCELRELOADTABLE";
+//  回到初始状态
+export const  INITSTATE = "INITSTATE";
