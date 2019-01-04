@@ -1,6 +1,6 @@
 import urlList from "./api.actions";
 import page from "@/component/page";
-import ZSearchTable from "@/component/bussiness/zsearchtable";
+import { ZSearchTable, SliderChange } from "@/component/bussiness";
 import PropTypes from "prop-types";
 import {
   clickButton,
@@ -58,7 +58,7 @@ class About extends React.Component {
     const { form } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        console.log(values, "ww");
+        console.log(values, "111");
       }
     });
   };
@@ -79,6 +79,11 @@ class About extends React.Component {
         >
           测试
         </Button>
+        <SliderChange
+          onChange={value => {
+            console.log(value, "1111");
+          }}
+        />
         <ZSearchTable
           url="/v1/consumable"
           data={{}}
