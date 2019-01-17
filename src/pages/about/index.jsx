@@ -1,17 +1,12 @@
 import urlList from "./api.actions";
 import page from "@/component/page";
-import { ZSearchTable, SliderChange } from "@/component/bussiness";
+import ZSearchTable from "@/component/bussiness/zsearchtable";
+import Test from "@/component/bussiness/test";
 import PropTypes from "prop-types";
-import {
-  clickButton,
-  getInfo,
-  openModal,
-  reload,
-  initState
-} from "@/store/about/action";
+import { clickButton, getInfo, openModal, cancelModal,reloadTable } from "@/store/about/action";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import AddModal from "./modal/add";
-import TestModal from "./modal/test";
+import utils from "../../utils";
 const FormItem = Form.Item;
 @page({
   style: require("./style"),
@@ -23,8 +18,9 @@ const FormItem = Form.Item;
     mapDispatchToProps: {
       clickButton,
       getInfo,
+      cancelModal,
       openModal,
-      initState
+      reloadTable
     }
   }
 })
@@ -43,47 +39,64 @@ class About extends React.Component {
   }
   componentWillMount() {}
   componentDidMount() {
-    let { getInfo } = this.props;
+    let { getInfo ,clickButton,openModal,cancelModal,reloadTable} = this.props;
     getInfo();
+    clickButton();
+    openModal("ADD");
+    cancelModal('ADD');
+    let a = {};
+    let readFilePromise = utils.promisify(this.reload,a);
+    var obj = {'0':"zero",'1':"one",'2':'two',length:3};
+    [].slice.call(obj,{...arguments});
+    readFilePromise('test').then(data => {
+      console.log(data);
+      console.log(a,'11222')
+    }).catch(err => {
+      console.log(err);
+    })
+    
+    // this.reload("test",(err,success) => {
+    //    console.log(err,success)
+    // })
   }
-  componentWillReceiveProps(props) {}
+  componentWillReceiveProps(props) {
+    const { aboutData } = props;
+    if (aboutData.tableReload) {
+      this.reload();
+    }
+  }
   componentWillUpdate() {}
   componentDidUpdate() {}
-  componentWillUnmount() {
-    let { initState } = this.props;
-    initState();
-  }
+  componentWillUnmount() {}
   //  验证表单信息
   validateForm = () => {
     const { form } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        console.log(values, "111");
+        console.log(values, "ww");
       }
     });
   };
   //  刷新页面
-  reload = () => {
-    alert("reload");
+  reload = (a,callback) => {
+    console.log(a);
+    callback && utils.isFunction(callback) && callback(false,"success")
   };
   render() {
     const { data } = this.state;
     const { aboutData, clickButton, getInfo, form, openModal } = this.props;
     return (
       <div className="about-container">
-        <Button
-          type="primary"
-          onClick={() => {
-            openModal("TEST");
-          }}
-        >
-          测试
-        </Button>
-        <SliderChange
-          onChange={value => {
-            console.log(value, "1111");
-          }}
-        />
+        <Test list={aboutData.dataList} {
+          ...form.getFieldProps("userName", {
+              initialValue: 123,
+              rules: [
+                {
+                  required: true,
+                  message: "请输入用户名"
+                }
+              ]
+            })}></Test>
         <ZSearchTable
           url="/v1/consumable"
           data={{}}
@@ -92,7 +105,7 @@ class About extends React.Component {
             <Button
               type="primary"
               onClick={() => {
-                openModal("ADD");
+                openModal();
               }}
             >
               新增
@@ -197,16 +210,7 @@ class About extends React.Component {
         >
           表单验证
         </Button>
-        <Button
-          type="primary"
-          onClick={() => {
-            this.props.history.push("/");
-          }}
-        >
-          跳转路由
-        </Button>
-        <AddModal key={Utils.getRanderSrting()} />
-        <TestModal key={Utils.getRanderSrting()} />
+        <AddModal />
       </div>
     );
   }
