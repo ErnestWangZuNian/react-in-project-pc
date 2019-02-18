@@ -39,7 +39,6 @@ export const aboutData = (state = defaultState, action = {}) => {
           result = { ...state };
           result.modal.add.visible = true;
           break;
-          break;
         case "TEST":
           result = { ...state };
           result.modal.test.visible = true;

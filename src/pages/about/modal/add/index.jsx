@@ -20,7 +20,9 @@ class App extends React.Component {
     super(props);
     this.state = {};
   }
-  componentWillMount() {}
+  componentWillMount() {
+    const { aboutData, confirmModal, cancelModal, form } = this.props;
+  }
   componentDidMount() {}
   componentWillReceiveProps() {}
   componentWillUpdate() {}
@@ -38,7 +40,7 @@ class App extends React.Component {
               if (err) {
                 console.log("Received values of form: ", values);
               } else {
-                confirmModal("ADD",values);
+                confirmModal("ADD", values);
               }
             });
           }}
