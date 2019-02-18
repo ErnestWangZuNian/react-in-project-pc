@@ -1,5 +1,6 @@
 import url from "./api.action";
 import { Button } from "antd";
+import Test from "@/component/bussiness/test";
 import page from "../../component/page";
 @page({
   style: require("./test.less")
@@ -22,6 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Test list={[{id:2}]}></Test>
         <Button
           type="primary"
           onClick={() => {
