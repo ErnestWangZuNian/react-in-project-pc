@@ -2,6 +2,7 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer")({
   browsers: [
@@ -11,14 +12,24 @@ const autoprefixer = require("autoprefixer")({
     "not ie < 9" // React doesn't support IE8 anyway
   ]
 });
-const resolve = (dir) =>  {
+const resolve = dir => {
   return path.resolve(__dirname, dir);
-}
-const context = resolve('src');
+};
+const context = resolve("src");
 
 module.exports = {
   context,
-  entry: [resolve("src/main.js")],
+  entry: {
+    main: resolve("src/main.js"),
+    vendor: [
+      "react",
+      "react-dom",
+      "redux",
+      "react-router-dom",
+      "react-redux",
+      "axios"
+    ]
+  },
   output: {
     filename: "[name].bundle.js",
     path: resolve("dist")
@@ -31,11 +42,12 @@ module.exports = {
     }
   },
   module: {
-    loaders: [{
+    loaders: [
+      {
         test: /\.(js|jsx)$/,
         include: context,
         use: {
-          loader: "babel-loader",
+          loader: "babel-loader"
         }
       },
       {
@@ -57,14 +69,15 @@ module.exports = {
       {
         test: /\.less$/,
         include: resolve("src/pages"),
-        use: [{
+        use: [
+          {
             loader: "style-loader/useable"
           },
           {
             loader: "css-loader"
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               plugins: [autoprefixer]
             }
@@ -87,7 +100,7 @@ module.exports = {
               loader: "css-loader"
             },
             {
-              loader: 'postcss-loader',
+              loader: "postcss-loader",
               options: {
                 plugins: [autoprefixer]
               }
@@ -106,10 +119,10 @@ module.exports = {
             loader: "style-loader/useable"
           },
           {
-            loader: "css-loader",
+            loader: "css-loader"
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               plugins: [autoprefixer]
             }
@@ -139,23 +152,34 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [{
-          loader: "file-loader"
-        }]
+        use: [
+          {
+            loader: "file-loader"
+          }
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [{
-          loader: "file-loader"
-        }]
+        use: [
+          {
+            loader: "file-loader"
+          }
+        ]
       }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(["dist"]),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "common"
+      names: ['vendor'],
+      minChunks: Infinity,
+      filename: 'common.bundle.[chunkhash].js',
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['manifest'],
+      filename: 'manifest.bundle.[chunkhash].js',
+    }),
+    new BundleAnalyzerPlugin({ analyzerPort: 8919 }),
     new HtmlWebpackPlugin({
       title: "Production",
       template: path.resolve(__dirname, "index.html")
