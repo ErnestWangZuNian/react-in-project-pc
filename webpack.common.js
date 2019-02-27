@@ -21,14 +21,16 @@ module.exports = {
   context,
   entry: {
     main: resolve("src/main.js"),
-    vendor: [
-      "react",
-      "react-dom",
-      "redux",
-      "react-router-dom",
-      "react-redux",
-      "axios"
-    ]
+    vendor: ["wzn-api", "wzn-utils"]
+  },
+  externals: {
+    jquery: "$",
+    react: "window.React",
+    "react-dom": "window.ReactDOM",
+    antd: "window.antd",
+    "react-redux": "window.ReactRedux",
+    axios: "window.axios",
+    redux: "window.Redux"
   },
   output: {
     filename: "[name].bundle.js",
@@ -171,15 +173,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(["dist"]),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor'],
+      names: ["vendor"],
       minChunks: Infinity,
-      filename: 'common.bundle.[chunkhash].js',
+      filename: "common.bundle.js"
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['manifest'],
-      filename: 'manifest.bundle.[chunkhash].js',
-    }),
-    new BundleAnalyzerPlugin({ analyzerPort: 8919 }),
     new HtmlWebpackPlugin({
       title: "Production",
       template: path.resolve(__dirname, "index.html")

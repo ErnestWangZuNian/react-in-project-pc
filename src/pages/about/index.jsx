@@ -54,10 +54,6 @@ class About extends React.Component {
     }).catch(err => {
       console.log(err);
     })
-    
-    // this.reload("test",(err,success) => {
-    //    console.log(err,success)
-    // })
   }
   componentWillReceiveProps(props) {
     const { aboutData } = props;

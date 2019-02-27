@@ -23,7 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Test list={[{id:2}]}></Test>
+        <Test list={[{ id: 2 }]} />
         <Button
           type="primary"
           onClick={() => {
@@ -32,7 +32,7 @@ class App extends React.Component {
         >
           跳转路由
         </Button>
-        ;<div className="test">2222</div>
+        <div className="test">2222</div>
       </div>
     );
   }
