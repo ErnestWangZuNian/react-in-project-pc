@@ -1,7 +1,6 @@
 import urlList from "./api.actions";
 import page from "@/component/page";
 import ZSearchTable from "@/component/bussiness/zsearchtable";
-import Test from "@/component/bussiness/test";
 import PropTypes from "prop-types";
 import { clickButton, getInfo, openModal, cancelModal,reloadTable } from "@/store/about/action";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
