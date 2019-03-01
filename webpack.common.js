@@ -24,13 +24,12 @@ module.exports = {
     vendor: ["wzn-api", "wzn-utils"]
   },
   externals: {
-    jquery: "$",
-    react: "window.React",
-    "react-dom": "window.ReactDOM",
-    antd: "window.antd",
-    "react-redux": "window.ReactRedux",
-    axios: "window.axios",
-    redux: "window.Redux"
+    react: "React",
+    "react-dom": "ReactDOM",
+    antd: "antd",
+    "react-redux": "ReactRedux",
+    axios: "axios",
+    redux: "Redux"
   },
   output: {
     filename: "[name].bundle.js",
