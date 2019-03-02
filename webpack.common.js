@@ -25,17 +25,6 @@ module.exports = {
     main: resolve("src/main.js"),
     vendor: ["wzn-api", "wzn-utils"]
   },
-  externals: {
-    react: "window.React" ? "window.React" : "React",
-    "react-dom": "window.ReactDOM" ? "window.ReactDOM" : 'ReactDOM',
-    "react-redux": "window.ReactRedux" ? "window.ReactRedux" : "ReactRedux",
-    "react-router": "window.react-router" ? "window.ReactRouter" : "ReactRouter",
-    "react-router-dom": "window.react-router-dom" ? "window.ReactRouterDOM" : "ReactRouterDOM",
-    moment: "window.moment" ? "window.moment" : "moment",
-    antd: "window.antd" ? "window.antd" : 'antd',
-    axios: "window.axios" ? "window.axios" : "axios",
-    redux: "window.Redux" ? "window.Redux" : "Redux"
-  },
   output: {
     filename: "[name].bundle.js",
     path: resolve("dist")

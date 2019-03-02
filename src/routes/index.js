@@ -30,6 +30,7 @@ class Router extends React.Component {
             const route = r => {
               const Component = AllComponents[r.component];
               return (
+                Component ? 
                 <Route
                   key={r.route || r.key}
                   exact
@@ -60,10 +61,10 @@ class Router extends React.Component {
                       this.requireLogin(<Component {...merge} />, r.auth)
                     );
                   }}
-                />
+                />: null
               );
             };
-            return r.component ? route(r) : r.subs.map(r => route(r));
+            return r.component && route(r) ? route(r) : r.subs.map(r => route(r));
           })
         )}
         <Route render={() => <Redirect to="/404" />} />
