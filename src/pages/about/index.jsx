@@ -36,7 +36,6 @@ class About extends React.Component {
       data: null
     };
   }
-  componentWillMount() {}
   componentDidMount() {
     let { getInfo ,clickButton,openModal,cancelModal,reloadTable} = this.props;
     getInfo();
@@ -54,13 +53,6 @@ class About extends React.Component {
       console.log(err);
     })
   }
-  componentWillReceiveProps(props) {
-    const { aboutData } = props;
-    if (aboutData.tableReload) {
-      this.reload();
-    }
-  }
-  componentWillUpdate() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
   //  验证表单信息
@@ -82,16 +74,6 @@ class About extends React.Component {
     const { aboutData, clickButton, getInfo, form, openModal } = this.props;
     return (
       <div className="about-container">
-        <Test list={aboutData.dataList} {
-          ...form.getFieldProps("userName", {
-              initialValue: 123,
-              rules: [
-                {
-                  required: true,
-                  message: "请输入用户名"
-                }
-              ]
-            })}></Test>
         <ZSearchTable
           url="/v1/consumable"
           data={{}}

@@ -2,7 +2,6 @@ import style from "./style";
 import { Form } from "antd";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import preload from "./preload";
 let page = options => {
   options = { withRouter: true, ...options };
   return function(Component) {

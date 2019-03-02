@@ -1,10 +1,7 @@
-import url from "./api.action";
+
 import { Layout, Menu, Icon } from "antd";
-import page from "@/component/page";
+import Routes from './routes';
 const { Header, Sider, Content } = Layout;
-@page({
-  style: require("./style.scss")
-})
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +14,13 @@ class App extends React.Component {
   componentWillUnmount() {}
   render() {
     return (
-      1111
+        <Layout>
+            2222
+            <Header></Header>
+            <Content>
+               <Routes/>
+            </Content>
+        </Layout>
     );
   }
 }

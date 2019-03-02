@@ -2,7 +2,9 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const {
+  BundleAnalyzerPlugin
+} = require("webpack-bundle-analyzer");
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer")({
   browsers: [
@@ -24,12 +26,15 @@ module.exports = {
     vendor: ["wzn-api", "wzn-utils"]
   },
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
-    antd: "antd",
-    "react-redux": "ReactRedux",
-    axios: "axios",
-    redux: "Redux"
+    react: "window.React" ? "window.React" : "React",
+    "react-dom": "window.ReactDOM" ? "window.ReactDOM" : 'ReactDOM',
+    "react-redux": "window.ReactRedux" ? "window.ReactRedux" : "ReactRedux",
+    "react-router": "window.react-router" ? "window.ReactRouter" : "ReactRouter",
+    "react-router-dom": "window.react-router-dom" ? "window.ReactRouterDOM" : "ReactRouterDOM",
+    moment: "window.moment" ? "window.moment" : "moment",
+    antd: "window.antd" ? "window.antd" : 'antd',
+    axios: "window.axios" ? "window.axios" : "axios",
+    redux: "window.Redux" ? "window.Redux" : "Redux"
   },
   output: {
     filename: "[name].bundle.js",
@@ -43,8 +48,7 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.(js|jsx)$/,
         include: context,
         use: {
@@ -70,8 +74,7 @@ module.exports = {
       {
         test: /\.less$/,
         include: resolve("src/pages"),
-        use: [
-          {
+        use: [{
             loader: "style-loader/useable"
           },
           {
@@ -93,11 +96,7 @@ module.exports = {
         exclude: resolve("src/pages"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
-              loader: "style-loader"
-            },
-            {
+          use: [{
               loader: "css-loader"
             },
             {
@@ -115,8 +114,7 @@ module.exports = {
       {
         test: /\.s[c|a]ss$/,
         include: resolve("src/pages"),
-        use: [
-          {
+        use: [{
             loader: "style-loader/useable"
           },
           {
@@ -138,11 +136,7 @@ module.exports = {
         exclude: resolve("src/pages"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
-              loader: "style-loader"
-            },
-            {
+          use: [{
               loader: "css-loader"
             },
             {
@@ -153,19 +147,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       }
     ]
   },

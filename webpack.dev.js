@@ -11,7 +11,9 @@ module.exports = merge(common, {
     proxy: {
       "/": {
         target: "http://47.92.112.65",
-        pathRewrite: { "^/": "" }
+        pathRewrite: {
+          "^/": ""
+        }
       }
     }
   },

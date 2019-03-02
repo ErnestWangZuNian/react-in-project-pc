@@ -5,13 +5,14 @@ import Utils from "./utils/index";
 import Router from "./router/route/index.jsx";
 import store from "@/store/store";
 import { Provider } from "react-redux";
+import  Page from "./page";
 global.Api = Api;
 global.Utils = Utils;
 global.React = React;
 global.ReactDOM = ReactDOM;
 ReactDOM.render(
   <Provider store={store}>
-    <Router />
+     <Page store={store}></Page>
   </Provider>,
   document.getElementById("app")
 );
