@@ -1,12 +1,11 @@
 import { Layout, Menu, Icon } from "antd";
 import Routes from "@/routes";
-import SiderCustom from "@/component/bussiness/slidercustom";
+import SiderCustom from "@/component/layout/slidercustom";
 import page from "@/component/page";
 const { Header, Sider, Content } = Layout;
 @page({
     style: require("./style")
 })
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class App extends React.Component {
       <Layout className="page-container">
         <SiderCustom {...this.props} collapsed={this.state.collapsed} />
         <Layout>
-          <Header style={{ background: "#fff", padding: 0 }}>
+          <Header>
             <Icon
               className="trigger"
               type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
