@@ -1,7 +1,8 @@
 import Routes from "@/routes";
 import SiderCustom from "@/component/layout/slidercustom";
 import page from "@/component/page";
-const { Header, Sider, Content } = antd.Layout;
+import { Layout,Icon } from "antd";
+const { Header, Sider, Content } = Layout;
 @page({
   style: require("./style")
 })
