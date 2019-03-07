@@ -1,10 +1,9 @@
-import { Layout, Menu, Icon } from "antd";
 import Routes from "@/routes";
 import SiderCustom from "@/component/layout/slidercustom";
 import page from "@/component/page";
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content } = antd.Layout;
 @page({
-    style: require("./style")
+  style: require("./style")
 })
 class App extends React.Component {
   constructor(props) {

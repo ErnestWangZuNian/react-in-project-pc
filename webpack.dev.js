@@ -19,15 +19,6 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.ProvidePlugin({
-      React: 'react',
-      "react-dom": 'react-dom',
-      "react-router": 'react-router',
-      'react-router-dom': 'react-router-dom',
-      "antd": "antd",
-      "redux": "redux",
-      "react-redux": "react-redux"
-    }),
     new webpack.NamedModulesPlugin()
   ]
 });
