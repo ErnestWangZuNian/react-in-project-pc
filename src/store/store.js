@@ -1,13 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import * as about from "./about/reducer";
-// import * as production from "./production/reducer";
+import * as commonData from "./common/reducer";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-// import { composeWithDevTools } from "redux-devtools-extension";
 const middleware = [thunk, logger];
 let store = createStore(
-  combineReducers({ ...about }),
-  applyMiddleware(...middleware)
+  combineReducers({ ...commonData }),
+  applyMiddleware(...middleware),
   // composeWithDevTools(applyMiddleware(...middleware))
 );
 

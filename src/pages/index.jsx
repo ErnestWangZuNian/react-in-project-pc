@@ -1,11 +1,15 @@
-import Bundle from "@/component/bundle";
+import Bundle from "@/components/bundle";
 const About = () => (
   <Bundle load={require("bundle-loader?lazy!@/pages/about/index.jsx")} />
+);
+const AboutDetail = () => (
+  <Bundle load={require("bundle-loader?lazy!@/pages/about/detail.jsx")} />
 );
 const App = () => (
   <Bundle load={require("bundle-loader?lazy!@/pages/app/index.jsx")} />
 );
 export default {
   App,
-  About
+  About,
+  AboutDetail
 };

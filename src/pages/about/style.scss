@@ -1,16 +1,9 @@
-.about-container {
-  color: green;
-  padding: 20px;
+.home-container {
+  background: #fff;
+  position: relative;
+  min-height: 100vh;
 }
-.test {
-  background: green;
-  color: #fff;
-  width: 100%;
-  height: 2rem;
-}
-.red2 {
-  color: red;
-}
-.test {
-  color: red;
+.test{
+  display: flex;
+  color: red
 }

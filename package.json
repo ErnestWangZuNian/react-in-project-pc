@@ -52,16 +52,10 @@
     "wzn-utils": "^2.0.5"
   },
   "dependencies": {
-    "antd": "^3.13.6",
     "babel-plugin-import": "^1.8.0",
     "babel-plugin-react-css-modules": "^3.3.3",
     "create-react-class": "^15.6.3",
     "less": "^3.5.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-loadable": "^5.3.1",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",

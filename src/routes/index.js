@@ -1,4 +1,3 @@
-
 import { Route, Redirect, Switch } from "react-router-dom";
 import AllComponents from "@/pages";
 import routesConfig from "./config";
@@ -18,6 +17,7 @@ class Router extends React.Component {
     // if (process.env.NODE_ENV === "production" && !permissions) {
     //   // 线上环境判断是否登录
     //   return <Redirect to={"/login"} />;
+    // }ogin"} />;
     // }
     return permission ? this.requireAuth(permission, component) : component;
   };
@@ -29,42 +29,41 @@ class Router extends React.Component {
           routesConfig[key].map(r => {
             const route = r => {
               const Component = AllComponents[r.component];
-              return (
-                Component ? 
+              return Component ? (
                 <Route
                   key={r.route || r.key}
-                  exact
+                  exact={!r.matchs}
                   path={r.route || r.key}
                   render={props => {
-                    const reg = /\?\S*/g;
-                    // 匹配?及其以后字符串
-                    const queryParams = props.location.hash.match(reg);
-                    // 去除?的参数
-                    const { params } = props.match;
-                    Object.keys(params).forEach(key => {
-                      params[key] = params[key] && params[key].replace(reg, "");
-                    });
-                    props.match.params = {
-                      ...params
-                    };
                     const merge = {
-                      ...props,
-                      query: queryParams
-                        ? queryString.parse(queryParams[0])
-                        : {}
+                      ...props
                     };
                     // 回传route配置
                     onRouterChange && onRouterChange(r);
-                    return r.login ? (
-                      <Component {...merge} />
+                    return r.matchs && r.matchs.length ? (
+                      <Switch>
+                        {r.matchs.map(item => {
+                          console.log(item);
+                          return (
+                            <Route
+                              key={item.route || item.key}
+                              exact
+                              path={item.route || item.key}
+                              component={AllComponents[item.component]}
+                            />
+                          );
+                        })}
+                      </Switch>
                     ) : (
-                      this.requireLogin(<Component {...merge} />, r.auth)
+                      <Component {...merge} />
                     );
                   }}
-                />: null
-              );
+                />
+              ) : null;
             };
-            return r.component && route(r) ? route(r) : r.subs.map(r => route(r));
+            return r.component && route(r)
+              ? route(r)
+              : r.subs.map(r => route(r));
           })
         )}
         <Route render={() => <Redirect to="/404" />} />

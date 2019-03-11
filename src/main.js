@@ -1,14 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import Api from "./api/index";
-import Utils from "./utils/index";
+import Util from "@/utils";
 import store from "@/store/store";
 import { Provider } from "react-redux";
-import  Page from "@/component/layout/page";
+import  Page from "@/components/layout/page";
+Object.assign(global, antd);
 global.Api = Api;
-global.Utils = Utils;
-global.React = React;
-global.ReactDOM = ReactDOM;
+global.Util = Util;
 ReactDOM.render(
   <Provider store={store}>
      <Page store={store}></Page>

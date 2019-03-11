@@ -3,8 +3,6 @@ import page from "@/components/page";
   style: require("./style.scss")
 })
 class App extends React.Component {
-  static defaultProps = {};
-  static propTypes = {};
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +13,7 @@ class App extends React.Component {
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
-    return <div>这是app界面</div>;
+    return <div>这是about详情界面</div>;
   }
 }
 export default App;

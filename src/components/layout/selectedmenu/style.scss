@@ -1,0 +1,10 @@
+.selected-menu-container {
+  .selected-menu-tab-item {
+    position: relative;
+    .close-tab {
+      position: absolute;
+      top: 4px;
+      right: -18px;
+    }
+  }
+}
