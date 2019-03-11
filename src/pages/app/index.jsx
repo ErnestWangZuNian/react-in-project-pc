@@ -15,6 +15,7 @@ class App extends React.Component {
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
+    console.log(this.props,'123456')
     return <div>这是app界面</div>;
   }
 }

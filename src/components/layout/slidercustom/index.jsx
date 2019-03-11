@@ -6,12 +6,13 @@ class SiderCustom extends React.Component {
   static propTypes = {};
   constructor(props) {
     const { pathname } = props.location;
+    console.log(props.location,'www')
     super(props);
     this.state = {
       collapsed: false,
       mode: "inline",
       openKey: pathname.substr(0, pathname.lastIndexOf("/")),
-      selectedKey: pathname,
+      selectedKey: /`${pathname}`/,
       firstHide: false
     };
   }
@@ -50,9 +51,9 @@ class SiderCustom extends React.Component {
           menus={routes.menus}
           onClick={this.menuClick}
           mode="inline"
-          selectedKeys={[selectedKey]}
-          openKeys={firstHide ? null : [openKey]}
-          onOpenChange={this.openMenu}
+          // selectedKeys={[selectedKey]}
+          // openKeys={firstHide ? null : [openKey]}
+          // onOpenChange={this.openMenu}
         />
       </Sider>
     );

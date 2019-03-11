@@ -36,26 +36,34 @@ class Router extends React.Component {
                   path={r.route || r.key}
                   render={props => {
                     const merge = {
-                      ...props
+                      ...props,
+                      openkey: r.key
                     };
+                    console.log(merge,'wwww')
                     // 回传route配置
                     onRouterChange && onRouterChange(r);
                     return r.matchs && r.matchs.length ? (
                       <Switch>
                         {r.matchs.map(item => {
-                          console.log(item);
                           return (
                             <Route
                               key={item.route || item.key}
                               exact
                               path={item.route || item.key}
+                              render= {props => {
+                                const merge = {
+                                  ...props,
+                                  openkey: item.key
+                                };
+                                return  <Component {...merge} />
+                              }}
                               component={AllComponents[item.component]}
                             />
                           );
                         })}
                       </Switch>
                     ) : (
-                      <Component {...merge} />
+                      <Component {...merge} a={1234}/>
                     );
                   }}
                 />
