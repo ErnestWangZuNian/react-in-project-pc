@@ -1,46 +1,79 @@
 import routes from "@/routes/config";
 import SiderMenu from "./slidermenu";
 const { Sider } = antd.Layout;
+class MenuNode {
+  constructor(menuItem, parent = null) {
+    this.key = menuItem.key || menuItem.path;
+    this.title = menuItem.title;
+    this.parent = parent;
+  }
+}
 class SiderCustom extends React.Component {
   static defaultProps = {};
   static propTypes = {};
   constructor(props) {
     const { pathname } = props.location;
-    console.log(props.location,'www')
     super(props);
     this.state = {
       collapsed: false,
       mode: "inline",
-      openKey: pathname.substr(0, pathname.lastIndexOf("/")),
-      selectedKey: /`${pathname}`/,
-      firstHide: false
+      openKeys: [],
+      selectedKeys: []
     };
+    this.menusTree = [];
   }
   componentDidMount() {
-    const state = this.setMenuOpen(this.props);
-    this.setState(state);
+    const { history } = this.props;
+    this.initMenuList(routes.menus);
+    this.setActiveMenu(history.location);
+    this.unListen = history.listen(this.setActiveMenu);
   }
   componentDidUpdate() {}
-  setMenuOpen() {
-    const { pathname } = this.props.location;
-    return {
-      openKey: pathname.substr(0, pathname.lastIndexOf("/")),
-      selectedKey: pathname
-    };
+  componentWillUnmount() {
+    this.unListen();
   }
-  menuClick = e => {
-    this.setState({
-      selectedKey: e.key
-    });
-  };
+  //  切换菜单上下级
   openMenu = v => {
     this.setState({
-      openKey: v[v.length - 1],
-      firstHide: false
+      openKeys: v[v.length - 1]
+    });
+  };
+  //  处理菜单路由列表
+  initMenuList = (menus, parent = null) => {
+    for (let menuItem of menus) {
+      if (menuItem.subs) {
+        this.initMenuList(menuItem.subs, new MenuNode(menuItem, parent));
+      } else {
+        this.menusTree.push(new MenuNode(menuItem, parent));
+      }
+    }
+  };
+  //  浏览器路由对应的菜单高亮
+  setActiveMenu = location => {
+    const pathname = location.pathname;
+    for (let node of this.menusTree) {
+      const isActivePath = new RegExp(`^${node.key}`).test(pathname);
+      if (isActivePath) {
+        const openKeys = [];
+        const selectedKeys = [node.key];
+        while (node.parent) {
+          openKeys.push(node.parent.key);
+          node = node.parent;
+        }
+        this.setState({
+          openKeys,
+          selectedKeys
+        });
+        return;
+      }
+    }
+    this.setState({
+      openKeys: [],
+      selectedKeys: []
     });
   };
   render() {
-    const { selectedKey, firstHide, openKey } = this.state;
+    const { selectedKeys, openKeys } = this.state;
     const { collapsed } = this.props;
     return (
       <Sider trigger={null} breakpoint="lg" collapsed={collapsed}>
@@ -49,11 +82,10 @@ class SiderCustom extends React.Component {
           {...this.props}
           theme="dark"
           menus={routes.menus}
-          onClick={this.menuClick}
           mode="inline"
-          // selectedKeys={[selectedKey]}
-          // openKeys={firstHide ? null : [openKey]}
-          // onOpenChange={this.openMenu}
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={this.openMenu}
         />
       </Sider>
     );

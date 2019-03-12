@@ -20,33 +20,8 @@ class SliderMenu extends React.Component {
     const { onMenuClick } = this.props;
     onMenuClick && Util.isFunction(onMenuClick) && onMenuClick(item);
   };
-  // renderMenuItem = item => (
-  //   <Menu.Item key={item.key}>
-  //     <div
-  //       onClick={() => {
-  //         this.onMenuClick(item);
-  //       }}
-  //     >
-  //       {item.icon && <Icon type={item.icon} />}
-  //       <span className="nav-text">{item.title}</span>
-  //     </div>
-  //   </Menu.Item>
-  // );
-  // renderSubMenu = item => (
-  //   <Menu.SubMenu
-  //     key={item.key}
-  //     title={
-  //       <span>
-  //         {item.icon && <Icon type={item.icon} />}
-  //         <span className="nav-text">{item.title}</span>
-  //       </span>
-  //     }
-  //   >
-  //     {item.subs.map(item => this.renderMenuItem(item))}
-  //   </Menu.SubMenu>
-  // );
-  renderMenuItem = menuArr => {
-    const ret = menuArr.map(item => {
+  renderMenuItem = menus => {
+    let result = menus.map(item => {
       if (item.subs) {
         return (
           <Menu.SubMenu title={item.title} key={item.key || item.title}>
@@ -56,24 +31,23 @@ class SliderMenu extends React.Component {
       } else {
         return (
           <Menu.Item title={item.title} key={item.key}>
-            <Link to={item.key}>{item.title}</Link>
+            <div
+              onClick={() => {
+                this.onMenuClick(item);
+              }}
+            >
+              {item.icon && <Icon type={item.icon} />}
+              <span className="nav-text">{item.title}</span>
+            </div>
           </Menu.Item>
         );
       }
     });
-    return ret;
+    return result;
   };
   render() {
     const { menus } = this.props;
-    return (
-      <Menu {...this.props}>
-        {/* {menus &&
-          menus.map(item =>
-            item.subs ? this.renderSubMenu(item) : this.renderMenuItem(item)
-          )} */}
-           {this.renderMenuItem(menus)}
-      </Menu>
-    );
+    return <Menu {...this.props}>{this.renderMenuItem(menus)}</Menu>;
   }
 }
 
