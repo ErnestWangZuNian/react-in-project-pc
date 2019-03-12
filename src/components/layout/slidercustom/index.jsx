@@ -74,6 +74,7 @@ class SiderCustom extends React.Component {
   };
   render() {
     const { selectedKeys, openKeys } = this.state;
+    console.log(openKeys,'www')
     const { collapsed } = this.props;
     return (
       <Sider trigger={null} breakpoint="lg" collapsed={collapsed}>
@@ -84,8 +85,8 @@ class SiderCustom extends React.Component {
           menus={routes.menus}
           mode="inline"
           selectedKeys={selectedKeys}
-          openKeys={openKeys}
-          onOpenChange={this.openMenu}
+          // openKeys={openKeys}
+          // onOpenChange={this.openMenu}
         />
       </Sider>
     );

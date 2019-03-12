@@ -3,6 +3,15 @@ import AllComponents from "@/pages";
 import routesConfig from "./config";
 import queryString from "query-string";
 class Router extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+    this.menus = [];
+  }
+  componentDidMount() {
+    // this.renderComponentByRoute(routesConfig.menus)
+  }
   requireAuth = (permission, component) => {
     // const { auth } = this.props;
     // const { permissions } = auth.data;
@@ -21,59 +30,61 @@ class Router extends React.Component {
     // }
     return permission ? this.requireAuth(permission, component) : component;
   };
+  //  根绝单个memuItem生成route
+  generateItemRoute(menuItem){
+    const Component = AllComponents[menuItem.component];
+    let result = null;
+    return Component ? 
+      <Route
+      key={menuItem.key}
+      exact
+      path={menuItem.key}
+      render={props => {
+        const merge = {
+          ...props
+        };
+        return menuItem.matchs && menuItem.matchs.length ? (
+          <Switch>
+            {menuItem.matchs.map(item => {
+              const Component = AllComponents[item.component];
+              return (
+                Component ? 
+                <Route
+                  key={item.path || item.key}
+                  path={item.path || item.key}
+                  exact
+                  render= {props => {
+                    const merge = {
+                      ...props
+                    };
+                    return  <Component {...merge} />
+                  }}
+                /> : null
+              );
+            })}
+          </Switch>
+        ) : (
+          <Component {...merge}/>
+        );
+      }}
+    />
+    :null
+  }
+  // 根据路由配置渲染组件
+  renderComponentByRoute(menus){
+       return menus.map(item => {
+         if(item.subs){
+          return this.renderComponentByRoute(item.subs)
+         }else{
+          return this.generateItemRoute(item)
+         }
+      })
+  }
   render() {
     const { onRouterChange } = this.props;
     return (
       <Switch>
-        {Object.keys(routesConfig).map(key =>
-          routesConfig[key].map(r => {
-            const route = r => {
-              const Component = AllComponents[r.component];
-              return Component ? (
-                <Route
-                  key={r.route || r.key}
-                  exact={!r.matchs}
-                  path={r.route || r.key}
-                  render={props => {
-                    const merge = {
-                      ...props,
-                      openkey: r.key
-                    };
-                    console.log(merge,'wwww')
-                    // 回传route配置
-                    onRouterChange && onRouterChange(r);
-                    return r.matchs && r.matchs.length ? (
-                      <Switch>
-                        {r.matchs.map(item => {
-                          return (
-                            <Route
-                              key={item.route || item.key}
-                              exact
-                              path={item.route || item.key}
-                              render= {props => {
-                                const merge = {
-                                  ...props,
-                                  openkey: item.key
-                                };
-                                return  <Component {...merge} />
-                              }}
-                              component={AllComponents[item.component]}
-                            />
-                          );
-                        })}
-                      </Switch>
-                    ) : (
-                      <Component {...merge} a={1234}/>
-                    );
-                  }}
-                />
-              ) : null;
-            };
-            return r.component && route(r)
-              ? route(r)
-              : r.subs.map(r => route(r));
-          })
-        )}
+        {this.renderComponentByRoute(routesConfig.menus)}
         <Route render={() => <Redirect to="/404" />} />
       </Switch>
     );

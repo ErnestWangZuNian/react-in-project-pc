@@ -17,7 +17,12 @@ export default {
           subs: [{
             key: "/back/ui/buttons/detail",
             title: "账户管理详情",
-            component: "About"
+            component: "About",
+            subs: [{
+              key: "/back/ui/buttons/detail/11",
+              title: "账户管理详情11",
+              component: "App",
+            }]
           }]
         },
         {

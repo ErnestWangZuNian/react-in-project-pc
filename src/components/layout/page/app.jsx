@@ -70,9 +70,7 @@ class App extends React.Component {
     this.changeSelectedMenu(lastOneMenu.key);
   }
   render() {
-    console.log(this.props,'www')
     const { commonData } = this.props;
-    console.log(commonData,'www')
     const { selectedMenu } = commonData;
     const { currentMenuKey, changeMenuKey, collapsed } = this.state;
     return (
