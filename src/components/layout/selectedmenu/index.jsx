@@ -1,5 +1,10 @@
 import page from "@/components/page";
+import routeConfig from "@/routes/config";
 const TabPane = antd.Tabs.TabPane;
+const DEFAULT_SELECTED_MENU =
+  routeConfig.menus && routeConfig.menus.length
+    ? routeConfig.menus[0].path
+    : null;
 @page({
   style: require("./style")
 })
@@ -43,7 +48,7 @@ class SelectedMenu extends React.Component {
                   tab={
                     <div className="selected-menu-tab-item">
                       <span>{item.title}</span>
-                      {item.path !== "/back/index" ? (
+                      {item.path !== DEFAULT_SELECTED_MENU ? (
                         <span
                           className="close-tab"
                           onClick={e => {
@@ -56,7 +61,7 @@ class SelectedMenu extends React.Component {
                       ) : null}
                     </div>
                   }
-                  key={item.key}
+                  key={item.path}
                 />
               );
             })}

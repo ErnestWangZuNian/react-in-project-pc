@@ -16,12 +16,6 @@ class Router extends React.Component {
   componentDidMount() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
-  requireAuth = (permission, component) => {
-    return component;
-  };
-  requireLogin = (component, permission) => {
-    return permission ? this.requireAuth(permission, component) : component;
-  };
   //  根绝单个memuItem生成route
   generateItemRoute(menuItem) {
     const Component = AllComponents[menuItem.component];

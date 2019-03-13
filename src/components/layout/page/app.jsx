@@ -2,6 +2,7 @@ import page from "@/components/page";
 import Routes from "@/routes";
 import SiderCustom from "@/components/layout/slidercustom";
 import SelectedMenu from "@/components/layout/selectedmenu";
+import DocumentTitle from "react-document-title";
 import {
   COMMON_ADDMENU,
   COMMON_DELETEMENU,
@@ -30,7 +31,8 @@ class App extends React.Component {
     this.state = {
       collapsed: false,
       currentMenuKey: props.location.pathname,
-      changeMenuKey: props.location.pathname
+      changeMenuKey: props.location.pathname,
+      title: ""
     };
   }
   componentDidMount() {}
@@ -70,42 +72,48 @@ class App extends React.Component {
     this.changeSelectedMenu(lastOneMenu.path);
   }
   //   路由render的回调
-  routeEnter(item) {}
+  routeEnter(item) {
+    const { title } = this.state;
+    if (title === item.title) return;
+    this.setState({ title: item.title });
+  }
   render() {
     const { commonData } = this.props;
     const { selectedMenu } = commonData;
-    const { currentMenuKey, changeMenuKey, collapsed } = this.state;
+    const { currentMenuKey, changeMenuKey, collapsed, title } = this.state;
     return (
-      <Layout className="page-container">
-        <SiderCustom
-          key={changeMenuKey}
-          {...this.props}
-          onMenuClick={this.onMenuClick.bind(this)}
-          collapsed={collapsed}
-        />
-        <Layout>
-          <Header>
-            <Icon
-              className="trigger"
-              type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-              onClick={this.toggle.bind(this)}
-            />
-          </Header>
-          <Content className="page-content-container">
-            <SelectedMenu
-              menuList={selectedMenu}
-              currentMenuKey={currentMenuKey}
-              changeSelectedMenu={activeKey => {
-                this.changeSelectedMenu(activeKey);
-              }}
-              deleteSelectedMenu={item => {
-                this.deleteSelectedMenu(item);
-              }}
-            />
-            <Routes routeEnter={this.routeEnter.bind(this)} />
-          </Content>
+      <DocumentTitle title={title}>
+        <Layout className="page-container">
+          <SiderCustom
+            key={changeMenuKey}
+            {...this.props}
+            onMenuClick={this.onMenuClick.bind(this)}
+            collapsed={collapsed}
+          />
+          <Layout>
+            <Header>
+              <Icon
+                className="trigger"
+                type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
+                onClick={this.toggle.bind(this)}
+              />
+            </Header>
+            <Content className="page-content-container">
+              <SelectedMenu
+                menuList={selectedMenu}
+                currentMenuKey={currentMenuKey}
+                changeSelectedMenu={activeKey => {
+                  this.changeSelectedMenu(activeKey);
+                }}
+                deleteSelectedMenu={item => {
+                  this.deleteSelectedMenu(item);
+                }}
+              />
+              <Routes routeEnter={this.routeEnter.bind(this)} />
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
+      </DocumentTitle>
     );
   }
 }

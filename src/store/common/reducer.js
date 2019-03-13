@@ -1,11 +1,13 @@
 import * as actionType from "./action-type";
 import Util from "@/utils";
-const DEFAULT_SELECTED_MENU = [
-  { component: "App", icon: "mobile", key: "/back/index", title: "首页" }
-];
-const DEFAULT_UNIQUE_MENUKEY = {
-  "/back/index": true
-};
+import routeConfig from "@/routes/config";
+const DEFAULT_SELECTED_MENU =
+  routeConfig.menus && routeConfig.menus.length ? [routeConfig.menus[0]] : [];
+const DEFAULT_UNIQUE_MENUKEY = DEFAULT_SELECTED_MENU.length
+  ? {
+      [DEFAULT_SELECTED_MENU.path]: true
+    }
+  : {};
 let defaultState = {
   selectedMenu: Util.storage.getItem("COMMON_SELECTED_MENU")
     ? Util.storage.getItem("COMMON_SELECTED_MENU")
@@ -21,9 +23,9 @@ export const commonData = (state = defaultState, action = {}) => {
   let uniqueMenuKey = state.uniqueMenuKey;
   switch (action.type) {
     case actionType.COMMON_ADDMENU:
-      if (!uniqueMenuKey[currentMenu.key]) {
+      if (!uniqueMenuKey[currentMenu.path]) {
         selectedMenu.push(currentMenu);
-        uniqueMenuKey[currentMenu.key] = true;
+        uniqueMenuKey[currentMenu.path] = true;
       }
       Util.storage.setItem("COMMON_SELECTED_MENU", selectedMenu);
       Util.storage.setItem("COMMON_UNIQUE_MENUKEY", uniqueMenuKey);
@@ -34,7 +36,7 @@ export const commonData = (state = defaultState, action = {}) => {
       break;
     case actionType.COMMON_DELETEMENU:
       let resultMenu = Util.deleteValue(selectedMenu, currentMenu);
-      uniqueMenuKey[currentMenu.key] = false;
+      uniqueMenuKey[currentMenu.path] = false;
       Util.storage.setItem("COMMON_SELECTED_MENU", resultMenu);
       Util.storage.setItem("COMMON_UNIQUE_MENUKEY", uniqueMenuKey);
       return {

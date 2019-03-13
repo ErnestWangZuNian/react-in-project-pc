@@ -21,7 +21,7 @@ module.exports = {
   context,
   entry: {
     main: resolve("src/main.js"),
-    vendor: ["wzn-api", "wzn-utils"]
+    vendor: ["wzn-api", "wzn-utils","react-document-title"]
   },
   output: {
     filename: "[name].bundle.js",
