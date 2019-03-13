@@ -43,7 +43,7 @@ class SelectedMenu extends React.Component {
                   tab={
                     <div className="selected-menu-tab-item">
                       <span>{item.title}</span>
-                      {item.key !== "/back/index" ? (
+                      {item.path !== "/back/index" ? (
                         <span
                           className="close-tab"
                           onClick={e => {
