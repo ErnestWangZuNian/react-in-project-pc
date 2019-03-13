@@ -4,10 +4,6 @@ const TabPane = antd.Tabs.TabPane;
   style: require("./style")
 })
 class SelectedMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   static defaultProps = {
     menuList: []
   };
@@ -17,6 +13,10 @@ class SelectedMenu extends React.Component {
     deleteSelectedMenu: PropTypes.func.isRequired,
     currentMenuKey: PropTypes.string
   };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   componentDidMount() {}
   componentDidUpdate() {}
   render() {

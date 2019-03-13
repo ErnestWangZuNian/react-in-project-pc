@@ -22,15 +22,15 @@ class SliderMenu extends React.Component {
   };
   renderMenuItem = menus => {
     let result = menus.map(item => {
-      if (item.subs) {
+      if (item.children) {
         return (
-          <Menu.SubMenu title={item.title} key={item.key || item.title}>
-            {this.renderMenuItem(item.subs)}
+          <Menu.SubMenu title={item.title} key={item.path}>
+            {this.renderMenuItem(item.children)}
           </Menu.SubMenu>
         );
       } else {
         return (
-          <Menu.Item title={item.title} key={item.key}>
+          <Menu.Item title={item.title} key={item.path}>
             <div
               onClick={() => {
                 this.onMenuClick(item);

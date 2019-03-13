@@ -7,7 +7,7 @@ import {
   COMMON_DELETEMENU,
   COMMON_GETMENU
 } from "@/store/common/action";
-import { Layout,Icon} from "antd";
+import { Layout, Icon } from "antd";
 const { Header, Footer, Sider, Content } = Layout;
 @page({
   style: require("./style"),
@@ -47,9 +47,9 @@ class App extends React.Component {
   onMenuClick(item) {
     const { COMMON_ADDMENU, location } = this.props;
     COMMON_ADDMENU(item);
-    this.props.history.push(item.key);
+    this.props.history.push(item.path);
     this.setState({
-      currentMenuKey: item.key
+      currentMenuKey: item.path
     });
   }
   //  切换选中的菜单
@@ -67,8 +67,10 @@ class App extends React.Component {
     const { commonData } = this.props;
     const { selectedMenu } = commonData;
     let lastOneMenu = selectedMenu[selectedMenu.length - 1];
-    this.changeSelectedMenu(lastOneMenu.key);
+    this.changeSelectedMenu(lastOneMenu.path);
   }
+  //   路由render的回调
+  routeEnter(item) {}
   render() {
     const { commonData } = this.props;
     const { selectedMenu } = commonData;
@@ -100,7 +102,7 @@ class App extends React.Component {
                 this.deleteSelectedMenu(item);
               }}
             />
-            <Routes />
+            <Routes routeEnter={this.routeEnter.bind(this)} />
           </Content>
         </Layout>
       </Layout>

@@ -3,7 +3,7 @@ import SiderMenu from "./slidermenu";
 const { Sider } = antd.Layout;
 class MenuNode {
   constructor(menuItem, parent = null) {
-    this.key = menuItem.key || menuItem.path;
+    this.key = menuItem.path;
     this.title = menuItem.title;
     this.parent = parent;
   }
@@ -33,16 +33,16 @@ class SiderCustom extends React.Component {
     this.unListen();
   }
   //  切换菜单上下级
-  openMenu = v => {
+  openMenu = curentOpenkey => {
     this.setState({
-      openKeys: v[v.length - 1]
+      openKeys: curentOpenkey
     });
   };
   //  处理菜单路由列表
   initMenuList = (menus, parent = null) => {
     for (let menuItem of menus) {
-      if (menuItem.subs) {
-        this.initMenuList(menuItem.subs, new MenuNode(menuItem, parent));
+      if (menuItem.children) {
+        this.initMenuList(menuItem.children, new MenuNode(menuItem, parent));
       } else {
         this.menusTree.push(new MenuNode(menuItem, parent));
       }
@@ -74,7 +74,6 @@ class SiderCustom extends React.Component {
   };
   render() {
     const { selectedKeys, openKeys } = this.state;
-    console.log(openKeys,'www')
     const { collapsed } = this.props;
     return (
       <Sider trigger={null} breakpoint="lg" collapsed={collapsed}>
@@ -85,8 +84,8 @@ class SiderCustom extends React.Component {
           menus={routes.menus}
           mode="inline"
           selectedKeys={selectedKeys}
-          // openKeys={openKeys}
-          // onOpenChange={this.openMenu}
+          openKeys={openKeys}
+          onOpenChange={this.openMenu}
         />
       </Sider>
     );
