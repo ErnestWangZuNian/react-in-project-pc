@@ -1,4 +1,5 @@
 import page from "@/components/page";
+import { Button } from "antd";
 @page({
   style: require("./style.scss")
 })
@@ -15,7 +16,7 @@ class App extends React.Component {
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
-    return <div>这是app界面</div>;
+    return <div><Button type="primary">这是app界面</Button></div>;
   }
 }
 export default App;

@@ -3,7 +3,7 @@ import Util from "@/utils";
 import store from "@/store/store";
 import { Provider } from "react-redux";
 import Page from "@/components/layout/page";
-// import "./style/antd/index.less";
+import 'antd/dist/antd.css';
 Object.assign(global, antd);
 global.Api = Api;
 global.Util = Util;

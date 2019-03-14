@@ -2,7 +2,9 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const {
+  BundleAnalyzerPlugin
+} = require("webpack-bundle-analyzer");
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer")({
   browsers: [
@@ -16,6 +18,8 @@ const resolve = dir => {
   return path.resolve(__dirname, dir);
 };
 const context = resolve("src");
+const theme = require(resolve("src/style/antd-theme.js"))
+console.log(theme, '1234')
 
 module.exports = {
   context,
@@ -46,8 +50,7 @@ module.exports = {
     redux: "Redux"
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.(js|jsx)$/,
         include: context,
         use: {
@@ -73,8 +76,7 @@ module.exports = {
       {
         test: /\.less$/,
         include: resolve("src/pages"),
-        use: [
-          {
+        use: [{
             loader: "style-loader/useable"
           },
           {
@@ -87,7 +89,15 @@ module.exports = {
             }
           },
           {
-            loader: "less-loader"
+            loader: "less-loader",
+            options: {
+              // modifyVars: {
+              //   'primary-color': 'red',
+              //   'link-color': 'red',
+              //   'border-radius-base': '2px',
+              // },
+              javascriptEnabled: true,
+            },
           }
         ]
       },
@@ -96,8 +106,7 @@ module.exports = {
         exclude: resolve("src/pages"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
+          use: [{
               loader: "css-loader"
             },
             {
@@ -107,7 +116,15 @@ module.exports = {
               }
             },
             {
-              loader: "less-loader"
+              loader: "less-loader",
+              options: {
+                // modifyVars: {
+                //   'primary-color': 'red',
+                //   'link-color': 'red',
+                //   'border-radius-base': '2px',
+                // },
+                javascriptEnabled: true,
+              },
             }
           ]
         })
@@ -115,8 +132,7 @@ module.exports = {
       {
         test: /\.s[c|a]ss$/,
         include: resolve("src/pages"),
-        use: [
-          {
+        use: [{
             loader: "style-loader/useable"
           },
           {
@@ -138,8 +154,7 @@ module.exports = {
         exclude: resolve("src/pages"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
+          use: [{
               loader: "css-loader"
             },
             {
@@ -150,19 +165,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       }
     ]
   },
