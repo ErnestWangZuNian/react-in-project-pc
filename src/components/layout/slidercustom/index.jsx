@@ -80,7 +80,7 @@ class SiderCustom extends React.Component {
         <div className="logo" />
         <SiderMenu
           {...this.props}
-          theme="dark"
+          // theme="dark"
           menus={routes.menus}
           mode="inline"
           selectedKeys={selectedKeys}
