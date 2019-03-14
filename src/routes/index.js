@@ -16,6 +16,11 @@ class Router extends React.Component {
   componentDidMount() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
+  // 判断是否需要登录
+  isRequireLogin(Component) {
+    let isLogin = true;
+    return isLogin ? Component : <Redirect to="/login" />;
+  }
   //  根绝单个memuItem生成route
   generateItemRoute(menuItem) {
     const Component = AllComponents[menuItem.component];
@@ -57,14 +62,14 @@ class Router extends React.Component {
                       routeEnter &&
                         Util.isFunction(routeEnter) &&
                         routeEnter(menuItem);
-                      return <Component {...merge} />;
+                      return this.isRequireLogin(<Component {...merge} />);
                     }}
                   />
                 ) : null;
               })}
             </div>
           ) : (
-            <Component {...merge} />
+            this.isRequireLogin(<Component {...merge} />)
           );
         }}
       />
