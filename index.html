@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="./manifest.json" />
+    <title>React Demo</title>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-router/4.4.0-beta.6/react-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-router-dom/4.4.0-beta.6/react-router-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.13.6/antd.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/redux/4.0.0/redux.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-redux/5.0.7/react-redux.min.js"></script>
+  </head>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <title>React Demo</title>
-  <!-- <link rel="stylesheet/less" type="text/css" href="./public/theme.less" /> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
-  <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.bootcss.com/react-dom/16.4.2/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.bootcss.com/react-router/4.4.0-beta.6/react-router.min.js"></script>
-  <script src="https://cdn.bootcss.com/react-router-dom/4.4.0-beta.6/react-router-dom.min.js"></script>
-  <script src="https://cdn.bootcss.com/prop-types/15.7.2/prop-types.min.js"></script>
-  <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.13.6/antd.min.js"></script>
-  <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
-  <script src="https://cdn.bootcss.com/redux/4.0.0/redux.min.js"></script>
-  <script src="https://cdn.bootcss.com/react-redux/5.0.7/react-redux.min.js"></script>
-  <script>
-    window.less
-      .modifyVars({
-        '@primary-color': '#ee5e7b',
-        '@link-color': '#ee5e7b',
-        '@btn-primary-bg': 'ee5e7b',
-      })
-      .then(() => {})
-      .catch(error => {
-        console.log('111')
-      });
-  </script>
-</head>
-
-<body>
-  <div id="app"></div>
-</body>
-
+  <body>
+    <link rel="stylesheet/less" type="text/css" href="./public/theme.less" />
+    <script>
+      window.less = {
+        async: false,
+        env: "production"
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="app"></div>
+  </body>
 </html>
