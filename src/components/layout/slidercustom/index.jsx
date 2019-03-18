@@ -15,7 +15,6 @@ class SiderCustom extends React.Component {
     const { pathname } = props.location;
     super(props);
     this.state = {
-      collapsed: false,
       mode: "inline",
       openKeys: [],
       selectedKeys: []
@@ -23,14 +22,20 @@ class SiderCustom extends React.Component {
     this.menusTree = [];
   }
   componentDidMount() {
-    const { history } = this.props;
-    this.initMenuList(routes.menus);
-    this.setActiveMenu(history.location);
-    this.unListen = history.listen(this.setActiveMenu);
+    const { history,collapsed } = this.props;
+    if (collapsed) {
+      this.setState({
+        openKeys: []
+      });
+    } else {
+      this.initMenuList(routes.menus);
+      this.setActiveMenu(history.location);
+      this.unListen = history.listen(this.setActiveMenu);
+    }
   }
-  componentDidUpdate() {}
+  componentDidUpdate(props) {}
   componentWillUnmount() {
-    this.unListen();
+    this.unListen && this.unListen();
   }
   //  切换菜单上下级
   openMenu = curentOpenkey => {

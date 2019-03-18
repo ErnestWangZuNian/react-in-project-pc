@@ -41,7 +41,8 @@ class App extends React.Component {
   toggle() {
     const { collapsed } = this.state;
     this.setState({
-      collapsed: !collapsed
+      collapsed: !collapsed,
+      changeMenuKey: Util.getRandomString()
     });
   }
   //  点击菜单
@@ -57,8 +58,7 @@ class App extends React.Component {
   changeSelectedMenu(activeKey) {
     this.props.history.push(activeKey);
     this.setState({
-      currentMenuKey: activeKey,
-      changeMenuKey: Util.getRandomString()
+      currentMenuKey: activeKey
     });
   }
   //   先删除选中的菜单 => 跳转到当前所有菜单中的最后一个
