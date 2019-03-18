@@ -8,10 +8,9 @@ import {
   COMMON_DELETEMENU,
   COMMON_GETMENU
 } from "@/store/common/action";
-import { Layout, Icon } from "antd";
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Sider, Content } = antd.Layout;
 @page({
-  style: require("./style"),
+  style: require("./style.scss"),
   connect: {
     mapStateToProps: state => {
       return {

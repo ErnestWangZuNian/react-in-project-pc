@@ -16,6 +16,7 @@ const resolve = dir => {
   return path.resolve(__dirname, dir);
 };
 const context = resolve("src");
+const theme = require(resolve("src/styles/antdtheme.js"));
 
 module.exports = {
   context,
@@ -73,34 +74,6 @@ module.exports = {
       {
         test: /\.less$/,
         exclude: resolve("node_modules"),
-        use: [
-          {
-            loader: "style-loader/useable"
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: [autoprefixer]
-            }
-          },
-          {
-            loader: "less-loader",
-            options: {
-              modifyVars: {
-                "primary-color": "#00375B",
-                "link-color": "#00375B"
-              },
-              javascriptEnabled: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.less$/,
-        exclude: resolve("node_modules"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: [
@@ -116,10 +89,7 @@ module.exports = {
             {
               loader: "less-loader",
               options: {
-                modifyVars: {
-                  "primary-color": "#00375B",
-                  "link-color": "#00375B"
-                },
+                modifyVars: theme,
                 javascriptEnabled: true
               }
             }
