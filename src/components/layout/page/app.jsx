@@ -3,11 +3,7 @@ import Routes from "@/routes";
 import SiderCustom from "@/components/layout/slidercustom";
 import SelectedMenu from "@/components/layout/selectedmenu";
 import DocumentTitle from "react-document-title";
-import {
-  COMMON_ADDMENU,
-  COMMON_DELETEMENU,
-  COMMON_GETMENU
-} from "@/store/common/action";
+import { COMMON_ADDMENU, COMMON_DELETEMENU } from "@/store/common/action";
 const { Header, Footer, Sider, Content } = antd.Layout;
 @page({
   style: require("./style.scss"),
@@ -19,8 +15,7 @@ const { Header, Footer, Sider, Content } = antd.Layout;
     },
     mapDispatchToProps: {
       COMMON_ADDMENU,
-      COMMON_DELETEMENU,
-      COMMON_GETMENU
+      COMMON_DELETEMENU
     }
   }
 })
@@ -34,9 +29,15 @@ class App extends React.Component {
       title: ""
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    const { history } = this.props;
+    this.setSelectedMenActive(history.location);
+    this.unListen = history.listen(this.setSelectedMenActive);
+  }
   componentDidUpdate() {}
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    this.unListen && this.unListen();
+  }
   //  是否收缩左侧菜单
   toggle() {
     const { collapsed } = this.state;
@@ -61,9 +62,25 @@ class App extends React.Component {
       currentMenuKey: activeKey
     });
   }
+  //   设置选中的菜单高亮
+  setSelectedMenActive(location) {
+    const pathname = location ? location.pathname : null;
+    const { commonData } = this.props;
+    const { selectedMenu } = commonData;
+    if (pathname && selectedMenu && selectedMenu.length) {
+      for (let menuItem of selectedMenu) {
+        const isActivePath = new RegExp(`^${menuItem.path}`).test(pathname);
+        if (isActivePath) {
+          this.setState({
+            currentMenuKey: menuItem.path
+          });
+        }
+      }
+    }
+  }
   //   先删除选中的菜单 => 跳转到当前所有菜单中的最后一个
   async deleteSelectedMenu(item) {
-    const { COMMON_DELETEMENU, COMMON_GETMENU } = this.props;
+    const { COMMON_DELETEMENU } = this.props;
     await COMMON_DELETEMENU(item, this.changeSelectedMenu);
     const { commonData } = this.props;
     const { selectedMenu } = commonData;
