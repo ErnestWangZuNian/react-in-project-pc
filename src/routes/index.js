@@ -31,14 +31,14 @@ class Router extends React.Component {
           })
         }
       }
-      return authFlag ? component : <Redirect to = "/403" />
+      return authFlag ? component : <Redirect to="/403" />
     }
     // 判断是否需要登录
     isRequireLogin(component, item) {
       let isLogin = true;
       let auth = item.meta ? item.meta.auths : null;
       if (!isLogin) {
-        return <Redirect to = "/login" />
+        return <Redirect to="/login" />
       }
       return auth ? this.isRequireAuth(component, auth) : component;
     }
@@ -48,16 +48,16 @@ class Router extends React.Component {
         const routeEnter = this.props.routeEnter;
         let result = null;
         return Component ? ( <
-          Route key = {
-            menuItem.path
-          }
-          exact = {
+          Route exact={
             !menuItem.matchs
           }
-          path = {
+            key={
             menuItem.path
           }
-          render = {
+            path={
+            menuItem.path
+          }
+            render={
             props => {
               const merge = {
                 ...props
@@ -78,13 +78,14 @@ class Router extends React.Component {
                   resultMatchs.map(item => {
                       const Component = AllComponents[item.component];
                       return Component ? ( <
-                        Route key = {
+                        Route exact
+                          key={
                           item.path
                         }
-                        path = {
+                          path={
                           item.path
                         }
-                        exact render = {
+                          render={
                           props => {
                             const merge = {
                               ...props
@@ -95,10 +96,10 @@ class Router extends React.Component {
                             return this.isRequireLogin( < Component {
                                 ...merge
                               }
-                              />,item);
+                                                        />,item);
                             }
                           }
-                          />
+                                           />
                         ): null;
                       })
                   } <
@@ -107,11 +108,11 @@ class Router extends React.Component {
                   this.isRequireLogin( < Component {
                       ...merge
                     }
-                    />,menuItem)
+                                       />,menuItem)
                   );
                 }
               }
-              />
+                             />
             ): null;
           }
           // 根据路由配置渲染组件
@@ -132,10 +133,10 @@ class Router extends React.Component {
               Switch > {
                 this.renderComponentByRoute(routesConfig.menus)
               } <
-              Route render = {
-                () => < Redirect to = "/404" / >
+              Route render={
+                () => < Redirect to="/404" / >
               }
-              /> <
+                /> <
               /Switch>
             );
           }

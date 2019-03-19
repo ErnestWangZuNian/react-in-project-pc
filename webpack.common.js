@@ -2,7 +2,9 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const {
+  BundleAnalyzerPlugin
+} = require("webpack-bundle-analyzer");
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer")({
   browsers: [
@@ -47,13 +49,24 @@ module.exports = {
     redux: "Redux"
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.(js|jsx)$/,
         include: context,
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.js[x]?$/,
+        enforce: 'pre',
+        use: [{
+          loader: 'eslint-loader',
+          options: {
+            fix: true
+          }
+        }],
+        include: context,
+        exclude: /node_modules/
       },
       {
         test: /\.bundle\.jsx$/,
@@ -76,8 +89,7 @@ module.exports = {
         exclude: resolve("node_modules"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
+          use: [{
               loader: "css-loader"
             },
             {
@@ -99,8 +111,7 @@ module.exports = {
       {
         test: /\.s[c|a]ss$/,
         include: resolve("src/pages"),
-        use: [
-          {
+        use: [{
             loader: "style-loader/useable"
           },
           {
@@ -122,8 +133,7 @@ module.exports = {
         exclude: resolve("src/pages"),
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
+          use: [{
               loader: "css-loader"
             },
             {
@@ -134,19 +144,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        use: [{
+          loader: "file-loader"
+        }]
       }
     ]
   },

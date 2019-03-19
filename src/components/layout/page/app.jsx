@@ -30,6 +30,7 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
+     console.log(this,'www')
     const { history,location } = this.props;
     this.setSelectedMenActive(location);
     this.unListen = history.listen(this.setSelectedMenActive);
@@ -102,29 +103,29 @@ class App extends React.Component {
       <DocumentTitle title={title}>
         <Layout className="page-container">
           <SiderCustom
-            key={changeMenuKey}
-            {...this.props}
-            onMenuClick={this.onMenuClick.bind(this)}
-            collapsed={collapsed}
+              key={changeMenuKey}
+              {...this.props}
+              collapsed={collapsed}
+              onMenuClick={this.onMenuClick.bind(this)}
           />
           <Layout>
             <Header>
               <Icon
-                className="trigger"
-                type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-                onClick={this.toggle.bind(this)}
+                  className="trigger"
+                  onClick={this.toggle.bind(this)}
+                  type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
               />
             </Header>
             <Content className="page-content-container">
               <SelectedMenu
-                menuList={selectedMenu}
-                currentMenuKey={currentMenuKey}
-                changeSelectedMenu={activeKey => {
+                  changeSelectedMenu={activeKey => {
                   this.changeSelectedMenu(activeKey);
                 }}
-                deleteSelectedMenu={item => {
+                  currentMenuKey={currentMenuKey}
+                  deleteSelectedMenu={item => {
                   this.deleteSelectedMenu(item);
                 }}
+                  menuList={selectedMenu}
               />
               <Routes routeEnter={this.routeEnter.bind(this)} />
             </Content>

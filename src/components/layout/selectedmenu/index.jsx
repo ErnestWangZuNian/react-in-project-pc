@@ -34,24 +34,25 @@ class SelectedMenu extends React.Component {
     return (
       <div className="selected-menu-container">
         <Tabs
-          type="card"
-          activeKey={currentMenuKey}
-          onChange={activeKey => {
+            activeKey={currentMenuKey}
+            onChange={activeKey => {
             changeSelectedMenu(activeKey);
           }}
+            type="card"
         >
           {menuList &&
             menuList.length &&
             menuList.map(item => {
               return (
                 <TabPane
-                  tab={
+                    key={item.path}
+                    tab={
                     <div className="selected-menu-tab-item">
                       <span>{item.title}</span>
                       {item.path !== DEFAULT_SELECTED_MENU ? (
                         <span
-                          className="close-tab"
-                          onClick={e => {
+                            className="close-tab"
+                            onClick={e => {
                             e.stopPropagation();
                             deleteSelectedMenu(item);
                           }}
@@ -61,7 +62,6 @@ class SelectedMenu extends React.Component {
                       ) : null}
                     </div>
                   }
-                  key={item.path}
                 />
               );
             })}

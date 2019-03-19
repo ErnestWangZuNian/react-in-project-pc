@@ -12,11 +12,24 @@ import NoFound from "@/pages/common/nofound";
 export default () => (
   <Router>
     <Switch>
-      <Route exact path="/" render={() => <Redirect to="/back/index" push />} />
-      <Route path="/back" component={App} />
-      <Route path="/login" component={Login} />
-      <Route path="/403" component={Noauth} />
-      <Route path="/404" component={NoFound} />
+      <Route exact
+          path="/"
+          render={() => <Redirect push
+              to="/back/index"
+                        />}
+      />
+      <Route component={App}
+          path="/back"
+      />
+      <Route component={Login}
+          path="/login"
+      />
+      <Route component={Noauth}
+          path="/403"
+      />
+      <Route component={NoFound}
+          path="/404"
+      />
     </Switch>
   </Router>
 );
