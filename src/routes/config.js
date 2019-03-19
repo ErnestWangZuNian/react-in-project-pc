@@ -6,7 +6,7 @@ export default {
       icon: "mobile",
       component: "App",
       meta: {
-        auths: ["abc"]
+        auths: ["receichain/finance"]
       }
     },
     {
@@ -36,6 +36,9 @@ export default {
           title: "开票管理",
           component: "About",
           icon: "mobile",
+          meta: {
+            auths: ["abc"]
+          }
         },
         {
           path: "/back/ui/user",

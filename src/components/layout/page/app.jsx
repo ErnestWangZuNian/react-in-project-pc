@@ -30,8 +30,8 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
-    const { history } = this.props;
-    this.setSelectedMenActive(history.location);
+    const { history,location } = this.props;
+    this.setSelectedMenActive(location);
     this.unListen = history.listen(this.setSelectedMenActive);
   }
   componentDidUpdate() {}
@@ -47,12 +47,13 @@ class App extends React.Component {
     });
   }
   //  点击菜单
-  onMenuClick(item) {
+  async onMenuClick(item) {
     const { COMMON_ADDMENU, location } = this.props;
-    COMMON_ADDMENU(item);
-    this.props.history.push(item.path);
+    await COMMON_ADDMENU(item);
     this.setState({
       currentMenuKey: item.path
+    },() => {
+      this.props.history.push(item.path);
     });
   }
   //  切换选中的菜单
@@ -63,9 +64,9 @@ class App extends React.Component {
     });
   }
   //   设置选中的菜单高亮
-  setSelectedMenActive(location) {
-    const pathname = location ? location.pathname : null;
+  setSelectedMenActive = (location) => {
     const { commonData } = this.props;
+    const pathname = location ? location.pathname : null;
     const { selectedMenu } = commonData;
     if (pathname && selectedMenu && selectedMenu.length) {
       for (let menuItem of selectedMenu) {
