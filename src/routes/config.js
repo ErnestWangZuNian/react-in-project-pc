@@ -43,7 +43,7 @@ export default {
         {
           path: "/back/ui/user",
           title: "用户管理",
-          component: "About",
+          component: "User",
           icon: "mobile",
           matchs: [{
               path: "/back/ui/user/detail/:id",

@@ -57,44 +57,7 @@ class Router extends React.Component {
             ...props
           };
           routeEnter && Util.isFunction(routeEnter) && routeEnter(menuItem);
-          let resultMatchs = [];
-          if (menuItem.matchs) {
-            resultMatchs = resultMatchs.concat(menuItem.matchs);
-            resultMatchs.push({
-              path: menuItem.path,
-              title: menuItem.title,
-              icon: menuItem.icon,
-              component: menuItem.component
-            });
-          }
-          return menuItem.matchs && resultMatchs.length ? (
-            <div>
-              {resultMatchs.map(item => {
-                const Component = AllComponents[item.component];
-                return Component ? (
-                  <Route
-                    key={item.path}
-                    path={item.path}
-                    exact
-                    render={props => {
-                      const merge = {
-                        ...props
-                      };
-                      routeEnter &&
-                        Util.isFunction(routeEnter) &&
-                        routeEnter(menuItem);
-                      return this.isRequireLogin(
-                        <Component {...merge} />,
-                        item
-                      );
-                    }}
-                  />
-                ) : null;
-              })}
-            </div>
-          ) : (
-            this.isRequireLogin(<Component {...merge} />, menuItem)
-          );
+          return this.isRequireLogin(<Component {...merge} />, menuItem)
         }}
       />
     ) : null;
