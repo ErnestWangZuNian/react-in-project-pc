@@ -1,7 +1,7 @@
-import { Route, Redirect, Switch } from "react-router-dom";
-import AllComponents from "@/pages";
-import routesConfig from "./config";
-import queryString from "query-string";
+import { Route, Redirect, Switch } from 'react-router-dom';
+import AllComponents from '@/pages';
+import routesConfig from './config';
+import queryString from 'query-string';
 class Router extends React.Component {
   static defaultProps = {
     routeEnter: []
@@ -20,9 +20,9 @@ class Router extends React.Component {
   isRequireAuth(component, auth) {
     let authFlag = false;
     let authList = [
-      "receichain/finance",
-      "receichain/progress",
-      "receichain/repay"
+      'receichain/finance',
+      'receichain/progress',
+      'receichain/repay'
     ];
     if (auth && auth.length) {
       for (let authItem of auth) {
@@ -49,10 +49,10 @@ class Router extends React.Component {
     let result = null;
     return Component ? (
       <Route
-        key={menuItem.path}
-        exact={!menuItem.matchs}
-        path={menuItem.path}
-        render={props => {
+          exact={!menuItem.matchs}
+          key={menuItem.path}
+          path={menuItem.path}
+          render={props => {
           const merge = {
             ...props
           };
@@ -73,10 +73,10 @@ class Router extends React.Component {
                 const Component = AllComponents[item.component];
                 return Component ? (
                   <Route
-                    key={item.path}
-                    path={item.path}
-                    exact
-                    render={props => {
+                      exact
+                      key={item.path}
+                      path={item.path}
+                      render={props => {
                       const merge = {
                         ...props
                       };

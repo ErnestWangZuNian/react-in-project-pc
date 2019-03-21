@@ -1,4 +1,4 @@
-import * as ActionType from "./action-type";
+import * as ActionType from './action-type';
 // 新增菜单
 export const COMMON_ADDMENU = item => {
   let result = async dispatch => {

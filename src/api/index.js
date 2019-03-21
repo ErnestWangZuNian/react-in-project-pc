@@ -1,4 +1,4 @@
-import Api from "wzn-api";
+import Api from 'wzn-api';
 let api = new Api();
 
 // 添加请求拦截器

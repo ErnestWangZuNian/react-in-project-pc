@@ -1,4 +1,4 @@
-import createReactClass from "create-react-class";
+import createReactClass from 'create-react-class';
 let style = target => {
     return Component =>
       createReactClass({

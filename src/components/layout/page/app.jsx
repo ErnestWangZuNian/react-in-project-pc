@@ -1,12 +1,12 @@
-import page from "@/components/page";
-import Routes from "@/routes";
-import SiderCustom from "@/components/layout/slidercustom";
-import SelectedMenu from "@/components/layout/selectedmenu";
-import DocumentTitle from "react-document-title";
-import { COMMON_ADDMENU, COMMON_DELETEMENU } from "@/store/common/action";
+import page from '@/components/page';
+import Routes from '@/routes';
+import SiderCustom from '@/components/layout/slidercustom';
+import SelectedMenu from '@/components/layout/selectedmenu';
+import DocumentTitle from 'react-document-title';
+import { COMMON_ADDMENU, COMMON_DELETEMENU } from '@/store/common/action';
 const { Header, Footer, Sider, Content } = antd.Layout;
 @page({
-  style: require("./style.scss"),
+  style: require('./style.scss'),
   connect: {
     mapStateToProps: state => {
       return {
@@ -26,7 +26,7 @@ class App extends React.Component {
       collapsed: false,
       currentMenuKey: props.location.pathname,
       changeMenuKey: props.location.pathname,
-      title: ""
+      title: ''
     };
   }
   componentDidMount() {
@@ -113,7 +113,7 @@ class App extends React.Component {
               <Icon
                   className="trigger"
                   onClick={this.toggle.bind(this)}
-                  type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
+                  type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
               />
             </Header>
             <Content className="page-content-container">

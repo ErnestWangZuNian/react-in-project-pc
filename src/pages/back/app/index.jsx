@@ -1,7 +1,7 @@
-import page from "@/components/page";
-import { Button } from "antd";
+import page from '@/components/page';
+import { Button } from 'antd';
 @page({
-  style: require("./style.scss")
+  style: require('./style.scss')
 })
 class App extends React.Component {
   static defaultProps = {};

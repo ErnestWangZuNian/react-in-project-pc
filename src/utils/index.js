@@ -1,17 +1,17 @@
-import wznUtils from "wzn-utils";
+import wznUtils from 'wzn-utils';
 let util = {
   ...wznUtils,
   isArray: target => {
-    return Object.prototype.toString.call(target) == "[object Array]";
+    return Object.prototype.toString.call(target) == '[object Array]';
   },
   isFunction: target => {
-    return Object.prototype.toString.call(target) == "[object Function]";
+    return Object.prototype.toString.call(target) == '[object Function]';
   },
   isNumber: target => {
-    return Object.prototype.toString.call(target) == "[object Number]";
+    return Object.prototype.toString.call(target) == '[object Number]';
   },
   isString: target => {
-    return Object.prototype.toString.call(target) == "[object String]";
+    return Object.prototype.toString.call(target) == '[object String]';
   },
   getRandomString: () => {
     return `${Math.random().toString(36).substr(2)}`;
@@ -24,7 +24,7 @@ let util = {
       result = false;
     } else {
       aProps.map(item => {
-        if (typeof a[item] === "object") {
+        if (typeof a[item] === 'object') {
           if (a[item] === null || a[item] === undefined) {
             return;
           } else {
@@ -42,7 +42,7 @@ let util = {
   },
   deleteValue: (targetArray, value) => {
     targetArray = targetArray.filter(item => {
-      if (typeof value === "object") {
+      if (typeof value === 'object') {
         return util.equalValue(item, value) === false;
       } else {
         return item !== value;
@@ -58,8 +58,8 @@ let util = {
     },
     setItem: (key, value) => {
       if (
-        util.storage.getType(value) === "Object" ||
-        util.storage.getType(value) === "Array"
+        util.storage.getType(value) === 'Object' ||
+        util.storage.getType(value) === 'Array'
       ) {
         // 如果是对象
         value = JSON.stringify(value);
@@ -73,8 +73,8 @@ let util = {
         return false;
       }
       if (
-        (value && value.substring(0, 1) === "{") ||
-        value.substring(0, 1) === "["
+        (value && value.substring(0, 1) === '{') ||
+        value.substring(0, 1) === '['
       ) {
         value = JSON.parse(value); // 把字符串转为对象
       }

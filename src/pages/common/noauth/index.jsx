@@ -1,6 +1,6 @@
-import page from "@/components/page";
+import page from '@/components/page';
 @page({
-  style: require("./style.scss")
+  style: require('./style.scss')
 })
 class Noauth extends React.Component {
   static defaultProps = {};

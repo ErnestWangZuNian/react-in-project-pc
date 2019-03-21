@@ -3,11 +3,11 @@ import {
   Route,
   Switch,
   Redirect
-} from "react-router-dom";
-import App from "./app";
-import Login from "@/pages/common/login";
-import Noauth from "@/pages/common/noauth";
-import NoFound from "@/pages/common/nofound";
+} from 'react-router-dom';
+import App from './app';
+import Login from '@/pages/common/login';
+import Noauth from '@/pages/common/noauth';
+import NoFound from '@/pages/common/nofound';
 
 export default () => (
   <Router>

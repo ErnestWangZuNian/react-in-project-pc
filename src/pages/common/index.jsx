@@ -1,6 +1,6 @@
-import Bundle from "@/components/bundle";
+import Bundle from '@/components/bundle';
 const Login = () => (
-  <Bundle load={require("bundle-loader?lazy!@/pages/common/login/index.jsx")} />
+  <Bundle load={require('bundle-loader?lazy!@/pages/common/login/index.jsx')} />
 );
 export default {
   Login

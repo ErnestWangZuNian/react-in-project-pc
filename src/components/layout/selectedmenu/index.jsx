@@ -1,12 +1,12 @@
-import page from "@/components/page";
-import routeConfig from "@/routes/config";
+import page from '@/components/page';
+import routeConfig from '@/routes/config';
 const TabPane = antd.Tabs.TabPane;
 const DEFAULT_SELECTED_MENU =
   routeConfig.menus && routeConfig.menus.length
     ? routeConfig.menus[0].path
     : null;
 @page({
-  style: require("./style")
+  style: require('./style')
 })
 class SelectedMenu extends React.Component {
   static defaultProps = {

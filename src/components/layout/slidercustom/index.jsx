@@ -1,5 +1,5 @@
-import routes from "@/routes/config";
-import SiderMenu from "./slidermenu";
+import routes from '@/routes/config';
+import SiderMenu from './slidermenu';
 const { Sider } = antd.Layout;
 class MenuNode {
   constructor(menuItem, parent = null) {
@@ -15,7 +15,7 @@ class SiderCustom extends React.Component {
     const { pathname } = props.location;
     super(props);
     this.state = {
-      mode: "inline",
+      mode: 'inline',
       openKeys: [],
       selectedKeys: []
     };

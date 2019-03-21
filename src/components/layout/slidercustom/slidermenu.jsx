@@ -1,8 +1,8 @@
-import page from "@/components/page";
-import { Link } from "react-router-dom";
+import page from '@/components/page';
+import { Link } from 'react-router-dom';
 const { SubMenu, MenuItem } = antd.Menu;
 @page({
-  style: require("./style.scss")
+  style: require('./style.scss')
 })
 class SliderMenu extends React.Component {
   static defaultProps = {};

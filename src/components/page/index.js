@@ -1,7 +1,7 @@
-import style from "./style";
-import { Form } from "antd";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import style from './style';
+import { Form } from 'antd';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 let page = options => {
   options = { withRouter: true, ...options };
   return function(Component) {
