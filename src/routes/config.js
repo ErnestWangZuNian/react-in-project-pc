@@ -41,21 +41,10 @@ export default {
           }
         },
         {
-          path: '/back/ui/user',
-          title: '用户管理',
-          component: 'About',
-          icon: 'mobile',
-          matchs: [{
-              path: '/back/ui/user/detail/:id',
-              title: '用户管理详情',
-              component: 'App'
-            },
-            {
-              path: '/back/ui/user/test/:id',
-              title: '用户管理详情',
-              component: 'About'
-            }
-          ]
+          path: "/back/ui/user",
+          title: "用户管理",
+          component: "User",
+          icon: "mobile"
         },
         {
           path: '/back/ui/3',
