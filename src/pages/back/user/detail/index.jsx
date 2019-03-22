@@ -1,6 +1,12 @@
 import page from "@/components/page";
 @page({
-  style: require("./style.scss")
+  style: require("./style.scss"),
+  connect: {
+    mapStateToProps: state => {
+      return {};
+    },
+    mapDispatchToProps: {}
+  }
 })
 class User extends React.Component {
   static defaultProps = {};

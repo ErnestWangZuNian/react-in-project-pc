@@ -2,40 +2,38 @@ import page from "@/components/page";
 import Detail from "./detail";
 import Form from "./form";
 import List from "./list";
+import PageStatusChange from "@/components/layout/pagestatuschange";
 @page({
-  style: require("./style.scss")
+  style: require("./style.scss"),
+  connect: {
+    mapStateToProps: state => {
+      return {
+        pageData: state.pageData
+      };
+    },
+    mapDispatchToProps: {}
+  }
 })
 class User extends React.Component {
   static defaultProps = {};
   static propTypes = {};
   constructor(props) {
     super(props);
-    this.state = {
-      page: 2
-    };
+    this.state = {};
   }
   componentDidMount() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
-  //  生成页面
-  renderPage = () => {
-    const { page } = this.state;
-    let result = null;
-    switch (page) {
-      case 0:
-        result = <List />;
-        break;
-      case 1:
-        result = <Form />;
-        break;
-      case 2:
-        result = <Detail />;
-        break;
-    }
-    return result;
-  };
   render() {
-    return <div>{this.renderPage()}</div>;
+    return (
+      <div>
+        <PageStatusChange activekey="list">
+          <div component={List} key="list" />
+          <div component={Form} key="form" />
+          <div component={Detail} key="detail" />
+        </PageStatusChange>
+      </div>
+    );
   }
 }
 export default User;

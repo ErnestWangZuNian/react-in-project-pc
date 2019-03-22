@@ -55,7 +55,7 @@ export default {
         {
           path: "/back/ui/3",
           title: "角色管理",
-          component: "About",
+          component: "Role",
           icon: "mobile"
         }
       ]

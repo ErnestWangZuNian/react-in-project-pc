@@ -30,7 +30,6 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
-     console.log(this,'www')
     const { history,location } = this.props;
     this.setSelectedMenActive(location);
     this.unListen = history.listen(this.setSelectedMenActive);

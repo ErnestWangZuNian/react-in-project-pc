@@ -11,9 +11,13 @@ const App = () => (
 const User = () => (
   <Bundle load={require("bundle-loader?lazy!@/pages/back/user/index.jsx")} />
 )
+const Role = () => (
+  <Bundle load={require("bundle-loader?lazy!@/pages/back/role/index.jsx")} />
+)
 export default {
   App,
   About,
   User,
+  Role,
   AboutDetail
 };
