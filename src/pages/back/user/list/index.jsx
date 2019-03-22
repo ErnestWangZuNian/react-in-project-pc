@@ -17,7 +17,7 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        这是用户列表界面  
+        这是用户列表界面
         <div>
           <Button type="primary">跳转去详请</Button>
         </div>
