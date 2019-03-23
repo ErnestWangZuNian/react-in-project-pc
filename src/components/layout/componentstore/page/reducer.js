@@ -34,6 +34,13 @@ export const pageData = (state = defaultState, action = {}) => {
         activekey: action.activekey
       };
       break;
+    case actionType.PAGE_INIT:
+      return {
+        ...state,
+        activekey: null,
+        history: []
+      }
+      break;
     default:
       return state;
   }

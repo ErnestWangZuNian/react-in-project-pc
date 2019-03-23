@@ -1,5 +1,5 @@
 import * as ActionType from "./action-type";
-// 新增菜单
+//  跳转页面
 export const PAGE_GOTO = (key,params,config) => {
   let result = async dispatch => {
     return new Promise(async (resolve, reject) => {
@@ -17,4 +17,10 @@ export const PAGE_GOTO = (key,params,config) => {
     });
   };
   return result;
+};
+//   重置状态
+export const PAGE_INIT = () => {
+  return {
+    type: ActionType.PAGE_INIT,
+  }
 };
