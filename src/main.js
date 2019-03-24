@@ -9,7 +9,7 @@ global.Api = Api;
 global.Util = Util;
 ReactDOM.render(
   <Provider store={store}>
-    <LayoutContainer store={store} />
+    <LayoutContainer store={store}/>
   </Provider>,
   document.getElementById('app')
 );

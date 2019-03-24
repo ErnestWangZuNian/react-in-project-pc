@@ -3,10 +3,7 @@ import Routes from "@/routes";
 import SiderCustom from "@/components/layout/app/slidercustom";
 import SelectedMenu from "@/components/layout/app/selectedmenu";
 import DocumentTitle from "react-document-title";
-import {
-  MENU_ADDMENU,
-  MENU_DELETEMENU
-} from "@/components/layout/layoutstore/menu/action";
+import { MENU_ADDMENU, MENU_DELETEMENU } from "@/store/menu/action";
 const { Header, Footer, Sider, Content } = antd.Layout;
 @page({
   style: require("./style.scss"),

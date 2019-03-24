@@ -1,13 +1,15 @@
 import page from "@/components/page";
+import { TEST_INIT } from "@/store/test/action";
 @page({
   style: require("./style.scss"),
   connect: {
     mapStateToProps: state => {
       return {
-        menuData: state.menuData
+        testData: state.testData
       };
     },
     mapDispatchToProps: {
+      TEST_INIT
     }
   }
 })
@@ -18,11 +20,15 @@ class User extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {}
+  componentDidMount() {
+    const { TEST_INIT } = this.props;
+    TEST_INIT();
+  }
   componentDidUpdate() {}
   componentWillUnmount() {}
   gotoDetail = () => {
-    const { go } = this.props;
+    const { page } = this.props;
+    const { go } = page.history;
     go(
       "form",
       {
@@ -34,13 +40,13 @@ class User extends React.Component {
     );
   };
   render() {
-    console.log(this.props,'www')
+    console.log(this.props,'wwww')
     return (
       <div>
         这是用户列表界面
         <div>
           <Button type="primary" onClick={this.gotoDetail}>
-            跳转去详请
+            {this.props.page.data.activekey}
           </Button>
         </div>
       </div>

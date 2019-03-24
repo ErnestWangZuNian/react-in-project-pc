@@ -11,11 +11,13 @@ class User extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props.page)
+  }
   componentDidUpdate() {}
   componentWillUnmount() {}
   gotoDetail = () => {
-    const { go } = this.props;
+    const { go } = this.props.page.history;
     go(
       "roleForm",
       {

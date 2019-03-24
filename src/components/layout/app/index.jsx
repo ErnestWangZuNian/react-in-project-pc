@@ -13,9 +13,9 @@ class AppWraper extends React.Component {
   componentWillUnmount() {}
   render() {
     return (
-      <Provider store={layoutStore}>
+      // <Provider store={layoutStore}>
         <App {...this.props} />
-      </Provider>
+      // </Provider>
     );
   }
 }

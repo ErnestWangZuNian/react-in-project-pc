@@ -2,7 +2,7 @@ import page from "@/components/page";
 import Detail from "./detail";
 import Form from "./form";
 import List from "./list";
-import PageGroup from "@/components/layout/pagegroup";
+import PageGroup from "@/components/layout/pagegroup/index.jsx";
 @page({
   style: require("./style.scss")
 })

@@ -17,14 +17,11 @@ class User extends React.Component {
       <div>
         这是用户列表表单界面
         <div>
-          <Button
-            type="primary"
-            onClick={() => {
-              this.props.next();
+          <Input
+            onBlur={() => {
+              this.props.page.history.back();
             }}
-          >
-            返回上一步
-          </Button>
+          />
         </div>
       </div>
     );
