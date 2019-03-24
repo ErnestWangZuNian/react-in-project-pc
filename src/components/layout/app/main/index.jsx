@@ -1,21 +1,24 @@
-import page from '@/components/page';
-import Routes from '@/routes';
-import SiderCustom from '@/components/layout/slidercustom';
-import SelectedMenu from '@/components/layout/selectedmenu';
-import DocumentTitle from 'react-document-title';
-import { COMMON_ADDMENU, COMMON_DELETEMENU } from '@/store/common/action';
+import page from "@/components/page";
+import Routes from "@/routes";
+import SiderCustom from "@/components/layout/app/slidercustom";
+import SelectedMenu from "@/components/layout/app/selectedmenu";
+import DocumentTitle from "react-document-title";
+import {
+  MENU_ADDMENU,
+  MENU_DELETEMENU
+} from "@/components/layout/layoutstore/menu/action";
 const { Header, Footer, Sider, Content } = antd.Layout;
 @page({
-  style: require('./style.scss'),
+  style: require("./style.scss"),
   connect: {
     mapStateToProps: state => {
       return {
-        commonData: state.commonData
+        menuData: state.menuData
       };
     },
     mapDispatchToProps: {
-      COMMON_ADDMENU,
-      COMMON_DELETEMENU
+      MENU_ADDMENU,
+      MENU_DELETEMENU
     }
   }
 })
@@ -26,11 +29,11 @@ class App extends React.Component {
       collapsed: false,
       currentMenuKey: props.location.pathname,
       changeMenuKey: props.location.pathname,
-      title: ''
+      title: ""
     };
   }
   componentDidMount() {
-    const { history,location } = this.props;
+    const { history, location } = this.props;
     this.setSelectedMenActive(location);
     this.unListen = history.listen(this.setSelectedMenActive);
   }
@@ -48,13 +51,16 @@ class App extends React.Component {
   }
   //  点击菜单
   async onMenuClick(item) {
-    const { COMMON_ADDMENU, location } = this.props;
-    await COMMON_ADDMENU(item);
-    this.setState({
-      currentMenuKey: item.path
-    },() => {
-      this.props.history.push(item.path);
-    });
+    const { MENU_ADDMENU, location } = this.props;
+    await MENU_ADDMENU(item);
+    this.setState(
+      {
+        currentMenuKey: item.path
+      },
+      () => {
+        this.props.history.push(item.path);
+      }
+    );
   }
   //  切换选中的菜单
   changeSelectedMenu(activeKey) {
@@ -64,10 +70,10 @@ class App extends React.Component {
     });
   }
   //   设置选中的菜单高亮
-  setSelectedMenActive = (location) => {
-    const { commonData } = this.props;
+  setSelectedMenActive = location => {
+    const { menuData } = this.props;
     const pathname = location ? location.pathname : null;
-    const { selectedMenu } = commonData;
+    const { selectedMenu } = menuData;
     if (pathname && selectedMenu && selectedMenu.length) {
       for (let menuItem of selectedMenu) {
         const isActivePath = new RegExp(`^${menuItem.path}`).test(pathname);
@@ -78,13 +84,13 @@ class App extends React.Component {
         }
       }
     }
-  }
+  };
   //   先删除选中的菜单 => 跳转到当前所有菜单中的最后一个
   async deleteSelectedMenu(item) {
-    const { COMMON_DELETEMENU } = this.props;
-    await COMMON_DELETEMENU(item, this.changeSelectedMenu);
-    const { commonData } = this.props;
-    const { selectedMenu } = commonData;
+    const { MENU_DELETEMENU } = this.props;
+    await MENU_DELETEMENU(item, this.changeSelectedMenu);
+    const { menuData } = this.props;
+    const { selectedMenu } = menuData;
     let lastOneMenu = selectedMenu[selectedMenu.length - 1];
     this.changeSelectedMenu(lastOneMenu.path);
   }
@@ -95,37 +101,42 @@ class App extends React.Component {
     this.setState({ title: item.title });
   }
   render() {
-    const { commonData } = this.props;
-    const { selectedMenu } = commonData;
+    const { menuData } = this.props;
+    const { selectedMenu } = menuData;
     const { currentMenuKey, changeMenuKey, collapsed, title } = this.state;
     return (
       <DocumentTitle title={title}>
         <Layout className="page-container">
           <SiderCustom
-              key={changeMenuKey}
-              {...this.props}
-              collapsed={collapsed}
-              onMenuClick={this.onMenuClick.bind(this)}
+            key={changeMenuKey}
+            {...this.props}
+            collapsed={collapsed}
+            onMenuClick={this.onMenuClick.bind(this)}
           />
           <Layout>
             <Header>
               <Icon
-                  className="trigger"
-                  onClick={this.toggle.bind(this)}
-                  type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                className="trigger"
+                onClick={this.toggle.bind(this)}
+                type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
               />
             </Header>
             <Content className="page-content-container">
               <SelectedMenu
-                  changeSelectedMenu={activeKey => {
+                changeSelectedMenu={activeKey => {
                   this.changeSelectedMenu(activeKey);
                 }}
-                  currentMenuKey={currentMenuKey}
-                  deleteSelectedMenu={item => {
+                currentMenuKey={currentMenuKey}
+                deleteSelectedMenu={item => {
                   this.deleteSelectedMenu(item);
                 }}
-                  menuList={selectedMenu}
+                menuList={selectedMenu}
               />
+              <Breadcrumb>
+                <Breadcrumb.Item>信用通</Breadcrumb.Item>
+                <Breadcrumb.Item>账户管理</Breadcrumb.Item>
+                <Breadcrumb.Item>用户管理</Breadcrumb.Item>
+              </Breadcrumb>
               <Routes routeEnter={this.routeEnter.bind(this)} />
             </Content>
           </Layout>

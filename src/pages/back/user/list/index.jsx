@@ -1,15 +1,13 @@
 import page from "@/components/page";
-import { PAGE_GOTO } from "@/store/page/action";
 @page({
   style: require("./style.scss"),
   connect: {
     mapStateToProps: state => {
       return {
-        pageData: state.pageData
+        menuData: state.menuData
       };
     },
     mapDispatchToProps: {
-      PAGE_GOTO
     }
   }
 })
@@ -25,7 +23,6 @@ class User extends React.Component {
   componentWillUnmount() {}
   gotoDetail = () => {
     const { go } = this.props;
-    console.log(go,'www')
     go(
       "form",
       {
@@ -37,6 +34,7 @@ class User extends React.Component {
     );
   };
   render() {
+    console.log(this.props,'www')
     return (
       <div>
         这是用户列表界面

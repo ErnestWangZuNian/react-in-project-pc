@@ -7,9 +7,7 @@ class User extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
-    this.state = {
-      collapsed: false
-    };
+    this.state = {};
   }
   componentDidMount() {}
   componentDidUpdate() {}
@@ -19,7 +17,14 @@ class User extends React.Component {
       <div>
         这是用户列表表单界面
         <div>
-          <Button type="primary">跳转去详请</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              this.props.next();
+            }}
+          >
+            返回上一步
+          </Button>
         </div>
       </div>
     );

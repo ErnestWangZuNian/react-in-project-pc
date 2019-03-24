@@ -1,16 +1,7 @@
 import page from "@/components/page";
-import { PAGE_GOTO } from "@/store/page/action";
 @page({
   style: require("./style.scss"),
   connect: {
-    mapStateToProps: state => {
-      return {
-        pageData: state.pageData
-      };
-    },
-    mapDispatchToProps: {
-      PAGE_GOTO
-    }
   }
 })
 class User extends React.Component {

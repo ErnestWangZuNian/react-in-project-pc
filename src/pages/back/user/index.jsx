@@ -2,17 +2,9 @@ import page from "@/components/page";
 import Detail from "./detail";
 import Form from "./form";
 import List from "./list";
-import PageStatusChange from "@/components/layout/pagestatuschange";
+import PageGroup from "@/components/layout/pagegroup";
 @page({
-  style: require("./style.scss"),
-  connect: {
-    mapStateToProps: state => {
-      return {
-        pageData: state.pageData
-      };
-    },
-    mapDispatchToProps: {}
-  }
+  style: require("./style.scss")
 })
 class User extends React.Component {
   static defaultProps = {};
@@ -27,11 +19,11 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        <PageStatusChange activekey="list">
-          <div component={List} key="list" />
-          <div component={Form} key="form" />
-          <div component={Detail} key="detail" />
-        </PageStatusChange>
+        <PageGroup activekey="list">
+          <PageGroup.Node component={List} key="list" />
+          <PageGroup.Node component={Form} key="form" />
+          <PageGroup.Node component={Detail} key="detail" />
+        </PageGroup>
       </div>
     );
   }

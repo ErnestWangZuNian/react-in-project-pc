@@ -1,4 +1,4 @@
-import pageGroupStore from "../componentstore/store";
+import layoutStore from "@/components/layout/store";
 import { Provider } from "react-redux";
 import Main from "./main";
 class PageGroupWraper extends React.Component {
@@ -13,7 +13,7 @@ class PageGroupWraper extends React.Component {
   componentWillUnmount() {}
   render() {
     return (
-      <Provider store={pageGroupStore}>
+      <Provider store={layoutStore}>
         <Main {...this.props} />
       </Provider>
     );

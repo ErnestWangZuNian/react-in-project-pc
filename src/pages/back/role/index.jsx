@@ -2,7 +2,7 @@ import page from "@/components/page";
 import Detail from "./detail";
 import Form from "./form";
 import List from "./list";
-import PageStatusChange from "@/components/layout/pagestatuschange";
+import PageGroup from "@/components/layout/pagegroup";
 @page({
   style: require("./style.scss"),
   connect: {
@@ -27,11 +27,11 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        <PageStatusChange activekey="roleList">
-          <div component={List} key="roleList" />
-          <div component={Form} key="roleForm" />
-          <div component={Detail} key="roleDetail" />
-        </PageStatusChange>
+        <PageGroup activekey="roleList">
+          <PageGroup.Node component={List} key="roleList" />
+          <PageGroup.Node component={Form} key="roleForm" />
+          <PageGroup.Node component={Detail} key="roleDetail" />
+        </PageGroup>
       </div>
     );
   }
