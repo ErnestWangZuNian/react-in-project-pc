@@ -31,6 +31,7 @@ class PageGroup extends React.Component {
       activekey: null
     };
     store.subscribe(() => {
+      console.log(store.getState(),'www')
       let pageGroupData = store.getState().pageGroupData;
       this.setState({
         activekey: pageGroupData.activekey
@@ -42,8 +43,7 @@ class PageGroup extends React.Component {
   }
   componentDidUpdate() {}
   componentWillUnmount() {
-    const { PAGEGROUP_INIT } = this.props;
-    PAGEGROUP_INIT();
+    store.dispatch(PAGEGROUP_INIT());
   }
   //  首次加载
   load = () => {
