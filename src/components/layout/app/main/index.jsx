@@ -103,14 +103,14 @@ class App extends React.Component {
     const { currentMenuKey, changeMenuKey, collapsed, title } = this.state;
     return (
       <DocumentTitle title={title}>
-        <Layout className="page-container">
+        <Layout className="page-app-container">
           <SiderCustom
             key={changeMenuKey}
             {...this.props}
             collapsed={collapsed}
             onMenuClick={this.onMenuClick.bind(this)}
           />
-          <Layout>
+          <Layout className="page-content-container">
             <Header>
               <Icon
                 className="trigger"
@@ -129,11 +129,6 @@ class App extends React.Component {
                 }}
                 menuList={selectedMenu}
               />
-              <Breadcrumb>
-                <Breadcrumb.Item>信用通</Breadcrumb.Item>
-                <Breadcrumb.Item>账户管理</Breadcrumb.Item>
-                <Breadcrumb.Item>用户管理</Breadcrumb.Item>
-              </Breadcrumb>
               <Routes routeEnter={this.routeEnter.bind(this)} />
             </Content>
           </Layout>

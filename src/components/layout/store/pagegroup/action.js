@@ -8,12 +8,12 @@ export const PAGEGROUP_LOAD = (key,keyList) => {
   };
 };
 //  跳转页面
-export const PAGEGROUP_GOTO = (key, params, config) => {
+export const PAGEGROUP_GOTO = (key, parmas, isReload) => {
   return {
     type: ActionType.PAGEGROUP_GOTO,
     activekey: key,
-    params: params,
-    config: config
+    parmas,
+    isReload
   };
 };
 //  返回上一页
@@ -23,10 +23,10 @@ export const PAGEGROUP_BACK = () => {
   };
 };
 //  下一页
-export const PAGEGROUP_NEXT= (params, config) => {
+export const PAGEGROUP_NEXT= (parmas, config) => {
   return {
     type: ActionType.PAGEGROUP_NEXT,
-    params: params,
+    parmas: parmas,
     config: config
   };
 };

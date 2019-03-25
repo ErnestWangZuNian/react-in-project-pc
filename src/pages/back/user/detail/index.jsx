@@ -23,9 +23,16 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        这是用户列表详情界面
+        这是用户列表详情界面，上个页面的参数是{this.props.page.data.currentInfo.parmas.id}
         <div>
-          <Button type="primary">跳转去详请</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              this.props.page.history.go("form", {}, true);
+            }}
+          >
+            跳转去详请
+          </Button>
         </div>
       </div>
     );

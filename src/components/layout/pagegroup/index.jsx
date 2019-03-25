@@ -28,13 +28,14 @@ class PageGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activekey: null
+      activekey: null,
+      currentKeyIsReload: false
     };
     store.subscribe(() => {
-      console.log( store.getState(),'www')
       let pageGroupData = store.getState().pageGroupData;
       this.setState({
-        activekey: pageGroupData.activekey
+        activekey: pageGroupData.activekey,
+        currentKeyIsReload: pageGroupData.currentInfo.isReload
       });
     });
   }
@@ -54,7 +55,7 @@ class PageGroup extends React.Component {
   // }
   componentDidUpdate() {}
   componentWillUnmount() {
-    // store.dispatch(PAGEGROUP_INIT());
+    store.dispatch(PAGEGROUP_INIT());
   }
   //  首次加载
   load = () => {
@@ -80,8 +81,8 @@ class PageGroup extends React.Component {
     store.dispatch(PAGEGROUP_LOAD(resultActiveKey, keyList));
   };
   //  跳转页面
-  go = (...args) => {
-    store.dispatch(PAGEGROUP_GOTO(...args));
+  go = (key, parmas = null, isReload = false) => {
+    store.dispatch(PAGEGROUP_GOTO(key, parmas, isReload));
   };
   //  返回上一步
   back = () => {
@@ -93,10 +94,14 @@ class PageGroup extends React.Component {
   };
   render() {
     const { children } = this.props;
-    const { activekey } = this.state;
+    const { activekey, currentKeyIsReload } = this.state;
     return (
-      <div>
-        <Tabs activeKey={activekey}>
+      <div className="component-pagegroup-container">
+        <Tabs
+          activeKey={activekey}
+          className="component-pagegroup-tabs"
+          animated={false}
+        >
           {activekey &&
             children &&
             children.length &&
@@ -121,7 +126,10 @@ class PageGroup extends React.Component {
               };
               return (
                 <Tabs.TabPane key={key}>
-                  <Component {...pageProps} />
+                  <Component
+                    {...pageProps}
+                    key={activekey === key && currentKeyIsReload  ? Util.getRandomString() : null}
+                  />
                 </Tabs.TabPane>
               );
             })}

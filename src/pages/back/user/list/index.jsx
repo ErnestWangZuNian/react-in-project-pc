@@ -33,14 +33,10 @@ class User extends React.Component {
       "form",
       {
         id: 2
-      },
-      {
-        isLoad: false
       }
     );
   };
   render() {
-    console.log(this.props,'wwww')
     return (
       <div>
         这是用户列表界面

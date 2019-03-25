@@ -1,6 +1,12 @@
 import * as actionType from "./action-type";
 let defaultState = {
   activekey: null,
+  currentInfo: {
+    activekey: null,
+    lastActiveKey: null,
+    parmas: null,
+    isReload: false
+  },
   keyList: [],
   history: []
 };
@@ -12,17 +18,19 @@ export const pageGroupData = (state = defaultState, action = {}) => {
       {
         let history = [].concat(state.history);
         let lastActiveKey = state.activekey;
-        history.push({
+        let currentInfo = {
           activekey: action.activekey,
-          params: action.params,
-          config: action.config,
-          lastActiveKey
-        });
+          lastActiveKey,
+          parmas: null,
+          isReload: false,
+        }
+        history.push(currentInfo);
         return {
           ...state,
           activekey: action.activekey,
           keyList: action.keyList,
-          history
+          history,
+          currentInfo,
         };
         break;
       }
@@ -31,23 +39,25 @@ export const pageGroupData = (state = defaultState, action = {}) => {
       {
         let history = [].concat(state.history);
         let lastActiveKey = state.activekey;
+        let currentInfo = {
+          activekey: action.activekey,
+          lastActiveKey,
+          parmas: action.parmas,
+          isReload: action.isReload,
+        }
         if (history.length) {
           let result = history.some(item => {
             return item.activekey === action.activekey;
           });
           if (!result) {
-            history.push({
-              activekey: action.activekey,
-              params: action.params,
-              config: action.config,
-              lastActiveKey
-            });
+            history.push(currentInfo);
           }
         }
         return {
           ...state,
           activekey: action.activekey,
-          history
+          history,
+          currentInfo
         };
         break;
       }
@@ -57,7 +67,7 @@ export const pageGroupData = (state = defaultState, action = {}) => {
         let history = state.history;
         let lastActiveKey = null;
         if (history.length) {
-          history.map(item => {
+          history.forEach(item => {
             if (item.activekey === state.activekey) {
               lastActiveKey = item.lastActiveKey;
             }
@@ -78,22 +88,22 @@ export const pageGroupData = (state = defaultState, action = {}) => {
         let activekey = state.activekey;
         let history = [].concat(state.history);
         if (keyList.length) {
-          keyList.forEach((item,index)=> {
-            if(item === activekey){
-              if(index < keyList.length -1){
-                activekey = keyList[index+1];
+          keyList.forEach((item, index) => {
+            if (item === activekey) {
+              if (index < keyList.length - 1) {
+                activekey = keyList[index + 1];
                 let isHasActivekey = history.some(item => {
                   return item.activekey === activekey
                 })
-                if(!isHasActivekey){
+                if (!isHasActivekey) {
                   history.push({
                     activekey: activekey,
-                    params: action.params,
+                    parmas: action.parmas,
                     config: action.config,
-                    lastActiveKey:item
+                    lastActiveKey: item
                   })
                 }
-              }else{
+              } else {
                 activekey = keyList[0]
               }
             }
