@@ -31,7 +31,7 @@ class PageGroup extends React.Component {
       activekey: null
     };
     store.subscribe(() => {
-      console.log(store.getState(),'www')
+      console.log( store.getState(),'www')
       let pageGroupData = store.getState().pageGroupData;
       this.setState({
         activekey: pageGroupData.activekey
@@ -41,9 +41,20 @@ class PageGroup extends React.Component {
   componentDidMount() {
     this.load();
   }
+  // shouldComponentUpdate(newProps, newState) {
+  //   console.log(store.getState(), "123456768");
+  //   let pageGroupData = store.getState().pageGroupData;
+  //   let currentKey = newState.activekey;
+  //   let { history } = pageGroupData;
+  //   let result = history.some(item => {
+  //     return item.activekey === currentKey;
+  //   });
+  //   console.log(history);
+  //   return true;
+  // }
   componentDidUpdate() {}
   componentWillUnmount() {
-    store.dispatch(PAGEGROUP_INIT());
+    // store.dispatch(PAGEGROUP_INIT());
   }
   //  首次加载
   load = () => {
@@ -85,14 +96,11 @@ class PageGroup extends React.Component {
     const { activekey } = this.state;
     return (
       <div>
-        {activekey &&
-          children &&
-          children.length &&
-          children
-            .filter(item => {
-              return item.key === activekey;
-            })
-            .map(child => {
+        <Tabs activeKey={activekey}>
+          {activekey &&
+            children &&
+            children.length &&
+            children.map(child => {
               const { key, props } = child;
               const { component } = props;
               const Component =
@@ -112,11 +120,12 @@ class PageGroup extends React.Component {
                 }
               };
               return (
-                <div>
+                <Tabs.TabPane key={key}>
                   <Component {...pageProps} />
-                </div>
+                </Tabs.TabPane>
               );
             })}
+        </Tabs>
       </div>
     );
   }
