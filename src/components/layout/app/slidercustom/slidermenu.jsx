@@ -23,8 +23,8 @@ class SliderMenu extends React.Component {
       if (item.children) {
         return (
           <Menu.SubMenu
-              key={item.path}
-              title={
+            key={item.path}
+            title={(
               <div>
                 {item.icon ? (
                   <span>
@@ -33,7 +33,7 @@ class SliderMenu extends React.Component {
                 ) : null}
                 <span>{item.title}</span>
               </div>
-            }
+)}
           >
             {this.renderMenuItem(item.children)}
           </Menu.SubMenu>
@@ -42,7 +42,7 @@ class SliderMenu extends React.Component {
         return (
           <Menu.Item key={item.path}>
             <div
-                onClick={() => {
+              onClick={() => {
                 this.onMenuClick(item)
               }}
             >

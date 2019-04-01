@@ -1,5 +1,5 @@
 import page from "@/components/page";
-import Routes from "@/routes";
+import Routes from "@/components/layout/routes";
 import SiderCustom from "@/components/layout/app/slidercustom";
 import SelectedMenu from "@/components/layout/app/selectedmenu";
 import DocumentTitle from "react-document-title";
@@ -98,7 +98,7 @@ class App extends React.Component {
     this.setState({ title: item.title });
   }
   render() {
-    const { menuData } = this.props;
+    const { menuData, routesConfig } = this.props;
     const { selectedMenu } = menuData;
     const { currentMenuKey, changeMenuKey, collapsed, title } = this.state;
     return (
@@ -129,7 +129,10 @@ class App extends React.Component {
                 }}
                 menuList={selectedMenu}
               />
-              <Routes routeEnter={this.routeEnter.bind(this)} />
+              <Routes
+                routeEnter={this.routeEnter.bind(this)}
+                routesConfig={routesConfig}
+              />
             </Content>
           </Layout>
         </Layout>

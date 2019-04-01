@@ -25,6 +25,7 @@ class User extends React.Component {
   render() {
     return (
       <div>
+
         这是角色管理详情界面
         <div>
           <Button type="primary">跳转去详请</Button>

@@ -15,7 +15,9 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        这是用户列表表单界面,上个页面的参数是{this.props.page.data.currentInfo.parmas.id}
+
+        这是用户列表表单界面,上个页面的参数是
+        {this.props.page.data.currentInfo.parmas.id}
         <div>
           <Input
             onBlur={() => {

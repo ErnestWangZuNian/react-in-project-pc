@@ -80,19 +80,20 @@ class SiderCustom extends React.Component {
     const { selectedKeys, openKeys } = this.state
     const { collapsed } = this.props
     return (
-      <Sider breakpoint="lg"
-          collapsed={collapsed}
-          trigger={null}
+      <Sider
+        breakpoint="lg"
+        collapsed={collapsed}
+        trigger={null}
       >
         <div className="logo" />
         <SiderMenu
-            {...this.props}
+          {...this.props}
           // theme="dark"
-            menus={routes.menus}
-            mode="inline"
-            onOpenChange={this.openMenu}
-            openKeys={openKeys}
-            selectedKeys={selectedKeys}
+          menus={routes.menus}
+          mode="inline"
+          onOpenChange={this.openMenu}
+          openKeys={openKeys}
+          selectedKeys={selectedKeys}
         />
       </Sider>
     )

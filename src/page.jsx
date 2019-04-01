@@ -8,13 +8,14 @@ import App from "@/components/layout/app";
 import Login from "@/components/layout/login";
 import Noauth from "@/components/layout/noauth";
 import NoFound from "@/components/layout/nofound";
+import routesConfig from "@/routes/config";
 export default () => (
   <Router>
     <Switch>
       <Route exact path="/" render={() => <Redirect push to="/back/index" />} />
       <Route
         component={() => {
-          return <App menu />;
+          return <App routesConfig={routesConfig} />;
         }}
         path="/back"
       />
