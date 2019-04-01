@@ -4,7 +4,7 @@ import SiderCustom from "@/components/layout/app/slidercustom";
 import SelectedMenu from "@/components/layout/app/selectedmenu";
 import DocumentTitle from "react-document-title";
 import { MENU_ADDMENU, MENU_DELETEMENU } from "@/store/menu/action";
-const { Header, Footer, Sider, Content } = antd.Layout;
+const { Header, Content } = antd.Layout;
 @page({
   style: require("./style.scss"),
   connect: {
@@ -48,7 +48,7 @@ class App extends React.Component {
   }
   //  点击菜单
   async onMenuClick(item) {
-    const { MENU_ADDMENU, location } = this.props;
+    const { MENU_ADDMENU } = this.props;
     await MENU_ADDMENU(item);
     this.setState(
       {

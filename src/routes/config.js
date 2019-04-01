@@ -63,4 +63,4 @@ export default {
   ],
   // 非菜单相关路由
   auths: ["receichain/finance", "receichain/progress", "receichain/repay"]
-};
+}

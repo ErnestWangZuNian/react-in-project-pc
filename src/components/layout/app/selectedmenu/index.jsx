@@ -1,10 +1,10 @@
-import page from '@/components/page';
-import routeConfig from '@/routes/config';
-const TabPane = antd.Tabs.TabPane;
+import page from '@/components/page'
+import routeConfig from '@/routes/config'
+const TabPane = antd.Tabs.TabPane
 const DEFAULT_SELECTED_MENU =
   routeConfig.menus && routeConfig.menus.length
     ? routeConfig.menus[0].path
-    : null;
+    : null
 @page({
   style: require('./style')
 })
@@ -19,8 +19,8 @@ class SelectedMenu extends React.Component {
     currentMenuKey: PropTypes.string
   };
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
   componentDidMount() {}
   componentDidUpdate() {}
@@ -30,13 +30,13 @@ class SelectedMenu extends React.Component {
       currentMenuKey,
       changeSelectedMenu,
       deleteSelectedMenu
-    } = this.props;
+    } = this.props
     return (
       <div className="selected-menu-container">
         <Tabs
             activeKey={currentMenuKey}
             onChange={activeKey => {
-            changeSelectedMenu(activeKey);
+            changeSelectedMenu(activeKey)
           }}
             type="card"
         >
@@ -53,8 +53,8 @@ class SelectedMenu extends React.Component {
                         <span
                             className="close-tab"
                             onClick={e => {
-                            e.stopPropagation();
-                            deleteSelectedMenu(item);
+                            e.stopPropagation()
+                            deleteSelectedMenu(item)
                           }}
                         >
                           <Icon type="close" />
@@ -63,12 +63,12 @@ class SelectedMenu extends React.Component {
                     </div>
                   }
                 />
-              );
+              )
             })}
         </Tabs>
       </div>
-    );
+    )
   }
 }
 
-export default SelectedMenu;
+export default SelectedMenu

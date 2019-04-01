@@ -1,4 +1,4 @@
-import back from './back';
+import back from './back'
 export default {
  ...back
-};
+}

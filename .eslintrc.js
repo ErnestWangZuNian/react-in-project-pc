@@ -1,12 +1,66 @@
 module.exports = {
-    "parser": "babel-eslint",
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        // 禁止解构中出现空 {} 或 []
-        'no-empty-pattern': 'error',
-        // 禁止在函数参数中出现重复名称的参数
-        'no-dupe-args': 'error',
-    }
-} 
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+    commonjs: true
+  },
+  extends: "eslint:recommended",
+  parserOptions: {
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      jsx: true,
+      arrowFunctions: true,
+      classes: true,
+      modules: true,
+      defaultParams: true
+    },
+    sourceType: "module"
+  },
+  globals: {
+    React: true,
+    ReactDOM: true,
+    PropTypes: true,
+    antd: true,
+    Util: true,
+    Api: true
+  },
+  parser: "babel-eslint",
+  plugins: ["react"],
+  rules: {
+    "no-console": 0,
+    "react/jsx-uses-vars": 2
+    // "linebreak-style": ["error", "unix"],
+    // //"semi": ["error", "always"],
+    // "no-empty": 0,
+    // "comma-dangle": 0,
+    // "no-unused-vars": 0,
+    // "no-console": 0,
+    // "no-const-assign": 2,
+    // "no-dupe-class-members": 2,
+    // "no-duplicate-case": 2,
+    // "no-extra-parens": [2, "functions"],
+    // "no-self-compare": 2,
+    // "accessor-pairs": 2,
+    // "comma-spacing": [
+    //   2,
+    //   {
+    //     before: false,
+    //     after: true
+    //   }
+    // ],
+    // "constructor-super": 2,
+    // "new-cap": [
+    //   2,
+    //   {
+    //     newIsCap: true,
+    //     capIsNew: false
+    //   }
+    // ],
+    // "new-parens": 2,
+    // "no-array-constructor": 2,
+    // "no-class-assign": 2,
+    // "no-cond-assign": 2,
+    // "no-mixed-spaces-and-tabs": 0
+  }
+};

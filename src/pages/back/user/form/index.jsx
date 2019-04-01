@@ -1,4 +1,4 @@
-import page from "@/components/page";
+import page from "@/components/page"
 @page({
   style: require("./style.scss")
 })
@@ -6,8 +6,8 @@ class User extends React.Component {
   static defaultProps = {};
   static propTypes = {};
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
   componentDidMount() {}
   componentDidUpdate() {}
@@ -24,12 +24,12 @@ class User extends React.Component {
                 {
                   id: 3
                 }
-              );
+              )
             }}
           />
         </div>
       </div>
-    );
+    )
   }
 }
-export default User;
+export default User

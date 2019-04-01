@@ -1,15 +1,15 @@
-import page from "@/components/page";
-import Detail from "./detail";
-import Form from "./form";
-import List from "./list";
-import PageGroup from "@/components/layout/pagegroup";
+import page from "@/components/page"
+import Detail from "./detail"
+import Form from "./form"
+import List from "./list"
+import PageGroup from "@/components/layout/pagegroup"
 @page({
   style: require("./style.scss"),
   connect: {
     mapStateToProps: state => {
       return {
         pageData: state.pageData
-      };
+      }
     },
     mapDispatchToProps: {}
   }
@@ -18,8 +18,8 @@ class User extends React.Component {
   static defaultProps = {};
   static propTypes = {};
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
   componentDidMount() {}
   componentDidUpdate() {}
@@ -33,7 +33,7 @@ class User extends React.Component {
           <PageGroup.Node component={Detail} key="roleDetail" />
         </PageGroup>
       </div>
-    );
+    )
   }
 }
-export default User;
+export default User

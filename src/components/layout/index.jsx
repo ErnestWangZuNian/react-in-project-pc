@@ -3,11 +3,11 @@ import {
   Route,
   Switch,
   Redirect
-} from "react-router-dom";
-import App from "./app";
-import Login from "./login";
-import Noauth from "./noauth";
-import NoFound from "./nofound";
+} from "react-router-dom"
+import App from "./app"
+import Login from "./login"
+import Noauth from "./noauth"
+import NoFound from "./nofound"
 export default () => (
   <Router>
     <Switch>
@@ -18,4 +18,4 @@ export default () => (
       <Route component={NoFound} path="/404" />
     </Switch>
   </Router>
-);
+)
