@@ -1,4 +1,4 @@
-import * as ActionType from './action-type';
+import * as ActionType from './action-type'
 // 新增菜单
 export const MENU_ADDMENU = item => {
   let result = async dispatch => {
@@ -7,15 +7,15 @@ export const MENU_ADDMENU = item => {
         dispatch({
           type: ActionType.MENU_ADDMENU,
           currentMenu: item
-        });
-        resolve();
+        })
+        resolve()
       } catch (err) {
-        reject(err);
+        reject(err)
       }
-    });
-  };
-  return result;
-};
+    })
+  }
+  return result
+}
 // 删除菜单
 export const MENU_DELETEMENU = item => {
   let result = async dispatch => {
@@ -24,18 +24,18 @@ export const MENU_DELETEMENU = item => {
         dispatch({
           type: ActionType.MENU_DELETEMENU,
           currentMenu: item
-        });
-        resolve();
+        })
+        resolve()
       } catch (err) {
-        reject(err);
+        reject(err)
       }
-    });
-  };
-  return result;
-};
+    })
+  }
+  return result
+}
 // 默认菜单
 export const MENU_INITSTATE = () => {
   return {
     type: ActionType.MENU_INITSTATE
-  };
-};
+  }
+}

@@ -1,6 +1,4 @@
-import page from '@/components/page';
-import { Link } from 'react-router-dom';
-const { SubMenu, MenuItem } = antd.Menu;
+import page from '@/components/page'
 @page({
   style: require('./style.scss')
 })
@@ -10,23 +8,23 @@ class SliderMenu extends React.Component {
     onMenuClick: PropTypes.func.isRequired
   };
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
   componentDidMount() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
   onMenuClick = item => {
-    const { onMenuClick } = this.props;
-    onMenuClick && Util.isFunction(onMenuClick) && onMenuClick(item);
+    const { onMenuClick } = this.props
+    onMenuClick && Util.isFunction(onMenuClick) && onMenuClick(item)
   };
   renderMenuItem = menus => {
     let result = menus.map(item => {
       if (item.children) {
         return (
           <Menu.SubMenu
-              key={item.path}
-              title={
+            key={item.path}
+            title={(
               <div>
                 {item.icon ? (
                   <span>
@@ -35,32 +33,32 @@ class SliderMenu extends React.Component {
                 ) : null}
                 <span>{item.title}</span>
               </div>
-            }
+)}
           >
             {this.renderMenuItem(item.children)}
           </Menu.SubMenu>
-        );
+        )
       } else {
         return (
           <Menu.Item key={item.path}>
             <div
-                onClick={() => {
-                this.onMenuClick(item);
+              onClick={() => {
+                this.onMenuClick(item)
               }}
             >
                {item.icon && <Icon type={item.icon} />}
               <span className="nav-text">{item.title}</span>
             </div>
           </Menu.Item>
-        );
+        )
       }
-    });
-    return result;
+    })
+    return result
   };
   render() {
-    const { menus } = this.props;
-    return <Menu {...this.props}>{this.renderMenuItem(menus)}</Menu>;
+    const { menus } = this.props
+    return <Menu {...this.props}>{this.renderMenuItem(menus)}</Menu>
   }
 }
 
-export default SliderMenu;
+export default SliderMenu
