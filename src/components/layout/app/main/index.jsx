@@ -104,20 +104,20 @@ class App extends React.Component {
     return (
       <DocumentTitle title={title}>
         <Layout className="page-app-container">
-          <SiderCustom
-            key={changeMenuKey}
-            {...this.props}
-            collapsed={collapsed}
-            onMenuClick={this.onMenuClick.bind(this)}
-          />
+          <Header>
+            <Icon
+              className="trigger"
+              onClick={this.toggle.bind(this)}
+              type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
+            />
+          </Header>
           <Layout className="page-content-container">
-            <Header>
-              <Icon
-                className="trigger"
-                onClick={this.toggle.bind(this)}
-                type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
-              />
-            </Header>
+            <SiderCustom
+              key={changeMenuKey}
+              {...this.props}
+              collapsed={collapsed}
+              onMenuClick={this.onMenuClick.bind(this)}
+            />
             <Content className="page-content-container">
               <SelectedMenu
                 changeSelectedMenu={activeKey => {
