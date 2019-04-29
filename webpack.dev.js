@@ -17,7 +17,7 @@ module.exports = merge(common, {
     open: true, //When open is enabled, the dev server will open the browser.
     proxy: {
       "/": {
-        target: "http://47.92.112.65",
+        target: "https://pwx.weijingtong.net",
         secure: false,
         changeOrigin: true,
         pathRewrite: {

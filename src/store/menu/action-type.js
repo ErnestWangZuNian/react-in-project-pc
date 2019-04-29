@@ -1,3 +1,4 @@
+/* eslint-disable */
 //  新增菜单
 export const MENU_ADDMENU = 'MENU_ADDMENU'
 //  删除菜单

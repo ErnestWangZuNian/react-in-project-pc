@@ -1,3 +1,4 @@
+/* eslint-disable */
 import routes from '@/routes/config'
 import SiderMenu from './slidermenu'
 const { Sider } = antd.Layout

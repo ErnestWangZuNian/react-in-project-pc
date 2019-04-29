@@ -1,3 +1,4 @@
+/* eslint-disable */
 import page from '@/components/page'
 @page({
   style: require('./style.scss')
@@ -33,25 +34,24 @@ class SliderMenu extends React.Component {
                 ) : null}
                 <span>{item.title}</span>
               </div>
-)}
+            )}
           >
             {this.renderMenuItem(item.children)}
           </Menu.SubMenu>
         )
-      } else {
-        return (
-          <Menu.Item key={item.path}>
-            <div
-              onClick={() => {
-                this.onMenuClick(item)
-              }}
-            >
-               {item.icon && <Icon type={item.icon} />}
-              <span className="nav-text">{item.title}</span>
-            </div>
-          </Menu.Item>
-        )
       }
+      return (
+        <Menu.Item key={item.path}>
+          <div
+            onClick={() => {
+              this.onMenuClick(item)
+            }}
+          >
+             {item.icon && <Icon type={item.icon} />}
+            <span className="nav-text">{item.title}</span>
+          </div>
+        </Menu.Item>
+      )
     })
     return result
   };

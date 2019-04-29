@@ -1,3 +1,4 @@
+/* eslint-disable */
 import page from "@/components/page";
 import Routes from "@/components/layout/routes";
 import SiderCustom from "@/components/layout/app/slidercustom";

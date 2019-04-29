@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as ActionType from './action-type'
 // 新增菜单
 export const MENU_ADDMENU = item => {
