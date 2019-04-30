@@ -10,14 +10,7 @@ class User extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    Api.post('index.php/ProxyToLiteApp', {
-      mo: 'client',
-      co: 'Member',
-      ac: 'getUserInfo',
-      clientId: 41,
-    });
-  }
+  componentDidMount() {}
   componentDidUpdate() {}
   componentWillUnmount() {}
   gotoDetail = () => {
