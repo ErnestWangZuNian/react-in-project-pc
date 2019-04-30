@@ -24,20 +24,16 @@ class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: [],
+      test: props.preload.a.subjects,
     };
   }
-  async componentDidMount() {
-    const data = await Api.get('/movie/in_theaters');
-    this.setState({
-      test: data.subjects,
-    });
+  componentDidMount() {
+    console.log(this.props, '1234567');
   }
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
     const { test } = this.state;
-    console.log(test, 'www');
     return (
       <div>
         {test.length &&

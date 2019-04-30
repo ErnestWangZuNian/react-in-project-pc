@@ -1,11 +1,12 @@
 const preload = (target) => {
   return (Component) =>
-    class Style extends React.Component {
+    class Preload extends React.Component {
       constructor(props) {
         super(props);
         this.state = {
           isLoadSuceess: false,
         };
+        this.preload = {};
       }
       componentWillMount() {}
       async componentDidMount() {
@@ -24,7 +25,9 @@ const preload = (target) => {
             });
             try {
               const data = await Promise.all(promiseResult);
-              console.log(data, '789');
+              Object.keys(target).forEach((key, index) => {
+                this.preload[key] = data[index];
+              });
               isLoadSuceess = true;
               this.setState({
                 isLoadSuceess,
@@ -38,7 +41,7 @@ const preload = (target) => {
       componentWillUnmount() {}
       render() {
         const { isLoadSuceess } = this.state;
-        return isLoadSuceess ? <Component {...this.props} /> : null;
+        return isLoadSuceess ? <Component preload={this.preload} {...this.props} /> : <Spin />;
       }
     };
 };
