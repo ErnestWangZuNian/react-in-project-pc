@@ -1,18 +1,11 @@
 import wznUtils from 'wzn-utils';
-let util = {
+
+const util = {
   ...wznUtils,
-  isArray: (target) => {
-    return Object.prototype.toString.call(target) == '[object Array]';
-  },
-  isFunction: (target) => {
-    return Object.prototype.toString.call(target) == '[object Function]';
-  },
-  isBoolean: (target) => {
-    return Object.prototype.toString.call(target) == '[object Boolean]';
-  },
-  isObject: (target) => {
-    return Object.prototype.toString.call(target) == '[object Object]';
-  },
+  isArray: target => Object.prototype.toString.call(target) == '[object Array]',
+  isFunction: target => Object.prototype.toString.call(target) == '[object Function]',
+  isBoolean: target => Object.prototype.toString.call(target) == '[object Boolean]',
+  isObject: target => Object.prototype.toString.call(target) == '[object Object]',
   isEmoptyObject: (target) => {
     let result = false;
     if (!Object.keys(target).length) {
@@ -20,20 +13,14 @@ let util = {
     }
     return result;
   },
-  isNumber: (target) => {
-    return Object.prototype.toString.call(target) == '[object Number]';
-  },
-  isString: (target) => {
-    return Object.prototype.toString.call(target) == '[object String]';
-  },
-  getRandomString: () => {
-    return `${Math.random()
-      .toString(36)
-      .substr(2)}`;
-  },
+  isNumber: target => Object.prototype.toString.call(target) == '[object Number]',
+  isString: target => Object.prototype.toString.call(target) == '[object String]',
+  getRandomString: () => `${Math.random()
+    .toString(36)
+    .substr(2)}`,
   equalValue: (a, b) => {
-    let aProps = Object.getOwnPropertyNames(a);
-    let bProps = Object.getOwnPropertyNames(b);
+    const aProps = Object.getOwnPropertyNames(a);
+    const bProps = Object.getOwnPropertyNames(b);
     let result = true;
     if (aProps.length !== bProps.length) {
       result = false;
@@ -41,14 +28,12 @@ let util = {
       aProps.map((item) => {
         if (typeof a[item] === 'object') {
           if (a[item] === null || a[item] === undefined) {
-            return;
+
           } else {
             result = util.equalValue(a[item], b[item]);
           }
-        } else {
-          if (a[item] !== b[item]) {
-            result = false;
-          }
+        } else if (a[item] !== b[item]) {
+          result = false;
         }
       });
     }
@@ -59,16 +44,13 @@ let util = {
     targetArray = targetArray.filter((item) => {
       if (typeof value === 'object') {
         return util.equalValue(item, value) === false;
-      } else {
-        return item !== value;
       }
+      return item !== value;
     });
     return targetArray;
   },
   storage: {
-    getType: (object) => {
-      return Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];
-    },
+    getType: object => Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1],
     setItem: (key, value) => {
       if (util.storage.getType(value) === 'Object' || util.storage.getType(value) === 'Array') {
         // 如果是对象
@@ -77,7 +59,7 @@ let util = {
       sessionStorage.setItem(key, value);
     },
     getItem: (key) => {
-      var value = sessionStorage.getItem(key);
+      let value = sessionStorage.getItem(key);
       if (value === null) {
         // 如果不存在
         return false;

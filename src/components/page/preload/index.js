@@ -1,48 +1,53 @@
-const preload = (target) => {
-  return (Component) =>
-    class Preload extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          isLoadSuceess: false,
-        };
-        this.preload = {};
+const preload = target => Component => class Preload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoadSuceess: false,
+    };
+    this.preload = {};
+  }
+
+  componentWillMount() {}
+
+  async componentDidMount() {
+    let { isLoadSuceess } = this.state;
+    const promiseResult = [];
+    if (target && Util.isBoolean(target)) {
+      isLoadSuceess = true;
+      this.setState({
+        isLoadSuceess,
+      });
+    }
+    if (Util.isObject(target) || Util.isFunction(target)) {
+      let newTarget = { ...target };
+      if (Util.isFunction(target)) {
+        newTarget = target(this.props);
       }
-      componentWillMount() {}
-      async componentDidMount() {
-        let { isLoadSuceess } = this.state;
-        let promiseResult = [];
-        if (Util.isBoolean(target) && target) {
+      if (!Util.isEmoptyObject(newTarget)) {
+        Object.keys(newTarget).forEach((key) => {
+          promiseResult.push(Promise.resolve(newTarget[key]));
+        });
+        try {
+          const data = await Promise.all(promiseResult);
+          Object.keys(newTarget).forEach((key, index) => {
+            this.preload[key] = data[index];
+          });
           isLoadSuceess = true;
           this.setState({
             isLoadSuceess,
           });
-        }
-        if (Util.isObject(target)) {
-          if (!Util.isEmoptyObject(target)) {
-            Object.keys(target).forEach((key) => {
-              promiseResult.push(Promise.resolve(target[key]));
-            });
-            try {
-              const data = await Promise.all(promiseResult);
-              Object.keys(target).forEach((key, index) => {
-                this.preload[key] = data[index];
-              });
-              isLoadSuceess = true;
-              this.setState({
-                isLoadSuceess,
-              });
-            } catch (err) {
-              console.log(err);
-            }
-          }
+        } catch (err) {
+          console.error(err);
         }
       }
-      componentWillUnmount() {}
-      render() {
-        const { isLoadSuceess } = this.state;
-        return isLoadSuceess ? <Component preload={this.preload} {...this.props} /> : <Spin />;
-      }
-    };
+    }
+  }
+
+  componentWillUnmount() {}
+
+  render() {
+    const { isLoadSuceess } = this.state;
+    return isLoadSuceess ? <Component preload={this.preload} {...this.props} /> : <Spin />;
+  }
 };
 export default preload;

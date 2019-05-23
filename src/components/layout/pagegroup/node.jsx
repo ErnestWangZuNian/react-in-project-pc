@@ -4,16 +4,22 @@
 // })
 class Node extends React.Component {
   static defaultProps = {};
+
   static propTypes = {};
+
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
+
   componentDidMount() {}
+
   componentDidUpdate() {}
+
   componentWillUnmount() {}
+
   render() {
-    return ""
+    return '';
   }
 }
-export default Node
+export default Node;

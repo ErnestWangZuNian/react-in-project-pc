@@ -1,18 +1,25 @@
 import page from '@/components/page';
+
 @page({
   style: require('./style.scss'),
   connect: {},
 })
 class User extends React.Component {
   static defaultProps = {};
+
   static propTypes = {};
+
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   componentDidMount() {}
+
   componentDidUpdate() {}
+
   componentWillUnmount() {}
+
   gotoDetail = () => {
     const { go } = this.props.page.history;
     go(
@@ -25,6 +32,7 @@ class User extends React.Component {
       },
     );
   };
+
   render() {
     return (
       <div>

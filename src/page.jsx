@@ -2,21 +2,20 @@ import {
   HashRouter as Router,
   Route,
   Switch,
-  Redirect
-} from "react-router-dom";
-import App from "@/components/layout/app";
-import Login from "@/components/layout/login";
-import Noauth from "@/components/layout/noauth";
-import NoFound from "@/components/layout/nofound";
-import routesConfig from "@/routes/config";
+  Redirect,
+} from 'react-router-dom';
+import App from '@/components/layout/app';
+import Login from '@/components/layout/login';
+import Noauth from '@/components/layout/noauth';
+import NoFound from '@/components/layout/nofound';
+import routesConfig from '@/routes/config';
+
 export default () => (
   <Router>
     <Switch>
       <Route exact path="/" render={() => <Redirect push to="/back/index" />} />
       <Route
-        component={() => {
-          return <App routesConfig={routesConfig} />;
-        }}
+        component={() => <App routesConfig={routesConfig} />}
         path="/back"
       />
       <Route component={Login} path="/login" />

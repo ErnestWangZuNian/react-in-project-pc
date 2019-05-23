@@ -1,11 +1,12 @@
-import style from './style';
-import preload from './preload';
 import { Form } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-let page = (options) => {
+import preload from './preload';
+import style from './style';
+
+const page = (options) => {
   options = { withRouter: true, ...options };
-  return function(Component) {
+  return function (Component) {
     if (options && options.style) {
       Component = style(options.style)(Component);
     }

@@ -1,41 +1,47 @@
-import page from "@/components/page"
-import { TEST_INIT } from "@/store/test/action"
+import page from '@/components/page';
+import { TEST_INIT } from '@/store/test/action';
+
 @page({
-  style: require("./style.scss"),
+  style: require('./style.scss'),
   connect: {
-    mapStateToProps: state => {
-      return {
-        testData: state.testData
-      }
-    },
+    mapStateToProps: state => ({
+      testData: state.testData,
+    }),
     mapDispatchToProps: {
-      TEST_INIT
-    }
-  }
+      TEST_INIT,
+    },
+  },
 })
 class User extends React.Component {
   static defaultProps = {};
+
   static propTypes = {};
+
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
+
   componentDidMount() {
-    const { TEST_INIT } = this.props
-    TEST_INIT()
+    const { TEST_INIT } = this.props;
+    TEST_INIT();
   }
+
   componentDidUpdate() {}
+
   componentWillUnmount() {}
+
   gotoDetail = () => {
-    const { page } = this.props
-    const { go } = page.history
+    const { page } = this.props;
+    const { go } = page.history;
     go(
-      "form",
+      'form',
       {
-        id: 2
-      }
-    )
+        id: 2,
+      },
+    );
   };
+
   render() {
     return (
       <div>
@@ -47,7 +53,7 @@ class User extends React.Component {
           </Button>
         </div>
       </div>
-    )
+    );
   }
 }
-export default User
+export default User;

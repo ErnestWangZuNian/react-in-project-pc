@@ -1,6 +1,7 @@
-import UserRoute from "./user";
-import HomeRoute from "./home";
-import RoleRoute from "./role";
+import UserRoute from './user';
+import HomeRoute from './home';
+import RoleRoute from './role';
+
 export default {
-  menus: [HomeRoute, RoleRoute, UserRoute]
+  menus: [HomeRoute, RoleRoute, UserRoute],
 };
