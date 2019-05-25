@@ -2,7 +2,7 @@ import * as actionType from './action-type';
 import Util from '@/utils';
 import routeConfig from '@/routes/config';
 
-const DEFAULT_SELECTED_MENU = routeConfig.menus && routeConfig.menus.length ? [routeConfig.menus[0]] : [];
+const DEFAULT_SELECTED_MENU =  routeConfig.menus && routeConfig.menus.length ? [routeConfig.menus[0]] : [];
 const DEFAULT_UNIQUE_MENUKEY = DEFAULT_SELECTED_MENU.length
   ? {
     [DEFAULT_SELECTED_MENU.path]: true,

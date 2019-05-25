@@ -34,18 +34,14 @@ class User extends React.Component {
   gotoDetail = () => {
     const { page } = this.props;
     const { go } = page.history;
-    go(
-      'form',
-      {
-        id: 2,
-      },
-    );
+    go('form', {
+      id: 2,
+    });
   };
 
   render() {
     return (
       <div>
-
         这是用户列表界面
         <div>
           <Button type="primary" onClick={this.gotoDetail}>

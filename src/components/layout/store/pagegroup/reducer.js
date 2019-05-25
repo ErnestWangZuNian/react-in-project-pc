@@ -15,8 +15,7 @@ const defaultState = {
 export const pageGroupData = (state = defaultState, action = {}) => {
   switch (action.type) {
     //  首次加载
-    case actionType.PAGEGROUP_LOAD:
-    {
+    case actionType.PAGEGROUP_LOAD: {
       const history = [].concat(state.history);
       const lastActiveKey = state.activekey;
       const currentInfo = {
@@ -35,8 +34,7 @@ export const pageGroupData = (state = defaultState, action = {}) => {
       };
     }
     //  页面跳转
-    case actionType.PAGEGROUP_GOTO:
-    {
+    case actionType.PAGEGROUP_GOTO: {
       const history = [].concat(state.history);
       const lastActiveKey = state.activekey;
       const currentInfo = {
@@ -46,7 +44,9 @@ export const pageGroupData = (state = defaultState, action = {}) => {
         isReload: action.isReload,
       };
       if (history.length) {
-        const result = history.some(item => item.activekey === action.activekey);
+        const result = history.some(
+          item => item.activekey === action.activekey,
+        );
         if (!result) {
           history.push(currentInfo);
         }
@@ -59,8 +59,7 @@ export const pageGroupData = (state = defaultState, action = {}) => {
       };
     }
     //  页面回退
-    case actionType.PAGEGROUP_BACK:
-    {
+    case actionType.PAGEGROUP_BACK: {
       const { history } = state;
       let lastActiveKey = null;
       if (history.length) {
@@ -78,8 +77,7 @@ export const pageGroupData = (state = defaultState, action = {}) => {
       };
     }
     // 页面前进
-    case actionType.PAGEGROUP_NEXT:
-    {
+    case actionType.PAGEGROUP_NEXT: {
       const { keyList } = state;
       let { activekey } = state;
       const history = [].concat(state.history);
@@ -88,7 +86,9 @@ export const pageGroupData = (state = defaultState, action = {}) => {
           if (item === activekey) {
             if (index < keyList.length - 1) {
               activekey = keyList[index + 1];
-              const isHasActivekey = history.some(item => item.activekey === activekey);
+              const isHasActivekey = history.some(
+                item => item.activekey === activekey,
+              );
               if (!isHasActivekey) {
                 history.push({
                   activekey,

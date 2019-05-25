@@ -3,9 +3,12 @@ import wznUtils from 'wzn-utils';
 const util = {
   ...wznUtils,
   isArray: target => Object.prototype.toString.call(target) == '[object Array]',
-  isFunction: target => Object.prototype.toString.call(target) == '[object Function]',
-  isBoolean: target => Object.prototype.toString.call(target) == '[object Boolean]',
-  isObject: target => Object.prototype.toString.call(target) == '[object Object]',
+  isFunction: target =>
+    Object.prototype.toString.call(target) == '[object Function]',
+  isBoolean: target =>
+    Object.prototype.toString.call(target) == '[object Boolean]',
+  isObject: target =>
+    Object.prototype.toString.call(target) == '[object Object]',
   isEmoptyObject: (target) => {
     let result = false;
     if (!Object.keys(target).length) {
@@ -13,11 +16,14 @@ const util = {
     }
     return result;
   },
-  isNumber: target => Object.prototype.toString.call(target) == '[object Number]',
-  isString: target => Object.prototype.toString.call(target) == '[object String]',
-  getRandomString: () => `${Math.random()
-    .toString(36)
-    .substr(2)}`,
+  isNumber: target =>
+    Object.prototype.toString.call(target) == '[object Number]',
+  isString: target =>
+    Object.prototype.toString.call(target) == '[object String]',
+  getRandomString: () =>
+    `${Math.random()
+      .toString(36)
+      .substr(2)}`,
   equalValue: (a, b) => {
     const aProps = Object.getOwnPropertyNames(a);
     const bProps = Object.getOwnPropertyNames(b);
@@ -28,7 +34,6 @@ const util = {
       aProps.map((item) => {
         if (typeof a[item] === 'object') {
           if (a[item] === null || a[item] === undefined) {
-
           } else {
             result = util.equalValue(a[item], b[item]);
           }
@@ -50,9 +55,13 @@ const util = {
     return targetArray;
   },
   storage: {
-    getType: object => Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1],
+    getType: object =>
+      Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1],
     setItem: (key, value) => {
-      if (util.storage.getType(value) === 'Object' || util.storage.getType(value) === 'Array') {
+      if (
+        util.storage.getType(value) === 'Object' ||
+        util.storage.getType(value) === 'Array'
+      ) {
         // 如果是对象
         value = JSON.stringify(value);
       }
@@ -64,7 +73,10 @@ const util = {
         // 如果不存在
         return false;
       }
-      if ((value && value.substring(0, 1) === '{') || value.substring(0, 1) === '[') {
+      if (
+        (value && value.substring(0, 1) === '{')
+        || value.substring(0, 1) === '['
+      ) {
         value = JSON.parse(value); // 把字符串转为对象
       }
       return value;

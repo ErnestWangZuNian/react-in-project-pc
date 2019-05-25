@@ -23,7 +23,11 @@ class App extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    return <div><Button type="primary">这是app界面</Button></div>;
+    return (
+      <div>
+        <Button type="primary">这是app界面</Button>
+      </div>
+    );
   }
 }
 export default App;

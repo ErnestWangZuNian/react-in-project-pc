@@ -44,10 +44,7 @@ class User extends React.Component {
   render() {
     const { test } = this.state;
     return (
-      <div>
-        {test.length
-          && test.map(item => <div>{item.title}</div>)}
-      </div>
+      <div>{test.length && test.map(item => <div>{item.title}</div>)}</div>
     );
   }
 }

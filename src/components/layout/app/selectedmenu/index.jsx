@@ -2,9 +2,9 @@ import page from '@/components/page';
 import routeConfig from '@/routes/config';
 
 const { TabPane } = antd.Tabs;
-const DEFAULT_SELECTED_MENU = routeConfig.menus && routeConfig.menus.length
-  ? routeConfig.menus[0].path
-  : null;
+const DEFAULT_SELECTED_MENU =  routeConfig.menus && routeConfig.menus.length
+    ? routeConfig.menus[0].path
+    : null;
 @page({
   style: require('./style'),
 })
@@ -51,19 +51,19 @@ class SelectedMenu extends React.Component {
               <TabPane
                 key={item.path}
                 tab={(
-                  <div className="selected-menu-tab-item">
+<div className="selected-menu-tab-item">
                     <span>{item.title}</span>
                     {item.path !== DEFAULT_SELECTED_MENU ? (
-                      <span
+    <span
                         className="close-tab"
                         onClick={(e) => {
-                          e.stopPropagation();
-                          deleteSelectedMenu(item);
-                        }}
+        e.stopPropagation();
+        deleteSelectedMenu(item);
+      }}
                       >
                         <Icon type="close" />
                       </span>
-                    ) : null}
+  ) : null}
                   </div>
 )}
               />

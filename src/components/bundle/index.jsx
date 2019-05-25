@@ -1,4 +1,3 @@
-
 class Bundle extends React.Component {
   constructor() {
     super();

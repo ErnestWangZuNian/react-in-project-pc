@@ -28,7 +28,7 @@ class Router extends React.Component {
     const authList = [
       'receichain/finance',
       'receichain/progress',
-      'receichain/repay',
+      'receichain/repay'
     ];
     if (auth && auth.length) {
       for (const authItem of auth) {

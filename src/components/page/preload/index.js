@@ -1,53 +1,57 @@
 const preload = target => Component => class Preload extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoadSuceess: false,
-    };
-    this.preload = {};
-  }
-
-  componentWillMount() {}
-
-  async componentDidMount() {
-    let { isLoadSuceess } = this.state;
-    const promiseResult = [];
-    if (target && Util.isBoolean(target)) {
-      isLoadSuceess = true;
-      this.setState({
-        isLoadSuceess,
-      });
+    constructor(props) {
+      super(props);
+      this.state = {
+        isLoadSuceess: false,
+      };
+      this.preload = {};
     }
-    if (Util.isObject(target) || Util.isFunction(target)) {
-      let newTarget = { ...target };
-      if (Util.isFunction(target)) {
-        newTarget = target(this.props);
-      }
-      if (!Util.isEmoptyObject(newTarget)) {
-        Object.keys(newTarget).forEach((key) => {
-          promiseResult.push(Promise.resolve(newTarget[key]));
+
+    componentWillMount() {}
+
+    async componentDidMount() {
+      let { isLoadSuceess } = this.state;
+      const promiseResult = [];
+      if (target && Util.isBoolean(target)) {
+        isLoadSuceess = true;
+        this.setState({
+          isLoadSuceess,
         });
-        try {
-          const data = await Promise.all(promiseResult);
-          Object.keys(newTarget).forEach((key, index) => {
-            this.preload[key] = data[index];
+      }
+      if (Util.isObject(target) || Util.isFunction(target)) {
+        let newTarget = { ...target };
+        if (Util.isFunction(target)) {
+          newTarget = target(this.props);
+        }
+        if (!Util.isEmoptyObject(newTarget)) {
+          Object.keys(newTarget).forEach((key) => {
+            promiseResult.push(Promise.resolve(newTarget[key]));
           });
-          isLoadSuceess = true;
-          this.setState({
-            isLoadSuceess,
-          });
-        } catch (err) {
-          console.error(err);
+          try {
+            const data = await Promise.all(promiseResult);
+            Object.keys(newTarget).forEach((key, index) => {
+              this.preload[key] = data[index];
+            });
+            isLoadSuceess = true;
+            this.setState({
+              isLoadSuceess,
+            });
+          } catch (err) {
+            console.error(err);
+          }
         }
       }
     }
-  }
 
-  componentWillUnmount() {}
+    componentWillUnmount() {}
 
-  render() {
-    const { isLoadSuceess } = this.state;
-    return isLoadSuceess ? <Component preload={this.preload} {...this.props} /> : <Spin />;
-  }
-};
+    render() {
+      const { isLoadSuceess } = this.state;
+      return isLoadSuceess ? (
+      <Component preload={this.preload} {...this.props} />
+      ) : (
+      <Spin />
+      );
+    }
+  };
 export default preload;
