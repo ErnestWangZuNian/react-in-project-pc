@@ -52,19 +52,19 @@ class SelectedMenu extends React.Component {
                 key={item.path}
                 tab={(
 <div className="selected-menu-tab-item">
-                    <span>{item.title}</span>
-                    {item.path !== DEFAULT_SELECTED_MENU ? (
-    <span
-                        className="close-tab"
-                        onClick={(e) => {
-        e.stopPropagation();
-        deleteSelectedMenu(item);
-      }}
-                      >
-                        <Icon type="close" />
-                      </span>
-  ) : null}
-                  </div>
+  <span>{item.title}</span>
+  {item.path !== DEFAULT_SELECTED_MENU ? (
+                      <span
+      className="close-tab"
+      onClick={e => {
+                          e.stopPropagation();
+                          deleteSelectedMenu(item);
+                        }}
+    >
+      <Icon type="close" />
+    </span>
+                    ) : null}
+</div>
 )}
               />
             ))}

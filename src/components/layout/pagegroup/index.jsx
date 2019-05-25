@@ -120,11 +120,11 @@ class PageGroup extends React.Component {
             && children.map((child) => {
               const { key, props } = child;
               const { component } = props;
-              const Component =                typeof component === 'object'
+              const Component = typeof component === 'object'
+                ? component.default
                   ? component.default
-                    ? component.default
-                    : () => component
-                  : component;
+                  : () => component
+                : component;
               const pageProps = {
                 page: {
                   history: {
