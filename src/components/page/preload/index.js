@@ -1,5 +1,4 @@
-const { Spin } = React;
-const preload = target => Component => class Preload extends React.Component {
+const preload = target => (Component, Loading = '加载中') => class Preload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +21,7 @@ const preload = target => Component => class Preload extends React.Component {
     if (Util.isObject(target) || Util.isFunction(target)) {
       let newTarget = { ...target };
       if (Util.isFunction(target)) {
-        newTarget = target(this.props);
+        newTarget = await target(this.props);
       }
       if (!Util.isEmoptyObject(newTarget)) {
         Object.keys(newTarget).forEach((key) => {
@@ -48,7 +47,7 @@ const preload = target => Component => class Preload extends React.Component {
 
   render() {
     const { isLoadSuceess } = this.state;
-    return isLoadSuceess ? <Component preload={this.preload} {...this.props} /> : <Spin />;
+    return isLoadSuceess ? <Component preloadData={this.preload} {...this.props} /> : Loading;
   }
 };
 export default preload;

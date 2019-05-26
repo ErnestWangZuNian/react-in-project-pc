@@ -1,44 +1,30 @@
-class Bundle extends React.Component {
-  static defaultProps = {};
 
-  static propTypes = {
-    load: PropTypes.func.isRequired,
-  };
+const asyncComponent = (importComponent, placeholder = '拼命加载中...') => class AsyncComponent extends React.Component {
+    unmount = false;
 
-  constructor() {
-    super();
-    this.state = {
-      mod: null,
-    };
-  }
-
-  componentWillMount() {
-    this.load(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { load } = this.props;
-    if (nextProps.load !== load) {
-      this.load(nextProps);
+    constructor() {
+      super();
+      this.state = {
+        Child: null,
+      };
     }
-  }
 
-  load(props) {
-    this.setState({
-      mod: null,
-    });
-    props.load((mod) => {
+    async componentDidMount() {
+      console.log(placeholder, 'www');
+      const { default: Child } = await importComponent();
+      if (this.unmount) return;
       this.setState({
-        // handle both es imports and cjs
-        mod: mod.default ? mod.default : mod,
+        Child,
       });
-    });
-  }
+    }
 
-  render() {
-    const { mod } = this.state;
-    return mod ? <mod /> : null;
-  }
-}
+    componentWillUnmount() {
+      this.unmount = true;
+    }
 
-export default Bundle;
+    render() {
+      const { Child } = this.state;
+      return Child ? <Child {...this.props} /> : placeholder;
+    }
+};
+export default asyncComponent;

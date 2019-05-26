@@ -6,14 +6,8 @@ const { Button } = antd;
 
 @page({
   style,
-  preload: async () => {
-    const result = {
-      a: await Api.get('/v2/music/search'),
-    };
-    return result;
-  },
 })
-class App extends React.Component {
+class Demo extends React.Component {
   static defaultProps = {};
 
   static propTypes = {};
@@ -30,12 +24,11 @@ class App extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    console.log(this.props, 'wangzunian');
     return (
       <div className="home-container">
-        <Button type="primary">这是app</Button>
+        <Button type="primary">这是demo界面</Button>
       </div>
     );
   }
 }
-export default App;
+export default Demo;

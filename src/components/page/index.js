@@ -9,26 +9,27 @@ const Page = (params) => {
   const resultComponent = (Component) => {
     let newComponent = Component;
     if (options && options.style) {
-      newComponent = style(options.style)(Component);
+      newComponent = style(options.style)(newComponent);
     }
     if (options && options.preload) {
-      newComponent = preload(options.preload)(Component);
+      newComponent = preload(options.preload)(newComponent);
     }
     if (options && options.withRouter) {
-      newComponent = withRouter(Component);
+      newComponent = withRouter(newComponent);
     }
     if (options && options.form) {
-      newComponent = Form.create()(Component);
+      newComponent = Form.create()(newComponent);
     }
     if (options && options.connect) {
       const { mapStateToProps, mapDispatchToProps } = options.connect;
       newComponent = connect(
         mapStateToProps,
         mapDispatchToProps,
-      )(Component);
+      )(newComponent);
     }
     return newComponent;
   };
+
   return resultComponent;
 };
 export default Page;
