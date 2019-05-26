@@ -1,6 +1,6 @@
 module.exports = {
   extends: 'airbnb',
-  plugins: ['react','prettier'],
+  plugins: ['react'],
   env: {
     browser: true,
     node: true,
@@ -16,7 +16,6 @@ module.exports = {
   },
   parser: 'babel-eslint',
   rules: {
-    "prettier/prettier": "error",
     'no-console': 0,
     'react/jsx-uses-vars': 2,
     'react/prefer-es6-class': ['error', 'always'],

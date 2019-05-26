@@ -1,16 +1,15 @@
+
 import Api from './api/index';
-import Util from '@/utils';
-import store from '@/store/store';
-import { Provider } from 'react-redux';
-import LayoutContainer from '@/page';
-import '@/styles/main.less';
+// import Util from './utils';
+
+import Router from './routes';
+import 'antd/dist/antd.css';
 
 Object.assign(global, antd);
 global.Api = Api;
-global.Util = Util;
+// global.Util = Util;
+
 ReactDOM.render(
-  <Provider store={store}>
-    <LayoutContainer store={store} />
-  </Provider>,
+  Router,
   document.getElementById('app'),
 );

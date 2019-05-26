@@ -61,9 +61,9 @@ module.exports = {
         enforce: 'pre',
         use: [{
           loader: 'eslint-loader',
-          options: {
-            fix: true
-          }
+          // options: {
+          //   fix: true
+          // }
         }],
         include: context,
         exclude: /node_modules/

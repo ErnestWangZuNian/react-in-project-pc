@@ -1,4 +1,10 @@
 class Bundle extends React.Component {
+  static defaultProps = {};
+
+  static propTypes = {
+    load: PropTypes.func.isRequired,
+  };
+
   constructor() {
     super();
     this.state = {
@@ -11,7 +17,8 @@ class Bundle extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.load !== this.props.load) {
+    const { load } = this.props;
+    if (nextProps.load !== load) {
       this.load(nextProps);
     }
   }
@@ -29,7 +36,8 @@ class Bundle extends React.Component {
   }
 
   render() {
-    return this.state.mod ? <this.state.mod /> : null;
+    const { mod } = this.state;
+    return mod ? <mod /> : null;
   }
 }
 

@@ -4,29 +4,31 @@ import { withRouter } from 'react-router-dom';
 import preload from './preload';
 import style from './style';
 
-const page = (options) => {
-  options = { withRouter: true, ...options };
-  return function (Component) {
+const Page = (params) => {
+  const options = { withRouter: true, ...params };
+  const resultComponent = (Component) => {
+    let newComponent = Component;
     if (options && options.style) {
-      Component = style(options.style)(Component);
+      newComponent = style(options.style)(Component);
     }
     if (options && options.preload) {
-      Component = preload(options.preload)(Component);
+      newComponent = preload(options.preload)(Component);
     }
     if (options && options.withRouter) {
-      Component = withRouter(Component);
+      newComponent = withRouter(Component);
     }
     if (options && options.form) {
-      Component = Form.create()(Component);
+      newComponent = Form.create()(Component);
     }
     if (options && options.connect) {
       const { mapStateToProps, mapDispatchToProps } = options.connect;
-      Component = connect(
+      newComponent = connect(
         mapStateToProps,
         mapDispatchToProps,
       )(Component);
     }
-    return Component;
+    return newComponent;
   };
+  return resultComponent;
 };
-export default page;
+export default Page;

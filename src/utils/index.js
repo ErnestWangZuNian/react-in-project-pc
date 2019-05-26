@@ -3,12 +3,9 @@ import wznUtils from 'wzn-utils';
 const util = {
   ...wznUtils,
   isArray: target => Object.prototype.toString.call(target) == '[object Array]',
-  isFunction: target =>
-    Object.prototype.toString.call(target) == '[object Function]',
-  isBoolean: target =>
-    Object.prototype.toString.call(target) == '[object Boolean]',
-  isObject: target =>
-    Object.prototype.toString.call(target) == '[object Object]',
+  isFunction: target => Object.prototype.toString.call(target) == '[object Function]',
+  isBoolean: target => Object.prototype.toString.call(target) == '[object Boolean]',
+  isObject: target => Object.prototype.toString.call(target) == '[object Object]',
   isEmoptyObject: (target) => {
     let result = false;
     if (!Object.keys(target).length) {
@@ -16,14 +13,11 @@ const util = {
     }
     return result;
   },
-  isNumber: target =>
-    Object.prototype.toString.call(target) == '[object Number]',
-  isString: target =>
-    Object.prototype.toString.call(target) == '[object String]',
-  getRandomString: () =>
-    `${Math.random()
-      .toString(36)
-      .substr(2)}`,
+  isNumber: target => Object.prototype.toString.call(target) == '[object Number]',
+  isString: target => Object.prototype.toString.call(target) == '[object String]',
+  getRandomString: () => `${Math.random()
+    .toString(36)
+    .substr(2)}`,
   equalValue: (a, b) => {
     const aProps = Object.getOwnPropertyNames(a);
     const bProps = Object.getOwnPropertyNames(b);
@@ -55,12 +49,11 @@ const util = {
     return targetArray;
   },
   storage: {
-    getType: object =>
-      Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1],
+    getType: object => Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1],
     setItem: (key, value) => {
       if (
-        util.storage.getType(value) === 'Object' ||
-        util.storage.getType(value) === 'Array'
+        util.storage.getType(value) === 'Object'
+        || util.storage.getType(value) === 'Array'
       ) {
         // 如果是对象
         value = JSON.stringify(value);

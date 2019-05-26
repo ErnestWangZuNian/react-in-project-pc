@@ -1,8 +1,11 @@
-import page from '@/components/page';
-import { Button } from 'antd';
+import page from '../../components/page';
+
+const style = require('./style.scss');
+
+const { Button } = antd;
 
 @page({
-  style: require('./style.scss'),
+  style,
 })
 class App extends React.Component {
   static defaultProps = {};
@@ -11,9 +14,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      collapsed: false,
-    };
+    this.state = {};
   }
 
   componentDidMount() {}
@@ -25,7 +26,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Button type="primary">这是app界面</Button>
+        <Button type="primary">这是app</Button>
       </div>
     );
   }
