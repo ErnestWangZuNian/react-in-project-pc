@@ -17,11 +17,8 @@ module.exports = {
   parser: 'babel-eslint',
   rules: {
     'no-console': 0,
-    "no-dynamic-require": 0,
-    'react/jsx-uses-vars': 2,
+    'import/no-dynamic-require': 0,
     'linebreak-style': [0, 'error', 'windows'],
-    'react/prefer-es6-class': ['error', 'always'],
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
-    'jsx-quotes': ['error', 'prefer-double'],
   },
 };

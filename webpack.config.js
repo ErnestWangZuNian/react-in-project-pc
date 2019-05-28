@@ -24,7 +24,7 @@ if (pro) {
       title: 'Production',
       template: path.resolve(__dirname, 'index.html'),
     }),
-    new ExtractTextWebpackPlugin('css/style.[chunkhash].css'),
+    new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
     new CleanWebpackPlugin('dist'),
   );
 } else {
@@ -35,7 +35,7 @@ if (pro) {
       title: 'Production',
       template: path.resolve(__dirname, 'index.html'),
     }),
-    new ExtractTextWebpackPlugin('css/style.[chunkhash].css'),
+    new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
     new webpack.HotModuleReplacementPlugin(), // 热更新，热更新不是刷新
   );
 }
@@ -143,7 +143,7 @@ module.exports = {
     historyApiFallback: true, // spa不跳转,history模式的路由需要true
     host: 'localhost',
     port: 8080,
-    hot: true,
+    // hot: true,
     inline: true, // 实时刷新
     compress: true, // Enable gzip compression for everything served
     overlay: true, // Shows a full-screen overlay in the browser
@@ -180,6 +180,8 @@ module.exports = {
   },
   //  提取公共代码
   optimization: {
+    namedModules: true,
+    namedChunks: true,
     splitChunks: {
       cacheGroups: {
         vendor: {

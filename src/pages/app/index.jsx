@@ -31,7 +31,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="home-container">
         <Button type="primary">这是app</Button>
       </div>
     );
