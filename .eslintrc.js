@@ -20,5 +20,6 @@ module.exports = {
     'import/no-dynamic-require': 0,
     'linebreak-style': [0, 'error', 'windows'],
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/forbid-prop-types': 0,
   },
 };

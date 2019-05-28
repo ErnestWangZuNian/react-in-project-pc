@@ -6,6 +6,7 @@ const { Button } = antd;
 
 @page({
   style,
+  form: true,
   preload: async () => {
     const result = {
       a: await Api.get('/v2/music/search'),
@@ -16,7 +17,9 @@ const { Button } = antd;
 class App extends React.Component {
   static defaultProps = {};
 
-  static propTypes = {};
+  static propTypes = {
+    form: PropTypes.object.isRequired,
+  };
 
   constructor(props) {
     super(props);
@@ -30,8 +33,10 @@ class App extends React.Component {
   componentWillUnmount() {}
 
   render() {
+    const { form } = this.props;
+    console.log(form, '222');
     return (
-      <div className="home-container">
+      <div>
         <Button type="primary">这是app</Button>
       </div>
     );
