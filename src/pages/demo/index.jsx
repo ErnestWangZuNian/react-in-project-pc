@@ -25,7 +25,7 @@ class Demo extends React.Component {
 
   render() {
     return (
-      <div className="home-container">
+      <div>
         <Button type="primary">这是demo界面</Button>
       </div>
     );

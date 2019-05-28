@@ -30,9 +30,8 @@ class App extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    console.log(this.props, 'wangzunian');
     return (
-      <div className="home-container">
+      <div>
         <Button type="primary">这是app</Button>
       </div>
     );
