@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer')({
-  // React doesn't support IE8 anyway
   browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
 });
 

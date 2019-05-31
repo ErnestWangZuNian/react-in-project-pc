@@ -7,8 +7,6 @@ const preload = target => (Component, Loading = '加载中') => class Preload ex
     this.preload = {};
   }
 
-  componentWillMount() {}
-
   async componentDidMount() {
     let { isLoadSuceess } = this.state;
     const promiseResult = [];

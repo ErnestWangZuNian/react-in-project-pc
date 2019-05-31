@@ -2,7 +2,7 @@ import page from '../../components/page';
 
 const style = require('./style.scss');
 
-const { Button } = antd;
+const { Button, Input, Form } = antd;
 
 @page({
   style,
@@ -18,7 +18,7 @@ class App extends React.Component {
   static defaultProps = {};
 
   static propTypes = {
-    form: PropTypes.object.isRequired,
+    form: PropTypes.objectOf(PropTypes.object).isRequired,
   };
 
   constructor(props) {
@@ -34,10 +34,36 @@ class App extends React.Component {
 
   render() {
     const { form } = this.props;
-    console.log(form, '222');
+    console.log(form, 'wwww');
     return (
       <div>
-        <Button type="primary">这是app</Button>
+        <div>
+          <Button
+            type="primary"
+            onClick={() => {
+              // form.validateFields((err, values) => {
+              //   console.log(err, values);
+              // });
+              console.log(form.isPass(), 'www');
+            }}
+          >
+            确定
+          </Button>
+        </div>
+        <div>
+          <Form.Item>
+            <Input
+              {...form.getFieldProps('name', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入姓名',
+                  },
+                ],
+              })}
+            />
+          </Form.Item>
+        </div>
       </div>
     );
   }
