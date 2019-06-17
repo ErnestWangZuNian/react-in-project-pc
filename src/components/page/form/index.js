@@ -1,8 +1,10 @@
-// const { Form } = antd;
-import { createForm } from 'rc-form';
+
+
+import CusFrorm from './form';
+
 const formWrap = () => {
   const resultComponent = (Component) => {
-    const resultForm = class FormWrap extends React.Component {
+    const FormWrap = class FormWrap extends React.Component {
       static defaultProps = {};
 
       static propTypes = {
@@ -39,7 +41,7 @@ const formWrap = () => {
         return <Component form={formProps} />;
       }
     };
-    return createForm()(resultForm);
+    return CusFrorm.create()(FormWrap);
   };
   return resultComponent;
 };
