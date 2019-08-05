@@ -1,12 +1,14 @@
 import createDOMForm from 'rc-form/lib/createDOMForm';
 import omit from 'omit.js';
+import classnames from 'classnames';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 
 const FormLayouts = ['horizontal', 'inline', 'vertical'];
-class Form extends React.Component {
+class CusFrorm extends React.Component {
   static defaultProps = {
     colon: true,
     layout: 'horizontal',
+    prefixCls: 'wzn-form',
     hideRequiredMark: false,
     onSubmit(e) {
       e.preventDefault();
@@ -14,11 +16,15 @@ class Form extends React.Component {
   };
 
   static propTypes = {
-    prefixCls: PropTypes.string.isRequired,
     layout: PropTypes.oneOf(FormLayouts),
-    children: PropTypes.any,
     onSubmit: PropTypes.func,
+    style: PropTypes.any.isRequired,
+    children: PropTypes.any.isRequired,
+    className: PropTypes.string.isRequired,
+    prefixCls: PropTypes.string,
     hideRequiredMark: PropTypes.bool,
+    wrapperCol: PropTypes.object.isRequired,
+    labelCol: PropTypes.object.isRequired,
     colon: PropTypes.bool,
   };
 
@@ -42,25 +48,14 @@ class Form extends React.Component {
 
   render() {
     const {
-      prefixCls,
-      hideRequiredMark,
-      className = '',
-      layout,
-      inline,
-      horizontal,
-      vertical,
+      prefixCls, hideRequiredMark, className = '', layout, children,
     } = this.props;
-    console.warn(
-      !inline && !horizontal && !vertical,
-      '`Form[inline|horizontal|vertical]` is deprecated, please use `Form[layout]` instead.',
-    );
     const formClassName = classnames(
       prefixCls,
       {
-        [`${prefixCls}-horizontal`]:
-          (!inline && !vertical && layout === 'horizontal') || horizontal,
-        [`${prefixCls}-vertical`]: layout === 'vertical' || vertical,
-        [`${prefixCls}-inline`]: layout === 'inline' || inline,
+        [`${prefixCls}-horizontal`]: layout === 'horizontal',
+        [`${prefixCls}-vertical`]: layout === 'vertical',
+        [`${prefixCls}-inline`]: layout === 'inline',
         [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
       },
       className,
@@ -76,7 +71,11 @@ class Form extends React.Component {
       'form',
       'hideRequiredMark',
     ]);
-    return <form {...formProps} />;
+    return (
+      <form className={formClassName} {...formProps}>
+        {children}
+      </form>
+    );
   }
 }
-export default Form;
+export default CusFrorm;

@@ -1,27 +1,19 @@
 import page from '../../components/page';
+import  React from 'react';
+import { Button } from 'antd';
 
-const style = require('./style.scss');
-
-const { Button } = antd;
-
-@page({
-  style,
-})
 class Demo extends React.Component {
-  static defaultProps = {};
-
-  static propTypes = {};
 
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentDidUpdate() {}
+  componentDidUpdate() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   render() {
     return (

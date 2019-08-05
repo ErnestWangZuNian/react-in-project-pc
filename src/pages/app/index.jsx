@@ -1,4 +1,5 @@
 import page from '../../components/page';
+import CusFrorm from '../../components/page/form';
 
 const style = require('./style.scss');
 
@@ -34,35 +35,35 @@ class App extends React.Component {
 
   render() {
     const { form } = this.props;
-    console.log(form, 'wwww');
     return (
       <div>
         <div>
           <Button
             type="primary"
             onClick={() => {
-              // form.validateFields((err, values) => {
-              //   console.log(err, values);
-              // });
-              console.log(form.isPass(), 'www');
+              form.validateFields((err, values) => {
+                console.log(err, values);
+              });
             }}
           >
             确定
           </Button>
         </div>
         <div>
-          <Form.Item>
-            <Input
-              {...form.getFieldProps('name', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请输入姓名',
-                  },
-                ],
-              })}
-            />
-          </Form.Item>
+          <CusFrorm>
+            <Form.Item>
+              <Input
+                {...form.getFieldProps('name', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入姓名',
+                    },
+                  ],
+                })}
+              />
+            </Form.Item>
+          </CusFrorm>
         </div>
       </div>
     );
