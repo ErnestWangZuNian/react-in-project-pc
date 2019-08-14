@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import preload from './preload';
 import style from './style';
-import form from './form';
 
 const Page = (params) => {
   const options = { withRouter: true, ...params };
@@ -13,9 +12,6 @@ const Page = (params) => {
     }
     if (options && options.preload) {
       newComponent = preload(options.preload)(newComponent);
-    }
-    if (options && options.form) {
-      newComponent = form()(newComponent);
     }
     if (options && options.withRouter) {
       newComponent = withRouter(newComponent);

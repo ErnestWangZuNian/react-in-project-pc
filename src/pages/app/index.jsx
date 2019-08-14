@@ -1,13 +1,15 @@
+
+/*eslint-disable*/
 import page from '../../components/page';
-import CusFrorm from '../../components/page/form';
+import { NumberInput } from 'wzn-extendantd-components'
 
 const style = require('./style.scss');
 
-const { Button, Input, Form } = antd;
+const { Button } = antd;
+console.log(NumberInput, 'www')
 
 @page({
   style,
-  form: true,
   preload: async () => {
     const result = {
       a: await Api.get('/v2/music/search'),
@@ -19,52 +21,24 @@ class App extends React.Component {
   static defaultProps = {};
 
   static propTypes = {
-    form: PropTypes.objectOf(PropTypes.object).isRequired,
-  };
+  }
 
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentDidUpdate() {}
+  componentDidUpdate() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   render() {
-    const { form } = this.props;
     return (
       <div>
-        <div>
-          <Button
-            type="primary"
-            onClick={() => {
-              form.validateFields((err, values) => {
-                console.log(err, values);
-              });
-            }}
-          >
-            确定
-          </Button>
-        </div>
-        <div>
-          <CusFrorm>
-            <Form.Item>
-              <Input
-                {...form.getFieldProps('name', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请输入姓名',
-                    },
-                  ],
-                })}
-              />
-            </Form.Item>
-          </CusFrorm>
-        </div>
+        <NumberInput></NumberInput>
+        <Button type="primary">111</Button>
       </div>
     );
   }

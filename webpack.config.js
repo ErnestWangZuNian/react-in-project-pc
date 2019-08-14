@@ -146,7 +146,7 @@ module.exports = {
     contentBase: './dist', // 开发服务运行时的文件根目录
     historyApiFallback: true, // spa不跳转,history模式的路由需要true
     host: 'localhost',
-    port: 8080,
+    port: 1027,
     // hot: true,
     inline: true, // 实时刷新
     compress: true, // Enable gzip compression for everything served

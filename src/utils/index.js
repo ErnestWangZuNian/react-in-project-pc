@@ -15,9 +15,9 @@ const util = {
   },
   isNumber: target => Object.prototype.toString.call(target) === '[object Number]',
   isString: target => Object.prototype.toString.call(target) === '[object String]',
-  getRandomString: () => `${Math.random()
-    .toString(36)
-    .substr(2)}`,
+  // getRandomString: () => `${Math.random()
+  //   .toString(36)
+  //   .substr(2)}`,
   // equalValue: (a, b) => {
   //   const aProps = Object.getOwnPropertyNames(a);
   //   const bProps = Object.getOwnPropertyNames(b);
