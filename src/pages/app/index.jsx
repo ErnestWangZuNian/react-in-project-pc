@@ -1,12 +1,12 @@
 
 /*eslint-disable*/
-import page from '../../components/page';
 import { NumberInput } from 'wzn-extendantd-components'
+import page from '../../components/page';
+
 
 const style = require('./style.scss');
 
 const { Button } = antd;
-console.log(NumberInput, 'www')
 
 @page({
   style,
