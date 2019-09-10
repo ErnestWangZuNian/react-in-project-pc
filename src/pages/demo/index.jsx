@@ -1,7 +1,5 @@
-
-/*eslint-disable*/
+import { NumberInput } from 'wzn-extendantd-components';
 import page from '../../components/page';
-import { NumberInput } from 'wzn-extendantd-components'
 
 const style = require('./style.scss');
 
@@ -19,26 +17,25 @@ const { Button } = antd;
 class App extends React.Component {
   static defaultProps = {};
 
-  static propTypes = {
-  }
+  static propTypes = {};
 
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentDidUpdate() { }
+  componentDidUpdate() {}
 
-  componentWillUnmount() { 
-    console.log('我卸载了')
+  componentWillUnmount() {
+    console.log('我卸载了');
   }
 
   render() {
     return (
       <div>
-        <NumberInput></NumberInput>
+        <NumberInput />
         <Button type="primary">2222</Button>
       </div>
     );

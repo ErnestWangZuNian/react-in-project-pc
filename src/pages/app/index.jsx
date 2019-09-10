@@ -1,6 +1,5 @@
 
-/*eslint-disable*/
-import { NumberInput } from 'wzn-extendantd-components'
+import { NumberInput } from 'wzn-extendantd-components';
 import page from '../../components/page';
 
 
@@ -37,7 +36,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NumberInput></NumberInput>
+        <NumberInput />
         <Button type="primary">111</Button>
       </div>
     );
