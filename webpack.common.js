@@ -1,52 +1,18 @@
-const path = require('path');
-const webpack = require('webpack');
-const argv = require('yargs-parser')(process.argv.slice(2));
 
-const pro = argv.mode == 'production'; //  区别是生产环境和开发环境
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path');
+
+const resolve = dir => path.resolve(__dirname, dir);
+const context = resolve('src');
 const autoprefixer = require('autoprefixer')({
   browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
 });
-
-const resolve = dir => path.resolve(__dirname, dir);
-const theme = require(resolve('src/styles/antdtheme.js'));
-const context = resolve('src');
-
-const plugins = [];
-if (pro) {
-  //  线上环境
-  plugins.push(
-    new HtmlWebpackPlugin({
-      inject: true,
-      title: 'Production',
-      template: path.resolve(__dirname, 'index.html'),
-    }),
-    new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
-    new CleanWebpackPlugin('dist'),
-  );
-} else {
-  //  开发环境
-  plugins.push(
-    new HtmlWebpackPlugin({
-      inject: true,
-      title: 'Production',
-      template: path.resolve(__dirname, 'index.html'),
-    }),
-    new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
-    new webpack.HotModuleReplacementPlugin(), // 热更新，热更新不是刷新
-  );
-}
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    main: resolve('src/main.js'),
-    vendor: ['wzn-api', 'wzn-utils', 'react-document-title'],
-  },
-  output: {
-    filename: pro ? '[name].[chunkhash].js' : '[name].js',
-    path: resolve('dist'),
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
   module: {
     rules: [
@@ -59,7 +25,13 @@ module.exports = {
         test: /\.js[x]?$/,
         enforce: 'pre',
         use: [
-          { loader: 'babel-loader' },
+          {
+            loader: 'babel-loader',
+            query: {
+              // presets: ['es2015', 'stage-0', 'react'],
+              // plugins: ['transform-runtime']
+            },
+          },
           {
             loader: 'eslint-loader',
           },
@@ -79,13 +51,6 @@ module.exports = {
               loader: 'postcss-loader',
               options: {
                 plugins: [autoprefixer],
-              },
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                modifyVars: theme,
-                javascriptEnabled: true,
               },
             },
           ],
@@ -141,28 +106,6 @@ module.exports = {
       },
     ],
   },
-  plugins,
-  devServer: {
-    contentBase: './dist', // 开发服务运行时的文件根目录
-    historyApiFallback: true, // spa不跳转,history模式的路由需要true
-    host: 'localhost',
-    port: 1027,
-    // hot: true,
-    inline: true, // 实时刷新
-    compress: true, // Enable gzip compression for everything served
-    overlay: true, // Shows a full-screen overlay in the browser
-    open: true,
-    proxy: {
-      '/': {
-        target: 'https://api.douban.com',
-        secure: false,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/': '',
-        },
-      },
-    },
-  },
   resolve: {
     // 别名
     alias: {
@@ -174,13 +117,10 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
-    'react-redux': 'ReactRedux',
     'react-router': 'ReactRouter',
     'react-router-dom': 'ReactRouterDOM',
     moment: 'moment',
     antd: 'antd',
-    axios: 'axios',
-    redux: 'Redux',
   },
   //  提取公共代码
   optimization: {
@@ -196,14 +136,13 @@ module.exports = {
           // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
           priority: 10,
         },
-        utils: {
+        common: {
           // 抽离自己写的公共代码，utils这个名字可以随意起
           chunks: 'initial',
-          name: 'utils', //  任意命名
+          name: 'common', //  任意命名
           minSize: 0, // 只要超出0字节就生成一个新包
         },
       },
     },
   },
-  devtool: pro ? '' : 'inline-source-map',
 };

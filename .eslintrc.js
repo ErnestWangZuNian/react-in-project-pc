@@ -16,6 +16,8 @@ module.exports = {
   },
   parser: 'babel-eslint',
   rules: {
+    'global-require': 0,
+    'import/no-unresolved': 0,
     'no-console': 0,
     'import/no-dynamic-require': 0,
     'import/no-unresolved': [2, { ignore: ['wzn-extendantd-components'] }],
