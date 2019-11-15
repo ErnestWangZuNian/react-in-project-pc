@@ -110,7 +110,6 @@ module.exports = {
     // 别名
     alias: {
       '@': context,
-      '@/components': path.join(__dirname, 'src/components'),
     },
     extensions: ['.js', '.jsx', '.json', '.css', '.scss', '.less'],
   },
