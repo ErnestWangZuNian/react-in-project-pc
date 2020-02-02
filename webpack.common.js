@@ -58,7 +58,7 @@ module.exports = {
       },
       {
         test: /\.s[c|a]ss$/,
-        exclude: resolve('node_modules'),
+        // exclude: resolve('node_modules'),
         use: [
           {
             loader: 'style-loader/useable',

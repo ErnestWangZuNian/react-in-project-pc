@@ -4,7 +4,6 @@ const path = require('path');
 const resolve = dir => path.resolve(__dirname, dir);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(
@@ -26,13 +25,12 @@ module.exports = merge(
         template: path.resolve(__dirname, 'index.html'),
       }),
       new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
-      new CleanWebpackPlugin('dist'),
     ],
     devServer: {
       contentBase: './dist', // 开发服务运行时的文件根目录
       historyApiFallback: true, // spa不跳转,history模式的路由需要true
       host: 'localhost',
-      port: 1023,
+      port: 1025,
       // hot: true,
       inline: true, // 实时刷新
       compress: true, // Enable gzip compression for everything served
