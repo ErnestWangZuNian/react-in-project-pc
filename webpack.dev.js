@@ -27,10 +27,9 @@ module.exports = merge(
       new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
     ],
     devServer: {
-      contentBase: './dist', // 开发服务运行时的文件根目录
       historyApiFallback: true, // spa不跳转,history模式的路由需要true
       host: 'localhost',
-      port: 1025,
+      port: 1024,
       // hot: true,
       inline: true, // 实时刷新
       compress: true, // Enable gzip compression for everything served
@@ -38,7 +37,7 @@ module.exports = merge(
       open: true,
       proxy: {
         '/': {
-          target: 'https://api.douban.com',
+          target: 'http://192.168.31.147:7002',
           secure: false,
           changeOrigin: true,
           pathRewrite: {

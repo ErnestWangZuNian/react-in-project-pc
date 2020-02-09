@@ -5,12 +5,12 @@ const { Button } = antd;
 
 @Page({
   style: require('./style.scss'),
-  preload: async () => {
-    const result = {
-      a: await Api.get('/v2/music/search'),
-    };
-    return result;
-  },
+  // preload: async () => {
+  //   const result = {
+  //     a: await Api.get('/v2/music/search'),
+  //   };
+  //   return result;
+  // },
 })
 class App extends React.Component {
   static propTypes = {};
