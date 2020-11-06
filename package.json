@@ -8,8 +8,7 @@
     "clean": "rm -rf dist && mkdir dist",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "npm run clean && webpack --config webpack.prod.js",
-    "theme": "node theme.js",
-    "lint": "eslint --ext .jsx,.js src/"
+    "theme": "node theme.js"
   },
   "repository": {
     "type": "git",
