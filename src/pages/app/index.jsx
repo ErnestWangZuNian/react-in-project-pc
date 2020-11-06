@@ -1,21 +1,41 @@
-const { useState, useEffect, useRef } = React;
-function App() {
-  const [count, setCount] = useState(0);
-  const dom = useRef(null);
-  useEffect(() => {
-    dom.current.addEventListener('click', () => {
-      console.log(count);
-      setCount(count + 1);
-    });
-    return () => {
-      console.log('我解除render');
-    };
-  }, []);
-  return (
-    <div ref={dom} style={{ width: '100%', height: '20px' }}>
-      {count}
-    </div>
-  );
+import { NumberInput } from 'wzn-extendantd-components';
+import { Page } from 'wzn-base-components';
+
+const { Button } = antd;
+
+@Page({
+  style: require('./style.scss'),
+  // preload: async () => {
+  //   const result = {
+  //     a: await Api.get('/v2/music/search'),
+  //   };
+  //   return result;
+  // },
+})
+class App extends React.Component {
+  static propTypes = {};
+
+  static defaultProps = {};
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div>
+        <NumberInput />
+        <Button type="primary">111</Button>
+      </div>
+    );
+  }
 }
 
 export default App;

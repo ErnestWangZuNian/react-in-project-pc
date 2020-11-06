@@ -1,16 +1,8 @@
-import { NumberInput } from 'wzn-extendantd-components';
 import { Page } from 'wzn-base-components';
-
-const { Button } = antd;
+import Layout from './layout/index';
 
 @Page({
   style: require('./style.scss'),
-  // preload: async () => {
-  //   const result = {
-  //     a: await Api.get('/v2/music/search'),
-  //   };
-  //   return result;
-  // },
 })
 class App extends React.Component {
   static propTypes = {};
@@ -26,15 +18,12 @@ class App extends React.Component {
 
   componentDidUpdate() {}
 
-  componentWillUnmount() {
-    console.log('我卸载了');
-  }
+  componentWillUnmount() {}
 
   render() {
     return (
-      <div>
-        <NumberInput />
-        <Button type="primary">demo</Button>
+      <div className="app-container">
+        <Layout {...this.props} />
       </div>
     );
   }

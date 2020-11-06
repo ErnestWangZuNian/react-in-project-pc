@@ -60,10 +60,31 @@ module.exports = {
       },
       {
         test: /\.s[c|a]ss$/,
-        exclude: resolve('node_modules'),
+        exclude: resolve('src/styles'),
         use: [
           {
             loader: 'style-loader/useable',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer],
+            },
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
+      {
+        test: /\.s[c|a]ss$/,
+        include: resolve('src/styles'),
+        use: [
+          {
+            loader: 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -111,7 +132,8 @@ module.exports = {
   resolve: {
     // 别名
     alias: {
-      '@': context,
+      '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/components'),
     },
     extensions: ['.js', '.jsx', '.json', '.css', '.scss', '.less'],
   },
