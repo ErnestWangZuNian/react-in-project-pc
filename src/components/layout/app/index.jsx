@@ -1,9 +1,8 @@
-import { Page } from 'wzn-base-components';
+
 import Layout from './layout/index';
 
-@Page({
-  style: require('./style.scss'),
-})
+require('./style.scss');
+
 class App extends React.Component {
   static propTypes = {};
 

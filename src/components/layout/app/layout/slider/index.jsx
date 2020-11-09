@@ -1,13 +1,12 @@
-import { Component } from 'wzn-base-components';
+
 import Menu from '../menu';
 import { LayoutContext } from '../layout-context';
+
+require('./style.scss');
 
 const { Layout } = antd;
 const { Sider } = Layout;
 
-@Component({
-  style: require('./style.scss'),
-})
 class LayoutSliderComponent extends React.Component {
   static propTypes = {};
 

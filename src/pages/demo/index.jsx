@@ -1,17 +1,7 @@
-import { NumberInput } from 'wzn-extendantd-components';
-import { Page } from 'wzn-base-components';
+import './style.scss';
 
 const { Button } = antd;
 
-@Page({
-  style: require('./style.scss'),
-  // preload: async () => {
-  //   const result = {
-  //     a: await Api.get('/v2/music/search'),
-  //   };
-  //   return result;
-  // },
-})
 class App extends React.Component {
   static propTypes = {};
 
@@ -33,7 +23,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NumberInput />
         <Button type="primary">demo</Button>
       </div>
     );

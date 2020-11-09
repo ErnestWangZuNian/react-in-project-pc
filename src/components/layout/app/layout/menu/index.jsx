@@ -1,12 +1,11 @@
-import { Component } from 'wzn-base-components';
-import { LayoutContext } from '../layout-context';
+
 import IconText from '@/components/icon-text';
+import { LayoutContext } from '../layout-context';
+
+require('./style.scss');
 
 const { Menu } = antd;
 
-@Component({
-  style: require('./style.scss'),
-})
 class MenusComponent extends React.Component {
   static propTypes = {};
 

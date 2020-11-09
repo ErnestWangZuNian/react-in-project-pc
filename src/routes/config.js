@@ -1,8 +1,7 @@
-import { AsyncComponent } from 'wzn-base-components';
-import methods from './methods';
 
-const Demo = AsyncComponent(() => import('@/pages/demo'));
-const App = AsyncComponent(() => import('@/pages/app'));
+import Demo from '@/pages/demo';
+import App from '@/pages/app';
+import methods from './methods';
 
 const menus = [
   {

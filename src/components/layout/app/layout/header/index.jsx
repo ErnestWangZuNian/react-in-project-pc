@@ -1,13 +1,11 @@
-import { Component } from 'wzn-base-components';
 import IconText from '@/components/icon-text';
 import { LayoutContext } from '../layout-context';
 
 const { Layout } = antd;
 const { Header } = Layout;
 
-@Component({
-  style: require('./style.scss'),
-})
+require('./style.scss');
+
 class LayoutHeaderComponent extends React.Component {
   static propTypes = {};
 

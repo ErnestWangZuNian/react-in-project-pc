@@ -1,9 +1,9 @@
 import { Route, Switch } from 'react-router-dom';
-import { Component } from 'wzn-base-components';
-
 import { LayoutContext, routeConfig, menusConfig, sliderConfig } from './layout-context';
 import LayoutSlider from './slider';
 import LayoutHeader from './header';
+
+require('./style.scss');
 
 const { Layout } = antd;
 const { findParentsByPath, menus: menusList = [] } = routeConfig;
@@ -42,9 +42,6 @@ const recurseRoute = (routesList) => {
   return result;
 };
 
-@Component({
-  style: require('./style.scss'),
-})
 class LayoutComponent extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,

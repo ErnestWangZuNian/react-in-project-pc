@@ -1,4 +1,4 @@
-import { Page } from 'wzn-base-components';
+
 
 const { Button, Form, Input } = antd;
 const formItemLayout = {
@@ -10,10 +10,6 @@ const formItemLayout = {
   },
 };
 
-@Page({
-  style: require('./style.scss'),
-  form: true,
-})
 class Login extends React.Component {
   static propTypes = {
     form: PropTypes.object.isRequired,

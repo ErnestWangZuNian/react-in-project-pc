@@ -1,11 +1,9 @@
-import { Component } from 'wzn-base-components';
+
 import classnames from 'classnames';
 
 const { Icon } = antd;
 
-@Component({
-  style: require('./style.scss'),
-})
+
 class IconText extends React.Component {
   static propTypes = {
     text: PropTypes.any.isRequired,

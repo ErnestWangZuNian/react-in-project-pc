@@ -1,9 +1,6 @@
 const merge = require('webpack-merge');
 const path = require('path');
-
-const resolve = dir => path.resolve(__dirname, dir);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(
@@ -11,20 +8,12 @@ module.exports = merge(
   {
     mode: 'development',
     devtool: 'inline-source-map',
-    entry: {
-      main: resolve('src/main.js'),
-    },
-    output: {
-      filename: '[name].bundle.js',
-      path: resolve('dist'),
-    },
     plugins: [
       new HtmlWebpackPlugin({
         inject: true,
         title: 'Production',
         template: path.resolve(__dirname, 'index.html'),
       }),
-      new ExtractTextWebpackPlugin({ filename: 'css/style.[chunkhash].css', allChunks: true }),
     ],
     devServer: {
       historyApiFallback: true, // spa不跳转,history模式的路由需要true

@@ -1,11 +1,13 @@
 const path = require('path');
-
-const resolve = dir => path.resolve(__dirname, dir);
+const resolve = (dir) => path.resolve(__dirname, dir);
 const context = resolve('src');
 const autoprefixer = require('autoprefixer')({
   browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
 });
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isProduct = process.env.NODE_ENV !== 'production';
+
+console.log(isProduct, 'www');
 
 module.exports = {
   performance: {
@@ -13,16 +15,30 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
+  entry: {
+    main: resolve('src/main.js'),
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: resolve('dist'),
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+          },
+        ],
+        include: context,
         exclude: resolve('node_modules'),
       },
       {
         test: /\.js[x]?$/,
         enforce: 'pre',
+        include: context,
+        exclude: resolve('node_modules'),
         use: [
           {
             loader: 'babel-loader',
@@ -34,36 +50,17 @@ module.exports = {
           {
             loader: 'eslint-loader',
             options: {
-              fix: true
-            }
+              fix: true,
+            },
           },
         ],
-        include: context,
-        exclude: resolve('node_modules'),
       },
+      //  less scss css的处理
       {
         test: /\.less$/,
-        use: ExtractTextWebpackPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [autoprefixer],
-              },
-            },
-          ],
-        }),
-      },
-      {
-        test: /\.s[c|a]ss$/,
-        exclude: resolve('src/styles'),
         use: [
           {
-            loader: 'style-loader/useable',
+            loader: isProduct ? MiniCssExtractPlugin.loader : 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -74,17 +71,13 @@ module.exports = {
               plugins: [autoprefixer],
             },
           },
-          {
-            loader: 'sass-loader',
-          },
         ],
       },
       {
         test: /\.s[c|a]ss$/,
-        include: resolve('src/styles'),
         use: [
           {
-            loader: 'style-loader',
+            loader: isProduct ? MiniCssExtractPlugin.loader : 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -102,13 +95,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextWebpackPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader'],
-        }),
+        use: [isProduct ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
       },
+
+      //  static img  media font svg
       {
-        test: /\.(jpe?g|png|gif)$/,
+        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
         use: [
           {
             loader: 'url-loader',
@@ -120,7 +112,23 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(svg)(\?.*)?$/i,
         use: [
           {
             loader: 'file-loader',
@@ -135,7 +143,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, 'src/components'),
     },
-    extensions: ['.js', '.jsx', '.json', '.css', '.scss', '.less'],
+    extensions: ['.js', '.ts', '.jsx', '.json', '.css', '.scss', '.less'],
   },
   externals: {
     react: 'React',
@@ -160,7 +168,7 @@ module.exports = {
           priority: 10,
         },
         common: {
-          // 抽离自己写的公共代码，utils这个名字可以随意起
+          // 抽离自己写的公共代码,common这个名字可以随意起
           chunks: 'initial',
           name: 'common', //  任意命名
           minSize: 0, // 只要超出0字节就生成一个新包
