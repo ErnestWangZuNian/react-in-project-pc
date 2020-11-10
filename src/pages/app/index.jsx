@@ -1,7 +1,12 @@
 import './style.scss';
 
+const { useEffect } = React;
+
 function App() {
-  return <div className="home-container">11111</div>;
+  useEffect(() => {
+    console.log(document.getElementsByClassName('home-container'));
+  }, []);
+  return <div styleName="home-container">11111</div>;
 }
 
 export default App;

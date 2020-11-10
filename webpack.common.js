@@ -1,13 +1,19 @@
 const path = require('path');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 const resolve = (dir) => path.resolve(__dirname, dir);
 const context = resolve('src');
+const isProduct = process.env.NODE_ENV === 'production';
 const autoprefixer = require('autoprefixer')({
   browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
 });
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const isProduct = process.env.NODE_ENV !== 'production';
-
-console.log(isProduct, 'www');
 
 module.exports = {
   performance: {
@@ -43,9 +49,25 @@ module.exports = {
           {
             loader: 'babel-loader',
             query: {
-              // presets: ['es2015', 'stage-0', 'react'],
-              // plugins: ['transform-runtime']
+              cacheDirectory: true,
+              plugins: [
+                [
+                  'react-css-modules',
+                  {
+                    filetypes: {
+                      '.scss': {
+                        syntax: 'postcss-scss',
+                      },
+                    },
+                    context,
+                    generateScopedName: '[local]_[hash:base64:5]',
+                  },
+                ],
+              ],
             },
+          },
+          {
+            loader: 'happypack/loader?id=happyBabel',
           },
           {
             loader: 'eslint-loader',
@@ -81,6 +103,10 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]_[hash:base64:5]',
+            },
           },
           {
             loader: 'postcss-loader',
@@ -97,7 +123,6 @@ module.exports = {
         test: /\.css$/,
         use: [isProduct ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
       },
-
       //  static img  media font svg
       {
         test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
@@ -153,6 +178,26 @@ module.exports = {
     moment: 'moment',
     antd: 'antd',
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': process.env.NODE_ENV,
+    }),
+    new FriendlyErrorsWebpackPlugin(),
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: 'happyBabel',
+      //如何处理  用法和loader 的配置一样
+      loaders: [
+        {
+          loader: 'babel-loader?cacheDirectory=true',
+        },
+      ],
+      //共享进程池
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true,
+    }),
+  ],
   //  提取公共代码
   optimization: {
     namedModules: true,
@@ -176,4 +221,6 @@ module.exports = {
       },
     },
   },
+  //  日志输出
+  stats: 'errors-only',
 };

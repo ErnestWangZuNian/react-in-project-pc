@@ -4,6 +4,20 @@
     "react-hot-loader/babel",
     "transform-decorators-legacy",
     [
+      "react-css-modules",
+      {
+        "generateScopedName": "src[path][name]__[local]",
+        "webpackHotModuleReloading": true,
+        "exclude": "node_modules",
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss"
+          }
+        },
+        "autoResolveMultipleImports": true
+      }
+    ],
+    [
       "transform-runtime",
       {
         "polyfill": false,

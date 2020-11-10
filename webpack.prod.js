@@ -9,6 +9,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   mode: 'production',
+
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -26,8 +27,8 @@ module.exports = merge(common, {
       template: path.resolve(__dirname, 'index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
     }),
     new CleanWebpackPlugin('dist'),
   ],

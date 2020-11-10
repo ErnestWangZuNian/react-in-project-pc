@@ -1,4 +1,4 @@
-import './style.scss';
+import styles from './style.scss';
 
 const { Button } = antd;
 
@@ -22,7 +22,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.homeContainer}>
         <Button type="primary">demo</Button>
       </div>
     );
