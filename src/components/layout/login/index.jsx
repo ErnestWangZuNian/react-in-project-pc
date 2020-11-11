@@ -1,5 +1,3 @@
-
-
 const { Button, Form, Input } = antd;
 const formItemLayout = {
   labelCol: {
@@ -41,8 +39,8 @@ class Login extends React.Component {
   render() {
     const { form } = this.props;
     return (
-      <div className="login-container">
-        <div className="login-content">
+      <div styleName="login-container">
+        <div styleName="login-content">
           <Form.Item {...formItemLayout} label="用户名" required>
             <Input
               placeholder="请输入用户名"

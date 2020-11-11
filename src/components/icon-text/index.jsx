@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import './style.scss';
 
 const { Icon } = antd;
 
@@ -30,7 +31,7 @@ class IconText extends React.Component {
         style={style}
       >
         <Icon {...moreProps} />
-        {text ? <span className="text-container">{text}</span> : null}
+        {text ? <span styleName="text-container">{text}</span> : null}
       </div>
     );
   }

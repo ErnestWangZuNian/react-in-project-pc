@@ -1,10 +1,10 @@
 import IconText from '@/components/icon-text';
 import { LayoutContext } from '../layout-context';
 
+import './style.scss';
+
 const { Layout } = antd;
 const { Header } = Layout;
-
-require('./style.scss');
 
 class LayoutHeaderComponent extends React.Component {
   static propTypes = {};
@@ -29,12 +29,12 @@ class LayoutHeaderComponent extends React.Component {
           const { sliderConfig } = value;
           const { collapsed, toggleCollapsed } = sliderConfig;
           const result = (
-            <Header className="layout-header-container">
-              <div className="trigger-container" onClick={toggleCollapsed}>
+            <Header styleName="layout-header-container">
+              <div styleName="trigger-container" onClick={toggleCollapsed}>
                 <IconText type={collapsed ? 'menu-unfold' : 'menu-fold'} />
               </div>
-              <div className="right-container">
-                <div className="user-container">
+              <div styleName="right-container">
+                <div styleName="user-container">
                   <IconText type="user" text="wzn" />
                 </div>
               </div>

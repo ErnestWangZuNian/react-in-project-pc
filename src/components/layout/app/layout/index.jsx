@@ -3,7 +3,7 @@ import { LayoutContext, routeConfig, menusConfig, sliderConfig } from './layout-
 import LayoutSlider from './slider';
 import LayoutHeader from './header';
 
-require('./style.scss');
+import './style.scss';
 
 const { Layout } = antd;
 const { findParentsByPath, menus: menusList = [] } = routeConfig;
@@ -123,11 +123,11 @@ class LayoutComponent extends React.Component {
           sliderConfig: contextSliderConfig,
         }}
       >
-        <Layout className="layout-container">
+        <Layout styleName="layout-container">
           <LayoutSlider />
           <Layout>
             <LayoutHeader />
-            <div className="layout-content-container">
+            <div styleName="layout-content-container">
               <Switch>{recurseRoute(menusList)}</Switch>
             </div>
           </Layout>

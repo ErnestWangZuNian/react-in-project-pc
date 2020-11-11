@@ -1,7 +1,7 @@
 import IconText from '@/components/icon-text';
 import { LayoutContext } from '../layout-context';
 
-require('./style.scss');
+import './style.scss';
 
 const { Menu } = antd;
 
@@ -62,7 +62,7 @@ class MenusComponent extends React.Component {
         {({ menusList, menusConfig }) => {
           const result = (
             <Menu
-              className="menus-container"
+              styleName="menus-container"
               theme={menusConfig.theme}
               mode={menusConfig.mode}
               onOpenChange={menusConfig.onOpenChange}

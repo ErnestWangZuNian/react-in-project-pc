@@ -1,6 +1,5 @@
 import Layout from './layout/index';
-
-require('./style.scss');
+import './style.scss';
 
 class App extends React.Component {
   static propTypes = {};
@@ -20,7 +19,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
+      <div styleName="app-container">
         <Layout {...this.props} />
       </div>
     );
