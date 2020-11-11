@@ -1,4 +1,3 @@
-
 import Menu from '../menu';
 import { LayoutContext } from '../layout-context';
 

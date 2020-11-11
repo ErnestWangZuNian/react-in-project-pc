@@ -1,4 +1,3 @@
-
 import Demo from '@/pages/demo';
 import App from '@/pages/app';
 import methods from './methods';

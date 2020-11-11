@@ -1,8 +1,6 @@
-
 import classnames from 'classnames';
 
 const { Icon } = antd;
-
 
 class IconText extends React.Component {
   static propTypes = {
@@ -27,7 +25,10 @@ class IconText extends React.Component {
   render() {
     const { text, className, style, ...moreProps } = this.props;
     return (
-      <div className={classnames(className, 'icon-text-container')} style={style}>
+      <div
+        className={classnames(className, 'icon-text-container')}
+        style={style}
+      >
         <Icon {...moreProps} />
         {text ? <span className="text-container">{text}</span> : null}
       </div>

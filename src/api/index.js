@@ -18,7 +18,7 @@ api.interceptors.request.use(
     }
     return newConfig;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error),
 );
 
 // 添加响应拦截器
@@ -32,6 +32,6 @@ api.interceptors.response.use(
     }
     return result;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error),
 );
 export default api;

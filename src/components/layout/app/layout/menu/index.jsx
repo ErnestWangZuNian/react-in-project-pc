@@ -1,4 +1,3 @@
-
 import IconText from '@/components/icon-text';
 import { LayoutContext } from '../layout-context';
 
