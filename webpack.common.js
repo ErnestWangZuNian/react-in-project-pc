@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const hasha = require('hasha');
 
 const HappyPack = require("happypack");
 const os = require("os");
@@ -12,6 +13,11 @@ const resolve = (dir) => path.resolve(__dirname, dir);
 const context = resolve("src");
 const isProduct = process.env.NODE_ENV === "production";
 const autoprefixer = require("autoprefixer");
+
+const generateScopedName = (name, filename) => {
+  const hash = hasha(filename + name, { algorithm: "md5" });
+  return `${name}-${hash.slice(0, 5)}`;
+};
 
 module.exports = {
   performance: {
@@ -48,20 +54,6 @@ module.exports = {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env"],
-              // plugins: [
-              //   [
-              //     "react-css-modules",
-              //     {
-              //       filetypes: {
-              //         ".scss": {
-              //           syntax: "postcss-scss",
-              //         },
-              //       },
-              //       context,
-              //       generateScopedName: "[local]_[hash:base64:5]",
-              //     },
-              //   ],
-              // ],
             },
           },
           {
@@ -86,7 +78,9 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: '[local]_[hash:base64:5]'
+                getLocalIdent({ resourcePath }, localIdentName, localName) {
+                  return generateScopedName(localName, resourcePath);
+                },
               },
             },
           },
@@ -110,7 +104,9 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: '[local]_[hash:base64:5]'
+                getLocalIdent({ resourcePath }, localIdentName, localName) {
+                  return generateScopedName(localName, resourcePath);
+                },
               },
             },
           },
