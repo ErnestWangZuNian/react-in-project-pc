@@ -1,17 +1,17 @@
-const hasha = require('hasha');
+const hasha = require("hasha");
 
 const generateScopedName = (name, filename) => {
-  const hash = hasha(filename + name, { algorithm: 'md5' });
-  return `${name}-${hash.slice(0, 5)}`;
+  const hash = hasha(filename + name, { algorithm: "md5" });
+  return `${name}-${hash.slice(0, 5)}` 
 };
 
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
+  presets: ["@babel/preset-env", "@babel/preset-react"],
   env: {
     development: {
       presets: [
         [
-          '@babel/preset-react',
+          "@babel/preset-react",
           {
             development: true,
           },
@@ -20,14 +20,14 @@ module.exports = {
     },
   },
   plugins: [
-    '@babel/plugin-proposal-class-properties',
+    "@babel/plugin-proposal-class-properties",
     [
-      'react-css-modules',
+      "react-css-modules",
       {
-        exclude: 'node_modules',
+        exclude: "node_modules",
         filetypes: {
-          '.scss': {
-            syntax: 'postcss-scss',
+          ".scss": {
+            syntax: "postcss-scss",
           },
         },
         generateScopedName,
