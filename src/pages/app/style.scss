@@ -1,10 +1,10 @@
+// $successColor: green;
 .home-container {
   width: 100%;
   position: relative;
   min-height: 100vh;
-  color: red;
+  background-color: $successColor;
 }
-
 .test {
   display: flex;
   color: red;
