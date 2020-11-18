@@ -1,3 +1,6 @@
+
+declare let React;
+
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import App from '../pages/app/index';
 

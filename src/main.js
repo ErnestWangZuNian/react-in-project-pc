@@ -6,7 +6,6 @@
  * @LastEditors: Ernestwang
  */
 import Util from '@/utils';
-import global from './global.tsx';
 import Router from './router/index.tsx';
 import 'antd/dist/antd.less';
 import './styles/common.scss';

@@ -1,4 +1,7 @@
-import './style.scss';
+require('./style.scss');
+
+declare let React;
+declare let antd;
 
 const { useEffect } = React;
 
