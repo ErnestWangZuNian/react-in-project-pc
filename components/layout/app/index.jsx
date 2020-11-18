@@ -1,6 +1,5 @@
+import Layout from './layout/index';
 import './style.scss';
-
-const { Button } = antd;
 
 class App extends React.Component {
   static propTypes = {};
@@ -16,15 +15,12 @@ class App extends React.Component {
 
   componentDidUpdate() {}
 
-  componentWillUnmount() {
-    console.log('我卸载了');
-  }
+  componentWillUnmount() {}
 
   render() {
     return (
-      <div styleName="home-container">
-        111
-        <Button type="primary">demo</Button>
+      <div styleName="app-container">
+        <Layout {...this.props} />
       </div>
     );
   }

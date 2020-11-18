@@ -218,7 +218,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, 'src/components'),
     },
-    extensions: ['.js', '.ts', '.jsx', '.json', '.css', '.scss', '.less'],
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json', '.css', '.scss', '.less'],
   },
   externals: {
     react: 'React',

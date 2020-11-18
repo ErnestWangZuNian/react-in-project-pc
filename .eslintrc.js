@@ -31,7 +31,7 @@ module.exports = {
     "import/no-dynamic-require": 0,
     "import/no-unresolved": [2, { ignore: ["^@/", '^@components/'] }],
     "linebreak-style": [0, "error", "windows"],
-    "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
+    "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx", '.ts', '.tsx'] }],
     "react/forbid-prop-types": 0,
     'react/static-property-placement': 0,
     'react/sort-comp': 0,
