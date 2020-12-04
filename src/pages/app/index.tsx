@@ -9,7 +9,7 @@ function App() {
     console.log(document.getElementsByClassName('home-container'));
   }, []);
   return (
-    <div className={`${style.app} test`}>
+    <div className={`${style["home-container"]} home-container`}>
       1111
       <Button type="primary">测试</Button>
     </div>
