@@ -2,7 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'app': string;
-  'home': string;
+  'home-container': string;
   'test': string;
 }
 export const cssExports: CssExports;

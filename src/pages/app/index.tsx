@@ -9,7 +9,8 @@ function App() {
     console.log(document.getElementsByClassName('home-container'));
   }, []);
   return (
-    <div className={style.home}>
+    <div className={`${style.app} test`}>
+      1111
       <Button type="primary">测试</Button>
     </div>
   );
