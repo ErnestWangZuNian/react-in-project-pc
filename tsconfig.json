@@ -2,13 +2,21 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": false,
-    "module": "es6",
+    "moduleResolution": "node",
+    "module": "es2015",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
+    "baseUrl": "./",
+    "strict": true,
+    "paths": {
+      "@/*": ["src/*"],
+    },
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src/"],
+  "include": ["src/**/*", "typings.d.ts"],
   "exclude": ["node_modules"]
 }

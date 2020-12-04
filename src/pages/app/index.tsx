@@ -1,7 +1,4 @@
-require('./style.scss');
-
-declare let React;
-declare let antd;
+import style from './style.scss';
 
 const { useEffect } = React;
 
@@ -12,7 +9,7 @@ function App() {
     console.log(document.getElementsByClassName('home-container'));
   }, []);
   return (
-    <div className="test-app" styleName="home-container">
+    <div className={style.home}>
       <Button type="primary">测试</Button>
     </div>
   );
