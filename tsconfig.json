@@ -1,22 +1,21 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": false,
-    "moduleResolution": "node",
-    "module": "es2015",
-    "target": "es5",
-    "jsx": "preserve",
-    "allowJs": true,
-    "sourceMap": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
     "baseUrl": "./",
-    "strict": true,
     "paths": {
       "@/*": ["src/*"],
     },
-    "allowSyntheticDefaultImports": true
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "target": "es6",
+    "lib": ["dom", "es2017"],
+    "skipLibCheck": true
   },
-  "include": ["src/**/*", "typings.d.ts"],
+  "include": ["src/**/*", "typings.d.ts", "public/layout1"],
   "exclude": ["node_modules"]
 }

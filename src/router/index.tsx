@@ -1,14 +1,14 @@
 
 declare let React;
 
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import App from '../pages/app/index';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import App from '@/components/layout/app';
 
 const Router = (
-  <HashRouter>
+  <BrowserRouter>
     <Switch>
       <Route path="/" component={App} />
     </Switch>
-  </HashRouter>
+  </BrowserRouter>
 );
 export default Router;

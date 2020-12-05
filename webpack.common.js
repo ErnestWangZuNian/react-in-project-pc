@@ -120,7 +120,7 @@ module.exports = {
             loader: isProduct ? MiniCssExtractPlugin.loader : 'style-loader',
           },
           {
-            loader: "css-modules-typescript-loader"
+            loader: 'css-modules-typescript-loader',
           },
           {
             loader: 'css-loader',

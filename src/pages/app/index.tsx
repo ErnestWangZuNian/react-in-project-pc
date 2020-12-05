@@ -1,17 +1,16 @@
-import style from './style.scss';
+import style from "./style.scss";
 
-const { useEffect } = React;
+import { useEffect } from "react";
 
-const { Button } = antd;
+import { Button } from "antd";
 
 function App() {
   useEffect(() => {
-    console.log(document.getElementsByClassName('home-container'));
+    console.log(document.getElementsByClassName("home-container"));
   }, []);
   return (
     <div className={`${style["home-container"]} home-container`}>
-      1111
-      <Button type="primary">测试</Button>
+      <Button type="primary">测速</Button>
     </div>
   );
 }

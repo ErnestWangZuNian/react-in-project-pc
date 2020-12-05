@@ -1,4 +1,10 @@
-import Demo from '@/pages/demo';
+/*
+ * @Description:
+ * @Author: Ernestwang
+ * @Date: 2020-12-02 21:32:09
+ * @LastEditTime: 2020-12-05 11:26:26
+ * @LastEditors: Ernestwang
+ */
 import App from '@/pages/app';
 import methods from './methods';
 
@@ -23,7 +29,7 @@ const menus = [
           {
             name: '新增商品分类',
             path: '/shop',
-            component: Demo,
+            component: App,
             icon: 'tag',
           },
         ],
@@ -38,13 +44,13 @@ const menus = [
   {
     name: '文章管理',
     path: '/demo',
-    component: Demo,
+    component: App,
     icon: 'tag',
   },
   {
     name: '标签管理',
     path: '/tag',
-    component: Demo,
+    component: App,
     icon: 'tag',
   },
 ];
