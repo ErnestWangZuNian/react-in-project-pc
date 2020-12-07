@@ -1,5 +1,6 @@
-import Layout from './layout/index';
+import Layout from './layout';
 import style from './style.scss';
+
 function App (props) {
   return (
     <div className={style["app-container"]}>
@@ -7,6 +8,7 @@ function App (props) {
     </div>
   );
 }
+
 App.propTypes = {};
 App.defaultProps = {};
 
